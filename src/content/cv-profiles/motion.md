@@ -8,55 +8,58 @@ order: 1
 ---
 ## Perfil profesional
 
-Desarrollador Multimedia y Motion Designer B2B especializado en la traducción de información técnica, corporativa y educativa en piezas animadas de alto impacto. Experto en Motion Graphics 2D, diseño instruccional visual y desarrollo de contenidos E-learning. Destaco por mi capacidad para interpretar guiones complejos y diseñar soluciones visuales que resuelven problemas de capacitación corporativa, inducción y ventas B2B.
+Desarrollador Multimedia y Motion Designer especializado en la traducción de información técnica, corporativa y educativa en piezas animadas de alto impacto. Experto en Motion Graphics 2D y desarrollo de contenidos audiovisuales. Mi enfoque combina la interpretación de guiones complejos con soluciones visuales (infografía animada, diseño sonoro y postproducción) para resolver necesidades de capacitación, comunicación interna y ventas.
 
 ## Experiencia laboral
 
-### Desarrollador Multimedia B2B
+### Motion Designer e Infografía Audiovisual
 
-**Independiente / Tiaxa / Euroglass**  
-2019 - Presente
+**Independiente / Kaizen Inmobiliarias** 2024 - Presente
 
-- Desarrollo de infografías animadas complejas para el sector tecnológico y minero, entregando piezas híbridas para imprenta y video FHD 18:9.
-- Animación de videos corporativos sobre seguridad industrial y control solar, enfocados en la retención de atención y claridad técnica.
+- Desarrollo de piezas audiovisuales para el sector inmobiliario, enfocadas en la visualización de proyectos y recorridos virtuales.
+- Edición y postproducción de videos promocionales con énfasis en el ritmo y la claridad del mensaje comercial.
 
-### Animador y Desarrollador E-learning
+### Productor de Material Instruccional y Contenido
 
-**MT Audiovisual**  
-2019
+**G&R Limitada** 2023 - 2024
 
-- Transformación de guiones e información técnica en módulos de aprendizaje interactivos.
-- Diseño de arquitectura visual, ritmo y animación integral para plataformas de educación corporativa.
+- Producción, grabación y edición integral de video-tutoriales técnicos sobre mantenimiento y operación de maquinaria industrial.
+- Creación de contenido estratégico, participando activamente en la elaboración de guiones, dirección de grabación y postproducción audiovisual.
+- Desarrollo de cápsulas explicativas para YouTube y plataformas internas, optimizando procesos de aprendizaje técnico.
 
-### Productor de Material Instruccional
+### Motion Graphics y Postproducción Corporativa
 
-**G&R Limitada**  
-2023 - 2024
+**Tiaxa / Euroglass** 2020 - 2022
 
-- Producción, grabación y edición audiovisual de video-tutoriales técnicos sobre mantenimiento y operación de maquinaria industrial.
+- Desarrollo de infografías animadas complejas para el sector tecnológico y minero (Tiaxa).
+- Producción de videos corporativos sobre seguridad industrial y control solar (Euroglass), transformando normativas técnicas en piezas visuales dinámicas.
+- Creación de activos visuales para presentaciones de alto impacto y comunicación B2B.
 
-### Desarrollador de Formatos Especiales
+### Motion Designer y Desarrollador de Contenidos
 
-**Planetario USACH**  
-2017
+**MT Audiovisual** 2017 - 2019
 
-- Desarrollo de proyectos audiovisuales en formatos no convencionales como FullDome y aplicación de VFX para divulgación científica.
+- Desarrollo de módulos de aprendizaje interactivos y contenidos educativos de alta fidelidad.
+- Ejecución de proyectos de animación y Motion Graphics para clientes como **Ligup, Esval, Fidi y Duoc UC**, abarcando desde videos institucionales hasta campañas de difusión.
+- Diseño de arquitectura visual y sincronización de audio para piezas de comunicación masiva.
 
-## Software y herramientas AV
+### Desarrollador de Formatos Especiales y VFX
 
-### Animación y postproducción
+**Planetario USACH** 2017
 
-- Adobe After Effects (Avanzado)
+- Práctica profesional en el área de producción, desarrollando contenidos para formato FullDome (proyección 360°).
+- Aplicación de efectos visuales (VFX) y postproducción para divulgación científica y astronómica.
+
+## Software y herramientas Audiovisuales
+
+### Animación y Postproducción
+- Adobe After Effects (Nivel Avanzado)
 - Adobe Premiere Pro
 
-### Audio y diseño sonoro
+### Audio y Diseño Sonoro
+- Adobe Audition (Limpieza de locuciones, mezcla y diseño de sonido)
 
-- Adobe Audition
-- Limpieza de locuciones
-- Sonorización
-
-### Diseño vectorial y UI
-
-- Adobe Illustrator
+### Diseño y Composición Visual
+- Adobe Illustrator (Preparación de activos vectoriales para animación)
 - Adobe Photoshop
-
+- Adobe InDesign
