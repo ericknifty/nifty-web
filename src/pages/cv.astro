@@ -1,0 +1,32 @@
+---
+import { render } from "astro:content";
+import DownloadList from "../components/DownloadList.astro";
+import PageHero from "../components/PageHero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getPageContent, getSiteSettings } from "../lib/content";
+
+const settings = await getSiteSettings();
+const page = await getPageContent("cv");
+
+if (!page) {
+  throw new Error("Falta src/content/pages/cv.md");
+}
+
+const { Content } = await render(page);
+---
+
+<BaseLayout title={`${settings.siteName} | CV`} description={page.data.intro ?? settings.siteDescription}>
+  <PageHero eyebrow="Experiencia" title={page.data.title} intro={page.data.intro} lead={page.data.lead} />
+
+  <section class="section">
+    <div class="shell prose prose--wide">
+      <Content />
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="shell">
+      <DownloadList files={page.data.attachments} />
+    </div>
+  </section>
+</BaseLayout>

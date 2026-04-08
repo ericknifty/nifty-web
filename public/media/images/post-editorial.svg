@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title">
+  <title>Proceso editorial</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff7ed" />
+      <stop offset="100%" stop-color="#fde68a" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <rect x="90" y="96" width="1020" height="608" rx="32" fill="#fffdf7" stroke="#0f172a" stroke-width="6" />
+  <rect x="150" y="170" width="340" height="24" rx="12" fill="#0f172a" opacity=".9" />
+  <rect x="150" y="220" width="520" height="18" rx="9" fill="#f97316" opacity=".65" />
+  <rect x="150" y="260" width="430" height="18" rx="9" fill="#f97316" opacity=".45" />
+  <rect x="150" y="328" width="900" height="250" rx="26" fill="#0f172a" opacity=".95" />
+  <path d="M802 410c69 0 125 56 125 125s-56 125-125 125-125-56-125-125 56-125 125-125Z" fill="#f97316" />
+  <path d="M787 474l62 61-62 61" fill="none" stroke="#fffdf7" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

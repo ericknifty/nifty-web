@@ -1,0 +1,55 @@
+---
+interface Action {
+  href: string;
+  label: string;
+  variant?: "primary" | "secondary";
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+  lead?: string;
+  actions?: Action[];
+}
+
+const { eyebrow, title, intro, lead, actions = [] } = Astro.props;
+---
+
+<section class="page-hero">
+  <div class="shell page-hero__inner">
+    <div class="page-hero__copy">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      {intro && <p class="page-hero__intro">{intro}</p>}
+      {lead && <p class="page-hero__lead">{lead}</p>}
+
+      {
+        actions.length > 0 && (
+          <div class="page-hero__actions">
+            {actions.map((action) => (
+              <a
+                class:list={["button", action.variant === "secondary" && "button--secondary"]}
+                href={action.href}
+              >
+                {action.label}
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+
+    <div class="page-hero__panel">
+      <div class="panel-note">
+        <span>Flujo del sitio</span>
+        <ol>
+          <li>Editas contenido en Pages CMS.</li>
+          <li>GitHub guarda el cambio.</li>
+          <li>Astro construye el sitio.</li>
+          <li>El hosting recibe la carpeta final.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

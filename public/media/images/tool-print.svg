@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title">
+  <title>Utilidad de imprenta</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#ecfccb" />
+      <stop offset="100%" stop-color="#bef264" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <rect x="120" y="106" width="960" height="588" rx="42" fill="#101828" />
+  <rect x="190" y="180" width="820" height="430" rx="28" fill="#f8fafc" />
+  <path d="M250 252h700" stroke="#0f172a" stroke-width="24" stroke-linecap="round" />
+  <path d="M250 318h280" stroke="#64748b" stroke-width="18" stroke-linecap="round" />
+  <path d="M250 366h280" stroke="#94a3b8" stroke-width="18" stroke-linecap="round" />
+  <path d="M250 414h280" stroke="#cbd5e1" stroke-width="18" stroke-linecap="round" />
+  <rect x="610" y="286" width="290" height="240" rx="24" fill="#f97316" />
+  <path d="M660 346h190M660 404h190M660 462h120" stroke="#fff7ed" stroke-width="22" stroke-linecap="round" />
+</svg>

@@ -1,0 +1,43 @@
+---
+import { render } from "astro:content";
+import DownloadList from "../../components/DownloadList.astro";
+import PageHero from "../../components/PageHero.astro";
+import VideoEmbed from "../../components/VideoEmbed.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { CATEGORY_LABELS, formatDate, getSiteSettings, getVisiblePosts, routeSlug } from "../../lib/content";
+
+export async function getStaticPaths() {
+  const posts = await getVisiblePosts();
+  return posts.map((entry) => ({
+    params: { slug: routeSlug(entry) },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const settings = await getSiteSettings();
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`${entry.data.title} | ${settings.siteName}`} description={entry.data.excerpt}>
+  <PageHero
+    eyebrow={CATEGORY_LABELS[entry.data.category]}
+    title={entry.data.title}
+    intro={entry.data.excerpt}
+    lead={`Publicado el ${formatDate(entry.data.date)}`}
+  />
+
+  <section class="section">
+    <div class="shell detail-layout">
+      <article class="prose prose--wide">
+        {entry.data.cover && <img class="cover-image" src={entry.data.cover} alt="" />}
+        <Content />
+      </article>
+
+      <aside class="detail-aside">
+        <VideoEmbed title={entry.data.title} videoUrl={entry.data.videoUrl} videoFile={entry.data.videoFile} />
+        <DownloadList files={entry.data.downloads} />
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,34 @@
+---
+import ContentCard from "../../components/ContentCard.astro";
+import PageHero from "../../components/PageHero.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { STATUS_LABELS, getSiteSettings, getVisibleTools, routeSlug } from "../../lib/content";
+
+const settings = await getSiteSettings();
+const tools = await getVisibleTools();
+---
+
+<BaseLayout title={`${settings.siteName} | Utilidades`} description="Demos y herramientas web ligadas al trabajo de diseño y producción.">
+  <PageHero
+    eyebrow="Utilidades"
+    title="Demos y herramientas"
+    intro="Espacio para publicar soluciones digitales pequeñas, pruebas funcionales y laboratorios técnicos."
+    lead="Esta sección te permite separar lo editorial de lo utilitario y convertir ideas internas en piezas demostrables."
+  />
+
+  <section class="section">
+    <div class="shell card-grid">
+      {
+        tools.map((tool) => (
+          <ContentCard
+            href={`/utilidades/${routeSlug(tool)}`}
+            title={tool.data.title}
+            eyebrow={STATUS_LABELS[tool.data.status]}
+            summary={tool.data.summary}
+            image={tool.data.cover}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

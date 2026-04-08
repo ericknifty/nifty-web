@@ -1,0 +1,54 @@
+---
+import { render } from "astro:content";
+import DownloadList from "../../components/DownloadList.astro";
+import LottiePlayer from "../../components/LottiePlayer.astro";
+import PageHero from "../../components/PageHero.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { STATUS_LABELS, getSiteSettings, getVisibleTools, routeSlug } from "../../lib/content";
+import { isExternalUrl } from "../../lib/media";
+
+export async function getStaticPaths() {
+  const tools = await getVisibleTools();
+  return tools.map((entry) => ({
+    params: { slug: routeSlug(entry) },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const settings = await getSiteSettings();
+const { Content } = await render(entry);
+const demoHref = entry.data.externalUrl || entry.data.demoPath;
+const actions = demoHref
+  ? [
+      {
+        href: demoHref,
+        label: isExternalUrl(demoHref) ? "Abrir demo externa" : "Abrir demo interna"
+      }
+    ]
+  : [];
+---
+
+<BaseLayout title={`${entry.data.title} | ${settings.siteName}`} description={entry.data.summary}>
+  <PageHero
+    eyebrow={STATUS_LABELS[entry.data.status]}
+    title={entry.data.title}
+    intro={entry.data.summary}
+    lead="Ficha editable desde el CMS para demos internas o enlaces externos."
+    actions={actions}
+  />
+
+  <section class="section">
+    <div class="shell detail-layout">
+      <article class="prose prose--wide">
+        {entry.data.cover && <img class="cover-image" src={entry.data.cover} alt="" />}
+        <Content />
+      </article>
+
+      <aside class="detail-aside">
+        <LottiePlayer src={entry.data.lottieFile} title={entry.data.title} />
+        <DownloadList files={entry.data.downloads} />
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

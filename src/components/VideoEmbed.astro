@@ -1,0 +1,48 @@
+---
+import { getVideoEmbed } from "../lib/media";
+
+interface Props {
+  title: string;
+  videoUrl?: string;
+  videoFile?: string;
+}
+
+const { title, videoUrl, videoFile } = Astro.props;
+const embed = getVideoEmbed(videoUrl);
+---
+
+{
+  (videoFile || embed) && (
+    <section class="detail-block">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Multimedia</p>
+          <h2>Video</h2>
+        </div>
+      </div>
+
+      {videoFile ? (
+        <video class="video-frame" controls preload="metadata">
+          <source src={videoFile} />
+          Tu navegador no soporta la reproducción de video.
+        </video>
+      ) : embed?.type === "iframe" ? (
+        <div class="video-frame video-frame--embed">
+          <iframe
+            src={embed.src}
+            title={title}
+            loading="lazy"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          />
+        </div>
+      ) : embed ? (
+        <p>
+          <a href={embed.src} target="_blank" rel="noreferrer">
+            Ver video externo
+          </a>
+        </p>
+      ) : null}
+    </section>
+  )
+}

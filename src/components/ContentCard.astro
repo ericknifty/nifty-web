@@ -1,0 +1,38 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  eyebrow?: string;
+  summary: string;
+  image?: string;
+  meta?: string;
+  tags?: string[];
+}
+
+const { href, title, eyebrow, summary, image, meta, tags = [] } = Astro.props;
+---
+
+<article class="content-card">
+  {image && (
+    <a class="content-card__media" href={href}>
+      <img src={image} alt="" loading="lazy" />
+    </a>
+  )}
+
+  <div class="content-card__body">
+    {eyebrow && <p class="content-card__eyebrow">{eyebrow}</p>}
+    <h2 class="content-card__title">
+      <a href={href}>{title}</a>
+    </h2>
+    {meta && <p class="content-card__meta">{meta}</p>}
+    <p>{summary}</p>
+
+    {
+      tags.length > 0 && (
+        <ul class="tag-list" aria-label="Etiquetas">
+          {tags.map((tag) => <li>{tag}</li>)}
+        </ul>
+      )
+    }
+  </div>
+</article>

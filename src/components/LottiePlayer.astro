@@ -1,0 +1,64 @@
+---
+interface Props {
+  src?: string;
+  title?: string;
+  loop?: boolean;
+  autoplay?: boolean;
+}
+
+const { src, title = "Animación Lottie", loop = true, autoplay = true } = Astro.props;
+---
+
+{
+  src && (
+    <section class="detail-block">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Animación</p>
+          <h2>Lottie</h2>
+        </div>
+      </div>
+
+      <div
+        class="lottie-frame"
+        data-lottie-player
+        data-src={src}
+        data-loop={String(loop)}
+        data-autoplay={String(autoplay)}
+        aria-label={title}
+      />
+    </section>
+  )
+}
+
+<script>
+  import lottie from "lottie-web";
+
+  const initLottie = () => {
+    document.querySelectorAll("[data-lottie-player]").forEach((element) => {
+      if (!(element instanceof HTMLElement)) return;
+      if (element.dataset.ready === "true") return;
+
+      const path = element.dataset.src;
+      if (!path) return;
+
+      lottie.loadAnimation({
+        container: element,
+        renderer: "svg",
+        loop: element.dataset.loop === "true",
+        autoplay: element.dataset.autoplay === "true",
+        path
+      });
+
+      element.dataset.ready = "true";
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLottie, { once: true });
+  } else {
+    initLottie();
+  }
+
+  document.addEventListener("astro:page-load", initLottie);
+</script>

@@ -1,0 +1,15 @@
+{
+  "siteName": "Web Nifty",
+  "siteTagline": "Portafolio, bitácora y laboratorio digital de diseño aplicado.",
+  "siteDescription": "Sitio personal para mostrar proyectos de motion, imprenta y desarrollo web, además de publicar procesos, reflexiones y utilidades propias.",
+  "email": "hola@portfolio.example.com",
+  "location": "Santiago, Chile",
+  "primaryCtaLabel": "Escríbeme",
+  "primaryCtaUrl": "mailto:hola@portfolio.example.com",
+  "secondaryCtaLabel": "Ver Vimeo",
+  "secondaryCtaUrl": "https://vimeo.com/",
+  "socialVimeo": "https://vimeo.com/",
+  "socialLinkedIn": "https://www.linkedin.com/",
+  "socialGitHub": "https://github.com/",
+  "socialInstagram": "https://www.instagram.com/"
+}

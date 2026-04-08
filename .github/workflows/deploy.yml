@@ -1,0 +1,57 @@
+name: Deploy to hosting
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    if: ${{ secrets.DEPLOY_HOST != '' && secrets.DEPLOY_USERNAME != '' && secrets.DEPLOY_PASSWORD != '' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Astro site
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: npm run build
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Publish dist to shared hosting
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_PROTOCOL: ${{ secrets.DEPLOY_PROTOCOL }}
+          DEPLOY_REMOTE_DIR: ${{ secrets.DEPLOY_REMOTE_DIR }}
+          DEPLOY_USERNAME: ${{ secrets.DEPLOY_USERNAME }}
+          DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+        run: |
+          set -eu
+
+          PROTOCOL="${DEPLOY_PROTOCOL:-sftp}"
+          REMOTE_DIR="${DEPLOY_REMOTE_DIR:-public_html}"
+
+          if [ "$PROTOCOL" = "sftp" ]; then
+            PORT="${DEPLOY_PORT:-22}"
+            lftp -c "set sftp:auto-confirm yes; open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT sftp://$DEPLOY_HOST; mirror -R dist \"$REMOTE_DIR\" --delete --verbose; bye"
+          elif [ "$PROTOCOL" = "ftps" ]; then
+            PORT="${DEPLOY_PORT:-21}"
+            lftp -c "set ssl:verify-certificate no; open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT ftps://$DEPLOY_HOST; mirror -R dist \"$REMOTE_DIR\" --delete --verbose; bye"
+          else
+            PORT="${DEPLOY_PORT:-21}"
+            lftp -c "set ssl:verify-certificate no; open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT ftp://$DEPLOY_HOST; mirror -R dist \"$REMOTE_DIR\" --delete --verbose; bye"
+          fi

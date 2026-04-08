@@ -1,0 +1,391 @@
+media:
+  - name: content_images
+    label: Imágenes
+    input: public/media/images
+    output: /media/images
+    extensions: [jpg, jpeg, png, webp, avif, svg]
+
+  - name: downloads
+    label: Descargas
+    input: public/media/downloads
+    output: /media/downloads
+    extensions: [pdf, zip, rar, 7z, doc, docx, xls, xlsx, txt]
+
+  - name: content_video
+    label: Videos
+    input: public/media/video
+    output: /media/video
+    extensions: [mp4, webm, mov]
+
+  - name: lottie_files
+    label: Lottie
+    input: public/lottie
+    output: /lottie
+    extensions: [json]
+
+content:
+  - name: site_settings
+    label: Ajustes del sitio
+    type: file
+    path: src/content/settings/site.json
+    fields:
+      - name: siteName
+        label: Nombre del sitio
+        type: string
+      - name: siteTagline
+        label: Tagline principal
+        type: text
+      - name: siteDescription
+        label: Descripción SEO
+        type: text
+      - name: email
+        label: Email
+        type: string
+      - name: location
+        label: Ubicación
+        type: string
+      - name: primaryCtaLabel
+        label: Texto CTA principal
+        type: string
+      - name: primaryCtaUrl
+        label: URL CTA principal
+        type: string
+      - name: secondaryCtaLabel
+        label: Texto CTA secundaria
+        type: string
+      - name: secondaryCtaUrl
+        label: URL CTA secundaria
+        type: string
+      - name: socialVimeo
+        label: Vimeo
+        type: string
+      - name: socialLinkedIn
+        label: LinkedIn
+        type: string
+      - name: socialGitHub
+        label: GitHub
+        type: string
+      - name: socialInstagram
+        label: Instagram
+        type: string
+
+  - name: home_page
+    label: Página de inicio
+    type: file
+    path: src/content/pages/inicio.md
+    fields:
+      - name: title
+        label: Título interno
+        type: string
+      - name: slug
+        label: Slug
+        type: string
+      - name: intro
+        label: Intro
+        type: text
+      - name: lead
+        label: Texto secundario
+        type: text
+      - name: body
+        label: Cuerpo
+        type: rich-text
+        options:
+          format: markdown
+          media: content_images
+          path: public/media/images/pages
+          rename: safe
+          switcher: true
+
+  - name: about_page
+    label: Página Sobre mí
+    type: file
+    path: src/content/pages/sobre-mi.md
+    fields:
+      - name: title
+        label: Título
+        type: string
+      - name: slug
+        label: Slug
+        type: string
+      - name: intro
+        label: Intro
+        type: text
+      - name: lead
+        label: Texto secundario
+        type: text
+      - name: body
+        label: Cuerpo
+        type: rich-text
+        options:
+          format: markdown
+          media: content_images
+          path: public/media/images/pages
+          rename: safe
+          switcher: true
+
+  - name: cv_page
+    label: Página CV
+    type: file
+    path: src/content/pages/cv.md
+    fields:
+      - name: title
+        label: Título
+        type: string
+      - name: slug
+        label: Slug
+        type: string
+      - name: intro
+        label: Intro
+        type: text
+      - name: lead
+        label: Texto secundario
+        type: text
+      - name: attachments
+        label: Adjuntos
+        type: file
+        options:
+          media: downloads
+          path: public/media/downloads/pages
+          multiple: true
+      - name: body
+        label: Cuerpo
+        type: rich-text
+        options:
+          format: markdown
+          media: content_images
+          path: public/media/images/pages
+          rename: safe
+          switcher: true
+
+  - name: posts
+    label: Posts
+    type: collection
+    path: src/content/posts
+    filename: "{fields.slug}.md"
+    view:
+      primary: title
+      fields: [category, date, draft]
+      search: [title, excerpt, tags]
+    fields:
+      - name: title
+        label: Título
+        type: string
+      - name: slug
+        label: Slug
+        type: string
+      - name: date
+        label: Fecha
+        type: date
+      - name: category
+        label: Categoría
+        type: select
+        options:
+          values: [motion, print, web, reflexiones, vida, hacks]
+      - name: excerpt
+        label: Extracto
+        type: text
+      - name: cover
+        label: Portada
+        type: image
+        options:
+          media: content_images
+          path: public/media/images/posts
+      - name: tags
+        label: Etiquetas
+        type: select
+        options:
+          multiple: true
+          creatable: true
+          values: [astro, pages cms, portfolio, bitacora, motion, print, web]
+      - name: downloads
+        label: Descargas
+        type: file
+        options:
+          media: downloads
+          path: public/media/downloads/posts
+          multiple: true
+      - name: videoUrl
+        label: URL de video externo
+        type: string
+      - name: videoFile
+        label: Video local
+        type: file
+        options:
+          media: content_video
+          path: public/media/video/posts
+          extensions: [mp4, webm, mov]
+      - name: featured
+        label: Destacado
+        type: boolean
+      - name: draft
+        label: Borrador
+        type: boolean
+      - name: body
+        label: Cuerpo
+        type: rich-text
+        options:
+          format: markdown
+          media: content_images
+          path: public/media/images/posts
+          rename: safe
+          switcher: true
+
+  - name: projects
+    label: Proyectos
+    type: collection
+    path: src/content/projects
+    filename: "{fields.slug}.md"
+    view:
+      primary: title
+      fields: [area, date, featured]
+      search: [title, summary, tags]
+    fields:
+      - name: title
+        label: Título
+        type: string
+      - name: slug
+        label: Slug
+        type: string
+      - name: area
+        label: Área
+        type: select
+        options:
+          values: [motion, print, web]
+      - name: date
+        label: Fecha
+        type: date
+      - name: summary
+        label: Resumen
+        type: text
+      - name: cover
+        label: Portada
+        type: image
+        options:
+          media: content_images
+          path: public/media/images/projects
+      - name: gallery
+        label: Galería
+        type: image
+        options:
+          media: content_images
+          path: public/media/images/projects
+          multiple: true
+      - name: tags
+        label: Etiquetas
+        type: select
+        options:
+          multiple: true
+          creatable: true
+          values: [motion, print, web, branding, editorial, animacion, deploy]
+      - name: downloads
+        label: Descargas
+        type: file
+        options:
+          media: downloads
+          path: public/media/downloads/projects
+          multiple: true
+      - name: videoUrl
+        label: URL de video externo
+        type: string
+      - name: videoFile
+        label: Video local
+        type: file
+        options:
+          media: content_video
+          path: public/media/video/projects
+      - name: lottieFile
+        label: Archivo Lottie
+        type: file
+        options:
+          media: lottie_files
+          path: public/lottie/projects
+          extensions: [json]
+      - name: featured
+        label: Destacado
+        type: boolean
+      - name: draft
+        label: Borrador
+        type: boolean
+      - name: body
+        label: Cuerpo
+        type: rich-text
+        options:
+          format: markdown
+          media: content_images
+          path: public/media/images/projects
+          rename: safe
+          switcher: true
+
+  - name: tools
+    label: Utilidades
+    type: collection
+    path: src/content/tools
+    filename: "{fields.slug}.md"
+    view:
+      primary: title
+      fields: [status, draft]
+      search: [title, summary]
+    fields:
+      - name: title
+        label: Título
+        type: string
+      - name: slug
+        label: Slug
+        type: string
+      - name: summary
+        label: Resumen
+        type: text
+      - name: status
+        label: Estado
+        type: select
+        options:
+          values: [idea, beta, published, archived]
+      - name: cover
+        label: Portada
+        type: image
+        options:
+          media: content_images
+          path: public/media/images/tools
+      - name: demoPath
+        label: Ruta interna de demo
+        type: string
+      - name: externalUrl
+        label: URL externa
+        type: string
+      - name: downloads
+        label: Descargas
+        type: file
+        options:
+          media: downloads
+          path: public/media/downloads/tools
+          multiple: true
+      - name: lottieFile
+        label: Archivo Lottie
+        type: file
+        options:
+          media: lottie_files
+          path: public/lottie/tools
+          extensions: [json]
+      - name: draft
+        label: Borrador
+        type: boolean
+      - name: body
+        label: Cuerpo
+        type: rich-text
+        options:
+          format: markdown
+          media: content_images
+          path: public/media/images/tools
+          rename: safe
+          switcher: true
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: app
+    templates:
+      create: "content(create): {path}"
+      update: "content(update): {path}"
+      delete: "content(delete): {path}"
+      rename: "content(rename): {oldPath} -> {newPath}"

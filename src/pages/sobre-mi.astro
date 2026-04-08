@@ -1,0 +1,25 @@
+---
+import { render } from "astro:content";
+import PageHero from "../components/PageHero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getPageContent, getSiteSettings } from "../lib/content";
+
+const settings = await getSiteSettings();
+const page = await getPageContent("sobre-mi");
+
+if (!page) {
+  throw new Error("Falta src/content/pages/sobre-mi.md");
+}
+
+const { Content } = await render(page);
+---
+
+<BaseLayout title={`${settings.siteName} | Sobre mí`} description={page.data.intro ?? settings.siteDescription}>
+  <PageHero eyebrow="Perfil" title={page.data.title} intro={page.data.intro} lead={page.data.lead} />
+
+  <section class="section">
+    <div class="shell prose prose--wide">
+      <Content />
+    </div>
+  </section>
+</BaseLayout>

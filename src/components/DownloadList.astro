@@ -1,0 +1,26 @@
+---
+import { fileLabel } from "../lib/content";
+
+interface Props {
+  files: string[];
+}
+
+const { files } = Astro.props;
+---
+
+{
+  files.length > 0 && (
+    <section class="detail-block">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Recursos</p>
+          <h2>Descargas</h2>
+        </div>
+      </div>
+
+      <ul class="download-list">
+        {files.map((file) => <li><a href={file}>{fileLabel(file)}</a></li>)}
+      </ul>
+    </section>
+  )
+}

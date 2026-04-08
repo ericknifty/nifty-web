@@ -1,0 +1,36 @@
+---
+import ContentCard from "../../components/ContentCard.astro";
+import PageHero from "../../components/PageHero.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { CATEGORY_LABELS, formatDate, getSiteSettings, getVisiblePosts, routeSlug } from "../../lib/content";
+
+const settings = await getSiteSettings();
+const posts = await getVisiblePosts();
+---
+
+<BaseLayout title={`${settings.siteName} | Blog`} description="Entradas de proceso, reflexión y documentación del trabajo.">
+  <PageHero
+    eyebrow="Blog"
+    title="Posts y bitácora"
+    intro="Acá vive el contenido editorial del sitio: procesos, reflexiones, pruebas y aprendizajes."
+    lead="La estructura está pensada para que puedas escribir desde el CMS y publicar sin tocar código en cada actualización."
+  />
+
+  <section class="section">
+    <div class="shell card-grid">
+      {
+        posts.map((post) => (
+          <ContentCard
+            href={`/blog/${routeSlug(post)}`}
+            title={post.data.title}
+            eyebrow={CATEGORY_LABELS[post.data.category]}
+            summary={post.data.excerpt}
+            image={post.data.cover}
+            meta={formatDate(post.data.date)}
+            tags={post.data.tags}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

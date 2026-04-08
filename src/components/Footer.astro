@@ -1,0 +1,46 @@
+---
+interface Props {
+  settings: {
+    siteName: string;
+    siteTagline: string;
+    email: string;
+    location: string;
+    socialVimeo?: string;
+    socialLinkedIn?: string;
+    socialGitHub?: string;
+    socialInstagram?: string;
+  };
+}
+
+const { settings } = Astro.props;
+
+const links = [
+  { href: settings.socialVimeo, label: "Vimeo" },
+  { href: settings.socialLinkedIn, label: "LinkedIn" },
+  { href: settings.socialGitHub, label: "GitHub" },
+  { href: settings.socialInstagram, label: "Instagram" }
+].filter((item): item is { href: string; label: string } => Boolean(item.href));
+---
+
+<footer class="site-footer">
+  <div class="shell site-footer__inner">
+    <div>
+      <p class="site-footer__eyebrow">Web Nifty</p>
+      <h2>{settings.siteTagline}</h2>
+      <p>{settings.location}</p>
+    </div>
+
+    <div class="site-footer__meta">
+      <a href={`mailto:${settings.email}`}>{settings.email}</a>
+      <div class="site-footer__links">
+        {
+          links.map((link) => (
+            <a href={link.href} target="_blank" rel="noreferrer">
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>

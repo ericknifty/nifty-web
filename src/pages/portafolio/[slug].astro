@@ -1,0 +1,61 @@
+---
+import { render } from "astro:content";
+import DownloadList from "../../components/DownloadList.astro";
+import LottiePlayer from "../../components/LottiePlayer.astro";
+import PageHero from "../../components/PageHero.astro";
+import VideoEmbed from "../../components/VideoEmbed.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { AREA_LABELS, formatDate, getSiteSettings, getVisibleProjects, routeSlug } from "../../lib/content";
+
+export async function getStaticPaths() {
+  const projects = await getVisibleProjects();
+  return projects.map((entry) => ({
+    params: { slug: routeSlug(entry) },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const settings = await getSiteSettings();
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`${entry.data.title} | ${settings.siteName}`} description={entry.data.summary}>
+  <PageHero
+    eyebrow={AREA_LABELS[entry.data.area]}
+    title={entry.data.title}
+    intro={entry.data.summary}
+    lead={`Actualizado el ${formatDate(entry.data.date)}`}
+  />
+
+  <section class="section">
+    <div class="shell detail-layout">
+      <article class="prose prose--wide">
+        {entry.data.cover && <img class="cover-image" src={entry.data.cover} alt="" />}
+        <Content />
+
+        {
+          entry.data.gallery.length > 0 && (
+            <section class="detail-block">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Galería</p>
+                  <h2>Imágenes del proyecto</h2>
+                </div>
+              </div>
+              <div class="gallery-grid">
+                {entry.data.gallery.map((image) => <img src={image} alt="" loading="lazy" />)}
+              </div>
+            </section>
+          )
+        }
+      </article>
+
+      <aside class="detail-aside">
+        <VideoEmbed title={entry.data.title} videoUrl={entry.data.videoUrl} videoFile={entry.data.videoFile} />
+        <LottiePlayer src={entry.data.lottieFile} title={entry.data.title} />
+        <DownloadList files={entry.data.downloads} />
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,171 @@
+---
+import { render } from "astro:content";
+import ContentCard from "../components/ContentCard.astro";
+import PageHero from "../components/PageHero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  AREA_LABELS,
+  CATEGORY_LABELS,
+  STATUS_LABELS,
+  formatDate,
+  getPageContent,
+  getSiteSettings,
+  getVisiblePosts,
+  getVisibleProjects,
+  getVisibleTools,
+  routeSlug
+} from "../lib/content";
+
+const settings = await getSiteSettings();
+const home = await getPageContent("inicio");
+
+if (!home) {
+  throw new Error("Falta src/content/pages/inicio.md");
+}
+
+const { Content } = await render(home);
+const projects = (await getVisibleProjects()).filter((entry) => entry.data.featured).slice(0, 3);
+const posts = (await getVisiblePosts()).slice(0, 3);
+const tools = (await getVisibleTools()).slice(0, 2);
+
+const heroActions: { href: string; label: string; variant?: "primary" | "secondary" }[] = [
+  { href: settings.primaryCtaUrl, label: settings.primaryCtaLabel }
+];
+
+if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
+  heroActions.push({
+    href: settings.secondaryCtaUrl,
+    label: settings.secondaryCtaLabel,
+    variant: "secondary"
+  });
+}
+---
+
+<BaseLayout title={`${settings.siteName} | Inicio`} description={settings.siteDescription}>
+  <PageHero
+    eyebrow="Portafolio + Blog + Demos"
+    title={settings.siteTagline}
+    intro={home.data.intro}
+    lead={home.data.lead}
+    actions={heroActions}
+  />
+
+  <section class="section">
+    <div class="shell two-column">
+      <div class="prose">
+        <Content />
+      </div>
+
+      <aside class="stack-card">
+        <p class="eyebrow">Estructura del proyecto</p>
+        <h2>Qué vive en cada capa</h2>
+        <ul class="stack-list">
+          <li><strong>src/content:</strong> posts, proyectos, páginas y configuración del sitio.</li>
+          <li><strong>public/media:</strong> imágenes, videos y descargas subidos desde el CMS.</li>
+          <li><strong>public/lottie:</strong> animaciones JSON listas para cargar en frontend.</li>
+          <li><strong>src/components + layouts:</strong> la capa visual y reutilizable del sitio.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell section-heading">
+      <div>
+        <p class="eyebrow">Portafolio</p>
+        <h2>Áreas principales</h2>
+      </div>
+      <a href="/portafolio">Ver todo el portafolio</a>
+    </div>
+
+    <div class="shell area-grid">
+      {Object.entries(AREA_LABELS).map(([key, label]) => (
+        <article class="area-card">
+          <p class="eyebrow">{key}</p>
+          <h3>{label}</h3>
+          <p>
+            {key === "motion" && "Piezas audiovisuales, motion graphics, reels y presentaciones."}
+            {key === "print" && "Producción gráfica, imprenta, piezas editoriales y sistemas impresos."}
+            {key === "web" && "Sitios, landings, demos y soluciones digitales con foco visual."}
+          </p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell section-heading">
+      <div>
+        <p class="eyebrow">Destacados</p>
+        <h2>Proyectos seleccionados</h2>
+      </div>
+      <a href="/portafolio">Ir al portafolio</a>
+    </div>
+
+    <div class="shell card-grid">
+      {
+        projects.map((project) => (
+          <ContentCard
+            href={`/portafolio/${routeSlug(project)}`}
+            title={project.data.title}
+            eyebrow={AREA_LABELS[project.data.area]}
+            summary={project.data.summary}
+            image={project.data.cover}
+            meta={formatDate(project.data.date)}
+            tags={project.data.tags}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell section-heading">
+      <div>
+        <p class="eyebrow">Bitácora</p>
+        <h2>Últimos posts</h2>
+      </div>
+      <a href="/blog">Ir al blog</a>
+    </div>
+
+    <div class="shell card-grid">
+      {
+        posts.map((post) => (
+          <ContentCard
+            href={`/blog/${routeSlug(post)}`}
+            title={post.data.title}
+            eyebrow={CATEGORY_LABELS[post.data.category]}
+            summary={post.data.excerpt}
+            image={post.data.cover}
+            meta={formatDate(post.data.date)}
+            tags={post.data.tags}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell section-heading">
+      <div>
+        <p class="eyebrow">Laboratorio</p>
+        <h2>Utilidades y demos</h2>
+      </div>
+      <a href="/utilidades">Ver utilidades</a>
+    </div>
+
+    <div class="shell card-grid card-grid--compact">
+      {
+        tools.map((tool) => (
+          <ContentCard
+            href={`/utilidades/${routeSlug(tool)}`}
+            title={tool.data.title}
+            eyebrow={STATUS_LABELS[tool.data.status]}
+            summary={tool.data.summary}
+            image={tool.data.cover}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
