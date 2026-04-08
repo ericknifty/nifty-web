@@ -1,12 +1,11 @@
 ---
-title: "CV B: Producción Gráfica e Industrial"
+title: Diseño Gráfico, Producción Gráfica e Industrial
 slug: print
 tabLabel: Producción Gráfica
-summary: "Perfil orientado a pre-prensa, flujos industriales, operación de maquinaria y asesoría técnica B2B."
+summary: Perfil orientado a pre-prensa, flujos industriales, operación de
+  maquinaria y asesoría técnica B2B.
 order: 2
-attachments: []
 ---
-
 ## Perfil profesional
 
 Especialista en Producción Gráfica con sólida experiencia en la dirección de procesos a nivel industrial y comercial. Especializado en pre-prensa, operación de maquinaria de alto volumen y automatización de tirajes. Combino el rigor técnico del taller con habilidades de asesoría comercial B2B, garantizando un control de calidad absoluto desde la recepción del archivo original hasta la entrega del producto final.
@@ -56,3 +55,4 @@ Especialista en Producción Gráfica con sólida experiencia en la dirección de
 - Adobe Illustrator
 - Adobe InDesign
 - Adobe Photoshop
+
