@@ -11,13 +11,29 @@ interface Props {
   intro?: string;
   lead?: string;
   actions?: Action[];
+  panelEyebrow?: string;
+  panelTitle?: string;
+  panelBody?: string;
+  panelItems?: string[];
 }
 
-const { eyebrow, title, intro, lead, actions = [] } = Astro.props;
+const {
+  eyebrow,
+  title,
+  intro,
+  lead,
+  actions = [],
+  panelEyebrow,
+  panelTitle,
+  panelBody,
+  panelItems = []
+} = Astro.props;
+
+const hasPanel = Boolean(panelTitle || panelBody || panelItems.length);
 ---
 
 <section class="page-hero">
-  <div class="shell page-hero__inner">
+  <div class:list={["shell", "page-hero__inner", !hasPanel && "page-hero__inner--single"]}>
     <div class="page-hero__copy">
       {eyebrow && <p class="eyebrow">{eyebrow}</p>}
       <h1>{title}</h1>
@@ -40,16 +56,23 @@ const { eyebrow, title, intro, lead, actions = [] } = Astro.props;
       }
     </div>
 
-    <div class="page-hero__panel">
-      <div class="panel-note">
-        <span>Flujo del sitio</span>
-        <ol>
-          <li>Editas contenido en Pages CMS.</li>
-          <li>GitHub guarda el cambio.</li>
-          <li>Astro construye el sitio.</li>
-          <li>El hosting recibe la carpeta final.</li>
-        </ol>
-      </div>
-    </div>
+    {
+      hasPanel && (
+        <div class="page-hero__panel">
+          <div class="panel-note">
+            {panelEyebrow && <span>{panelEyebrow}</span>}
+            {panelTitle && <h2>{panelTitle}</h2>}
+            {panelBody && <p>{panelBody}</p>}
+            {
+              panelItems.length > 0 && (
+                <ul>
+                  {panelItems.map((item) => <li>{item}</li>)}
+                </ul>
+              )
+            }
+          </div>
+        </div>
+      )
+    }
   </div>
 </section>

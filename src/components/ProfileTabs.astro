@@ -1,0 +1,155 @@
+---
+import type { CvProfile } from "../lib/cvProfiles";
+
+interface Props {
+  profiles: CvProfile[];
+}
+
+const { profiles } = Astro.props;
+const defaultProfile = profiles[0];
+---
+
+<section class="profile-tabs" data-profile-tabs>
+  <div class="profile-tabs__header">
+    <div>
+      <p class="eyebrow">CV</p>
+      <h2>Perfiles profesionales</h2>
+    </div>
+
+    <div class="profile-tabs__controls" role="tablist" aria-label="Perfiles profesionales">
+      {
+        profiles.map((profile, index) => (
+          <button
+            type="button"
+            class:list={["profile-tabs__button", index === 0 && "is-active"]}
+            role="tab"
+            id={`tab-${profile.id}`}
+            data-profile-tab={profile.id}
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls={`panel-${profile.id}`}
+          >
+            {profile.tabLabel}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="profile-tabs__panels">
+    {
+      profiles.map((profile, index) => (
+        <article
+          class:list={["profile-panel", index === 0 && "is-active"]}
+          id={`panel-${profile.id}`}
+          data-profile-panel={profile.id}
+          role="tabpanel"
+          aria-labelledby={`tab-${profile.id}`}
+          hidden={index !== 0}
+        >
+          <div class="profile-panel__intro">
+            <p class="eyebrow">{profile.summary}</p>
+            <h3>{profile.title}</h3>
+            <p>{profile.profile}</p>
+          </div>
+
+          <section class="profile-section">
+            <div class="section-heading section-heading--stack">
+              <div>
+                <p class="eyebrow">Experiencia</p>
+                <h4>Trayectoria relevante</h4>
+              </div>
+            </div>
+
+            <div class="profile-timeline">
+              {
+                profile.experience.map((item) => (
+                  <article class="timeline-item">
+                    <div class="timeline-item__meta">
+                      <h5>{item.role}</h5>
+                      <p>{item.organization}</p>
+                      <span>{item.period}</span>
+                    </div>
+
+                    <ul>
+                      {item.bullets.map((bullet) => <li>{bullet}</li>)}
+                    </ul>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section class="profile-section">
+            <div class="section-heading section-heading--stack">
+              <div>
+                <p class="eyebrow">Herramientas</p>
+                <h4>Software y equipamiento técnico</h4>
+              </div>
+            </div>
+
+            <div class="tool-grid">
+              {
+                profile.tools.map((group) => (
+                  <article class="tool-card">
+                    <h5>{group.label}</h5>
+                    <ul>
+                      {group.items.map((item) => <li>{item}</li>)}
+                    </ul>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const initProfileTabs = () => {
+    document.querySelectorAll("[data-profile-tabs]").forEach((root) => {
+      if (!(root instanceof HTMLElement)) return;
+      if (root.dataset.ready === "true") return;
+
+      const tabs = Array.from(root.querySelectorAll("[data-profile-tab]"));
+      const panels = Array.from(root.querySelectorAll("[data-profile-panel]"));
+
+      const activate = (target) => {
+        tabs.forEach((tab) => {
+          if (!(tab instanceof HTMLButtonElement)) return;
+          const isActive = tab.dataset.profileTab === target;
+          tab.classList.toggle("is-active", isActive);
+          tab.setAttribute("aria-selected", String(isActive));
+        });
+
+        panels.forEach((panel) => {
+          if (!(panel instanceof HTMLElement)) return;
+          const isActive = panel.dataset.profilePanel === target;
+          panel.hidden = !isActive;
+          panel.classList.toggle("is-active", isActive);
+        });
+      };
+
+      tabs.forEach((tab) => {
+        if (!(tab instanceof HTMLButtonElement)) return;
+        tab.addEventListener("click", () => activate(tab.dataset.profileTab));
+      });
+
+      const firstTab = tabs[0];
+      if (firstTab instanceof HTMLButtonElement && firstTab.dataset.profileTab) {
+        activate(firstTab.dataset.profileTab);
+      }
+
+      root.dataset.ready = "true";
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProfileTabs, { once: true });
+  } else {
+    initProfileTabs();
+  }
+
+  document.addEventListener("astro:page-load", initProfileTabs);
+</script>

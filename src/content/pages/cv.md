@@ -1,29 +1,15 @@
 ---
 title: CV
 slug: cv
-intro: Hoja de ruta profesional para reclutadores, estudios y clientes que necesiten una lectura rápida de perfil.
-lead: En esta sección conviene mantener una versión sintética, clara y muy actualizada de experiencia, formación y herramientas.
+intro: "Dos currículums orientados a necesidades distintas: uno audiovisual y otro técnico-industrial."
+lead: "La idea es que cada visitante pueda entrar directo al perfil que mejor conversa con su proyecto, servicio o búsqueda laboral."
 draft: false
 attachments: []
 ---
 
-## Perfil
+Esta sección separa la experiencia en dos recorridos profesionales:
 
-Diseñador con experiencia en motion graphics, producción gráfica y desarrollo web orientado a implementación visual.
+- **Motion Graphics B2B y E-learning**, orientado a comunicación audiovisual, diseño instruccional visual y producción multimedia.
+- **Producción Gráfica e Industrial**, enfocado en pre-prensa, impresión, automatización y operación técnica.
 
-## Experiencia sugerida
-
-- Empresa o estudio: rol, período y foco del trabajo.
-- Proyectos independientes: servicios, resultados y tecnologías utilizadas.
-- Desarrollo web: sitios, landings, demos y mantenimiento de plataformas.
-
-## Formación sugerida
-
-- Carrera universitaria.
-- Cursos o diplomados relevantes.
-- Autoformación guiada en HTML, CSS, JS y herramientas con IA.
-
-## Herramientas sugeridas
-
-- Diseño: Illustrator, Photoshop, After Effects, Figma.
-- Web: HTML5, CSS, JavaScript base, Astro, GitHub, Pages CMS.
+La navegación por pestañas ayuda a presentar mejor cada perfil a estudios, reclutadores, clientes corporativos o empresas del rubro gráfico.

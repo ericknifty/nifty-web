@@ -1,16 +1,15 @@
 ---
 title: Inicio
 slug: inicio
-intro: Un sitio pensado para mostrar trabajo, escribir procesos y publicar pequeñas herramientas sin depender de una base de datos.
-lead: "La idea es que el sitio crezca contigo y que cada sección tenga una función clara: mostrar experiencia, compartir aprendizajes y alojar demos útiles."
+intro: "Motion graphics B2B, producción gráfica y desarrollo web visual reunidos en un solo portafolio personal."
+lead: "Este sitio funciona como portafolio, blog profesional y espacio para mostrar soluciones digitales aplicadas a proyectos reales."
 draft: false
 attachments: []
 ---
 
-Este home está armado para explicar el proyecto mientras se usa. Cada módulo responde a una necesidad concreta:
+Trabajo desde dos perfiles complementarios que se cruzan de forma natural:
 
-- **Portafolio** para mostrar trabajos seleccionados y ordenarlos por área.
-- **Blog** para documentar procesos, hallazgos y reflexiones.
-- **Utilidades** para publicar pequeñas herramientas que luego pueden convertirse en servicios o productos.
+- **Motion Designer B2B y E-learning**, para traducir información técnica o corporativa en piezas audiovisuales claras.
+- **Producción Gráfica e Industrial**, para resolver pre-prensa, impresión, datos variables y ejecución técnica.
 
-La estructura está separada en contenido, diseño y archivos subidos para que modificar el sitio sea más simple con el tiempo.
+La sección de **Portafolio** muestra proyectos por especialidad. El **Blog** documenta procesos, hallazgos y reflexiones. **Utilidades** reúne demos y herramientas ligadas al trabajo diario de diseño y producción.

@@ -2,7 +2,9 @@
 import { render } from "astro:content";
 import DownloadList from "../components/DownloadList.astro";
 import PageHero from "../components/PageHero.astro";
+import ProfileTabs from "../components/ProfileTabs.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { cvProfiles } from "../lib/cvProfiles";
 import { getPageContent, getSiteSettings } from "../lib/content";
 
 const settings = await getSiteSettings();
@@ -16,11 +18,25 @@ const { Content } = await render(page);
 ---
 
 <BaseLayout title={`${settings.siteName} | CV`} description={page.data.intro ?? settings.siteDescription}>
-  <PageHero eyebrow="Experiencia" title={page.data.title} intro={page.data.intro} lead={page.data.lead} />
+  <PageHero
+    eyebrow="Experiencia"
+    title={page.data.title}
+    intro={page.data.intro}
+    lead={page.data.lead}
+    panelEyebrow="Lectura rápida"
+    panelTitle="Dos perfiles profesionales según el tipo de proyecto."
+    panelBody="La navegación por pestañas separa el perfil audiovisual del perfil técnico-industrial para que cada cliente, reclutador o estudio encuentre rápidamente el enfoque que necesita."
+  />
 
   <section class="section">
     <div class="shell prose prose--wide">
       <Content />
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="shell">
+      <ProfileTabs profiles={cvProfiles} />
     </div>
   </section>
 
