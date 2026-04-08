@@ -1,6 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400..700;1,400..700&family=Space+Grotesk:wght@400;500;700&display=swap");
 
 :root {
+  --font-display: "Brygada 1918", Georgia, serif;
+  --font-body: "Space Grotesk", "Segoe UI", sans-serif;
   --bg: #f8f5ef;
   --panel: rgba(255, 255, 255, 0.78);
   --ink: #111827;
@@ -28,7 +30,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-family: var(--font-body);
   color: var(--ink);
   background:
     radial-gradient(circle at top left, rgba(249, 115, 22, 0.22), transparent 32%),
@@ -160,7 +162,8 @@ main {
 .area-card h3,
 .content-card__title {
   margin: 0;
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-weight: 700;
   line-height: 0.98;
 }
@@ -333,7 +336,8 @@ main {
 
 .prose h2,
 .prose h3 {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
   line-height: 1.1;
   margin-top: 1.8em;
 }

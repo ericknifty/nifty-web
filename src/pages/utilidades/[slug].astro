@@ -4,7 +4,7 @@ import DownloadList from "../../components/DownloadList.astro";
 import LottiePlayer from "../../components/LottiePlayer.astro";
 import PageHero from "../../components/PageHero.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { STATUS_LABELS, getSiteSettings, getVisibleTools, routeSlug } from "../../lib/content";
+import { getSiteSettings, getStatusLabel, getVisibleTools, routeSlug } from "../../lib/content";
 import { isExternalUrl } from "../../lib/media";
 
 export async function getStaticPaths() {
@@ -31,7 +31,7 @@ const actions = demoHref
 
 <BaseLayout title={`${entry.data.title} | ${settings.siteName}`} description={entry.data.summary}>
   <PageHero
-    eyebrow={STATUS_LABELS[entry.data.status]}
+    eyebrow={getStatusLabel(entry.data.status)}
     title={entry.data.title}
     intro={entry.data.summary}
     lead="Ficha editable desde el CMS para demos internas o enlaces externos."

@@ -2,7 +2,7 @@
 import ContentCard from "../../components/ContentCard.astro";
 import PageHero from "../../components/PageHero.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { STATUS_LABELS, getSiteSettings, getVisibleTools, routeSlug } from "../../lib/content";
+import { getSiteSettings, getStatusLabel, getVisibleTools, routeSlug } from "../../lib/content";
 
 const settings = await getSiteSettings();
 const tools = await getVisibleTools();
@@ -23,7 +23,7 @@ const tools = await getVisibleTools();
           <ContentCard
             href={`/utilidades/${routeSlug(tool)}`}
             title={tool.data.title}
-            eyebrow={STATUS_LABELS[tool.data.status]}
+            eyebrow={getStatusLabel(tool.data.status)}
             summary={tool.data.summary}
             image={tool.data.cover}
           />

@@ -4,12 +4,12 @@ import ContentCard from "../components/ContentCard.astro";
 import PageHero from "../components/PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import {
-  AREA_LABELS,
-  CATEGORY_LABELS,
-  STATUS_LABELS,
   formatDate,
+  getAreaLabel,
+  getCategoryLabel,
   getPageContent,
   getSiteSettings,
+  getStatusLabel,
   getVisiblePosts,
   getVisibleProjects,
   getVisibleTools,
@@ -25,8 +25,14 @@ if (!home) {
 
 const { Content } = await render(home);
 const projects = (await getVisibleProjects()).filter((entry) => entry.data.featured).slice(0, 3);
-const posts = (await getVisiblePosts()).slice(0, 3);
+const posts = await getVisiblePosts(3);
 const tools = (await getVisibleTools()).slice(0, 2);
+
+const portfolioAreas = [
+  { key: "motion", label: getAreaLabel("motion"), copy: "Piezas audiovisuales, motion graphics, reels y presentaciones." },
+  { key: "print", label: getAreaLabel("print"), copy: "Producción gráfica, imprenta, piezas editoriales y sistemas impresos." },
+  { key: "web", label: getAreaLabel("web"), copy: "Sitios, landings, demos y soluciones digitales con foco visual." }
+];
 
 const heroActions: { href: string; label: string; variant?: "primary" | "secondary" }[] = [
   { href: settings.primaryCtaUrl, label: settings.primaryCtaLabel }
@@ -79,15 +85,11 @@ if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
     </div>
 
     <div class="shell area-grid">
-      {Object.entries(AREA_LABELS).map(([key, label]) => (
+      {portfolioAreas.map((area) => (
         <article class="area-card">
-          <p class="eyebrow">{key}</p>
-          <h3>{label}</h3>
-          <p>
-            {key === "motion" && "Piezas audiovisuales, motion graphics, reels y presentaciones."}
-            {key === "print" && "Producción gráfica, imprenta, piezas editoriales y sistemas impresos."}
-            {key === "web" && "Sitios, landings, demos y soluciones digitales con foco visual."}
-          </p>
+          <p class="eyebrow">{area.key}</p>
+          <h3>{area.label}</h3>
+          <p>{area.copy}</p>
         </article>
       ))}
     </div>
@@ -108,7 +110,7 @@ if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
           <ContentCard
             href={`/portafolio/${routeSlug(project)}`}
             title={project.data.title}
-            eyebrow={AREA_LABELS[project.data.area]}
+            eyebrow={getAreaLabel(project.data.area)}
             summary={project.data.summary}
             image={project.data.cover}
             meta={formatDate(project.data.date)}
@@ -134,7 +136,7 @@ if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
           <ContentCard
             href={`/blog/${routeSlug(post)}`}
             title={post.data.title}
-            eyebrow={CATEGORY_LABELS[post.data.category]}
+            eyebrow={getCategoryLabel(post.data.category)}
             summary={post.data.excerpt}
             image={post.data.cover}
             meta={formatDate(post.data.date)}
@@ -160,7 +162,7 @@ if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
           <ContentCard
             href={`/utilidades/${routeSlug(tool)}`}
             title={tool.data.title}
-            eyebrow={STATUS_LABELS[tool.data.status]}
+            eyebrow={getStatusLabel(tool.data.status)}
             summary={tool.data.summary}
             image={tool.data.cover}
           />

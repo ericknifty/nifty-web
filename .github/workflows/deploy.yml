@@ -9,6 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout repository
@@ -39,18 +40,49 @@ jobs:
           DEPLOY_USERNAME: ${{ secrets.DEPLOY_USERNAME }}
           DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
         run: |
-          set -eu
+          set -euo pipefail
 
           PROTOCOL="${DEPLOY_PROTOCOL:-sftp}"
           REMOTE_DIR="${DEPLOY_REMOTE_DIR:-public_html}"
+          MIRROR_ARGS="--verbose=1 --parallel=1 --only-newer --delete-first --scan-all-first --no-perms --no-umask --exclude-glob .gitkeep"
+          LFTP_COMMANDS=$(cat <<EOF
+          set cmd:fail-exit yes
+          set net:timeout 20
+          set net:max-retries 2
+          set net:reconnect-interval-base 5
+          set net:reconnect-interval-max 20
+          set xfer:clobber yes
+          set xfer:use-temp-file yes
+          set mirror:parallel-transfer-count 1
+          set mirror:use-pget-n 0
+          set ftp:passive-mode true
+          set ftp:sync-mode false
+          set ftp:list-options -a
+          EOF
+          )
 
           if [ "$PROTOCOL" = "sftp" ]; then
             PORT="${DEPLOY_PORT:-22}"
-            lftp -c "set sftp:auto-confirm yes; open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT sftp://$DEPLOY_HOST; mirror -R dist \"$REMOTE_DIR\" --delete --verbose; bye"
+            timeout --signal=TERM 6m lftp -c "$LFTP_COMMANDS
+            set sftp:auto-confirm yes
+            open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT sftp://$DEPLOY_HOST
+            mkdir -p \"$REMOTE_DIR\"
+            mirror -R dist \"$REMOTE_DIR\" $MIRROR_ARGS
+            bye"
           elif [ "$PROTOCOL" = "ftps" ]; then
             PORT="${DEPLOY_PORT:-21}"
-            lftp -c "set ssl:verify-certificate no; open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT ftps://$DEPLOY_HOST; mirror -R dist \"$REMOTE_DIR\" --delete --verbose; bye"
+            timeout --signal=TERM 6m lftp -c "$LFTP_COMMANDS
+            set ssl:verify-certificate no
+            open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT ftps://$DEPLOY_HOST
+            mkdir -p \"$REMOTE_DIR\"
+            mirror -R dist \"$REMOTE_DIR\" $MIRROR_ARGS
+            bye"
           else
             PORT="${DEPLOY_PORT:-21}"
-            lftp -c "set ssl:verify-certificate no; open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT ftp://$DEPLOY_HOST; mirror -R dist \"$REMOTE_DIR\" --delete --verbose; bye"
+            timeout --signal=TERM 6m lftp -c "$LFTP_COMMANDS
+            set ssl:verify-certificate no
+            open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT ftp://$DEPLOY_HOST
+            mkdir -p \"$REMOTE_DIR\"
+            mirror -R dist \"$REMOTE_DIR\" $MIRROR_ARGS
+            bye"
           fi

@@ -4,7 +4,7 @@ import DownloadList from "../../components/DownloadList.astro";
 import PageHero from "../../components/PageHero.astro";
 import VideoEmbed from "../../components/VideoEmbed.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { CATEGORY_LABELS, formatDate, getSiteSettings, getVisiblePosts, routeSlug } from "../../lib/content";
+import { formatDate, getCategoryLabel, getSiteSettings, getVisiblePosts, routeSlug } from "../../lib/content";
 
 export async function getStaticPaths() {
   const posts = await getVisiblePosts();
@@ -21,7 +21,7 @@ const { Content } = await render(entry);
 
 <BaseLayout title={`${entry.data.title} | ${settings.siteName}`} description={entry.data.excerpt}>
   <PageHero
-    eyebrow={CATEGORY_LABELS[entry.data.category]}
+    eyebrow={getCategoryLabel(entry.data.category)}
     title={entry.data.title}
     intro={entry.data.excerpt}
     lead={`Publicado el ${formatDate(entry.data.date)}`}

@@ -5,7 +5,7 @@ import LottiePlayer from "../../components/LottiePlayer.astro";
 import PageHero from "../../components/PageHero.astro";
 import VideoEmbed from "../../components/VideoEmbed.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { AREA_LABELS, formatDate, getSiteSettings, getVisibleProjects, routeSlug } from "../../lib/content";
+import { formatDate, getAreaLabel, getSiteSettings, getVisibleProjects, routeSlug } from "../../lib/content";
 
 export async function getStaticPaths() {
   const projects = await getVisibleProjects();
@@ -22,7 +22,7 @@ const { Content } = await render(entry);
 
 <BaseLayout title={`${entry.data.title} | ${settings.siteName}`} description={entry.data.summary}>
   <PageHero
-    eyebrow={AREA_LABELS[entry.data.area]}
+    eyebrow={getAreaLabel(entry.data.area)}
     title={entry.data.title}
     intro={entry.data.summary}
     lead={`Actualizado el ${formatDate(entry.data.date)}`}

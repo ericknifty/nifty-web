@@ -2,7 +2,7 @@
 import ContentCard from "../../components/ContentCard.astro";
 import PageHero from "../../components/PageHero.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { AREA_LABELS, formatDate, getSiteSettings, getVisibleProjects, routeSlug } from "../../lib/content";
+import { formatDate, getAreaLabel, getSiteSettings, getVisibleProjects, routeSlug } from "../../lib/content";
 
 const settings = await getSiteSettings();
 const projects = await getVisibleProjects();
@@ -26,7 +26,7 @@ const areas = ["motion", "print", "web"] as const;
           <div class="shell section-heading">
             <div>
               <p class="eyebrow">{area}</p>
-              <h2>{AREA_LABELS[area]}</h2>
+              <h2>{getAreaLabel(area)}</h2>
             </div>
             <p>{items.length} proyecto(s)</p>
           </div>
@@ -36,7 +36,7 @@ const areas = ["motion", "print", "web"] as const;
               <ContentCard
                 href={`/portafolio/${routeSlug(project)}`}
                 title={project.data.title}
-                eyebrow={AREA_LABELS[project.data.area]}
+                eyebrow={getAreaLabel(project.data.area)}
                 summary={project.data.summary}
                 image={project.data.cover}
                 meta={formatDate(project.data.date)}

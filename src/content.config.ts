@@ -1,6 +1,23 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
+const stringListField = z.preprocess((value) => {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => (typeof item === "string" ? item.trim() : ""))
+      .filter(Boolean);
+  }
+
+  if (typeof value === "string") {
+    return value
+      .split(/[\r\n,;]+/)
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+}, z.array(z.string()));
+
 const posts = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/posts" }),
   schema: z.object({
@@ -10,8 +27,8 @@ const posts = defineCollection({
     category: z.enum(["motion", "print", "web", "reflexiones", "vida", "hacks"]),
     excerpt: z.string(),
     cover: z.string().optional(),
-    tags: z.array(z.string()).default([]),
-    downloads: z.array(z.string()).default([]),
+    tags: stringListField,
+    downloads: stringListField,
     videoUrl: z.union([z.string().url(), z.literal("")]).optional(),
     videoFile: z.union([z.string(), z.literal("")]).optional(),
     featured: z.boolean().default(false),
@@ -28,9 +45,9 @@ const projects = defineCollection({
     date: z.coerce.date(),
     summary: z.string(),
     cover: z.string().optional(),
-    gallery: z.array(z.string()).default([]),
-    tags: z.array(z.string()).default([]),
-    downloads: z.array(z.string()).default([]),
+    gallery: stringListField,
+    tags: stringListField,
+    downloads: stringListField,
     videoUrl: z.union([z.string().url(), z.literal("")]).optional(),
     videoFile: z.union([z.string(), z.literal("")]).optional(),
     lottieFile: z.union([z.string(), z.literal("")]).optional(),
@@ -49,7 +66,7 @@ const tools = defineCollection({
     cover: z.string().optional(),
     demoPath: z.union([z.string(), z.literal("")]).optional(),
     externalUrl: z.union([z.string().url(), z.literal("")]).optional(),
-    downloads: z.array(z.string()).default([]),
+    downloads: stringListField,
     lottieFile: z.union([z.string(), z.literal("")]).optional(),
     draft: z.boolean().default(false)
   })
@@ -63,7 +80,7 @@ const pages = defineCollection({
     intro: z.string().optional(),
     lead: z.string().optional(),
     draft: z.boolean().default(false),
-    attachments: z.array(z.string()).default([])
+    attachments: stringListField
   })
 });
 

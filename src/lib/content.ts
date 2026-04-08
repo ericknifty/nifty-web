@@ -22,8 +22,17 @@ export const STATUS_LABELS = {
   archived: "Archivado"
 } as const;
 
-const sortByDateDesc = <T extends CollectionEntry<"posts" | "projects">>(a: T, b: T) =>
-  b.data.date.getTime() - a.data.date.getTime();
+const sortByDateDesc = <T extends CollectionEntry<"posts" | "projects">>(a: T, b: T) => {
+  const aTime = a.data.date instanceof Date ? a.data.date.getTime() : 0;
+  const bTime = b.data.date instanceof Date ? b.data.date.getTime() : 0;
+  return bTime - aTime;
+};
+
+function humanizeFallback(value: string) {
+  return value
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
 
 export function formatDate(date: Date) {
   return new Intl.DateTimeFormat("es-CL", {
@@ -42,6 +51,18 @@ export function routeSlug(entry: { id: string; data: { slug?: string } }) {
   return entry.data.slug ?? entry.id;
 }
 
+export function getCategoryLabel(category: string) {
+  return CATEGORY_LABELS[category as keyof typeof CATEGORY_LABELS] ?? humanizeFallback(category);
+}
+
+export function getAreaLabel(area: string) {
+  return AREA_LABELS[area as keyof typeof AREA_LABELS] ?? humanizeFallback(area);
+}
+
+export function getStatusLabel(status: string) {
+  return STATUS_LABELS[status as keyof typeof STATUS_LABELS] ?? humanizeFallback(status);
+}
+
 export async function getSiteSettings() {
   const site = await getEntry("settings", "site");
 
@@ -57,9 +78,10 @@ export async function getPageContent(slug: string) {
   return pages.find((entry) => routeSlug(entry) === slug);
 }
 
-export async function getVisiblePosts() {
+export async function getVisiblePosts(limit?: number) {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
-  return posts.sort(sortByDateDesc);
+  const sorted = posts.sort(sortByDateDesc);
+  return typeof limit === "number" ? sorted.slice(0, limit) : sorted;
 }
 
 export async function getVisibleProjects() {
