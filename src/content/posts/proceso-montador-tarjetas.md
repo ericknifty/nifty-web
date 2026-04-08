@@ -6,8 +6,7 @@ category: print
 excerpt: 'Siempre soñé con tener la herramienta de montaje de Corel Draw,
   gracias al "vibe coding" he logrado tener una herramienta funcional:'
 cover: /media/images/posts/imagen_2026-04-08_164621467.png
-tags:
-  - print
+tags: impresion,imposicion,montaje tarjetas
 featured: false
 draft: false
 ---
