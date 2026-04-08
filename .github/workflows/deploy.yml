@@ -66,23 +66,32 @@ jobs:
             timeout --signal=TERM 6m lftp -c "$LFTP_COMMANDS
             set sftp:auto-confirm yes
             open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT sftp://$DEPLOY_HOST
+            set cmd:fail-exit false
             mkdir -p \"$REMOTE_DIR\"
-            mirror -R dist \"$REMOTE_DIR\" $MIRROR_ARGS
+            set cmd:fail-exit true
+            cd \"$REMOTE_DIR\"
+            mirror -R dist . $MIRROR_ARGS
             bye"
           elif [ "$PROTOCOL" = "ftps" ]; then
             PORT="${DEPLOY_PORT:-21}"
             timeout --signal=TERM 6m lftp -c "$LFTP_COMMANDS
             set ssl:verify-certificate no
             open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT ftps://$DEPLOY_HOST
+            set cmd:fail-exit false
             mkdir -p \"$REMOTE_DIR\"
-            mirror -R dist \"$REMOTE_DIR\" $MIRROR_ARGS
+            set cmd:fail-exit true
+            cd \"$REMOTE_DIR\"
+            mirror -R dist . $MIRROR_ARGS
             bye"
           else
             PORT="${DEPLOY_PORT:-21}"
             timeout --signal=TERM 6m lftp -c "$LFTP_COMMANDS
             set ssl:verify-certificate no
             open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT ftp://$DEPLOY_HOST
+            set cmd:fail-exit false
             mkdir -p \"$REMOTE_DIR\"
-            mirror -R dist \"$REMOTE_DIR\" $MIRROR_ARGS
+            set cmd:fail-exit true
+            cd \"$REMOTE_DIR\"
+            mirror -R dist . $MIRROR_ARGS
             bye"
           fi

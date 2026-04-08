@@ -4,11 +4,11 @@ import DownloadList from "../components/DownloadList.astro";
 import PageHero from "../components/PageHero.astro";
 import ProfileTabs from "../components/ProfileTabs.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { cvProfiles } from "../lib/cvProfiles";
-import { getPageContent, getSiteSettings } from "../lib/content";
+import { getPageContent, getSiteSettings, getVisibleCvProfiles } from "../lib/content";
 
 const settings = await getSiteSettings();
 const page = await getPageContent("cv");
+const profiles = await getVisibleCvProfiles();
 
 if (!page) {
   throw new Error("Falta src/content/pages/cv.md");
@@ -36,7 +36,7 @@ const { Content } = await render(page);
 
   <section class="section section--tight">
     <div class="shell">
-      <ProfileTabs profiles={cvProfiles} />
+      <ProfileTabs profiles={profiles} />
     </div>
   </section>
 

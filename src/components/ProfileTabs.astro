@@ -1,12 +1,23 @@
 ---
-import type { CvProfile } from "../lib/cvProfiles";
+import { render, type CollectionEntry } from "astro:content";
+import DownloadList from "./DownloadList.astro";
 
 interface Props {
-  profiles: CvProfile[];
+  profiles: CollectionEntry<"cvProfiles">[];
 }
 
 const { profiles } = Astro.props;
-const defaultProfile = profiles[0];
+
+const renderedProfiles = await Promise.all(
+  profiles.map(async (profile) => {
+    const { Content } = await render(profile);
+    return {
+      entry: profile,
+      Content,
+      profileId: profile.data.slug ?? profile.id
+    };
+  })
+);
 ---
 
 <section class="profile-tabs" data-profile-tabs>
@@ -18,17 +29,17 @@ const defaultProfile = profiles[0];
 
     <div class="profile-tabs__controls" role="tablist" aria-label="Perfiles profesionales">
       {
-        profiles.map((profile, index) => (
+        renderedProfiles.map(({ entry, profileId }, index) => (
           <button
             type="button"
             class:list={["profile-tabs__button", index === 0 && "is-active"]}
             role="tab"
-            id={`tab-${profile.id}`}
-            data-profile-tab={profile.id}
+            id={`tab-${profileId}`}
+            data-profile-tab={profileId}
             aria-selected={index === 0 ? "true" : "false"}
-            aria-controls={`panel-${profile.id}`}
+            aria-controls={`panel-${profileId}`}
           >
-            {profile.tabLabel}
+            {entry.data.tabLabel}
           </button>
         ))
       }
@@ -37,69 +48,25 @@ const defaultProfile = profiles[0];
 
   <div class="profile-tabs__panels">
     {
-      profiles.map((profile, index) => (
+      renderedProfiles.map(({ entry, Content, profileId }, index) => (
         <article
           class:list={["profile-panel", index === 0 && "is-active"]}
-          id={`panel-${profile.id}`}
-          data-profile-panel={profile.id}
+          id={`panel-${profileId}`}
+          data-profile-panel={profileId}
           role="tabpanel"
-          aria-labelledby={`tab-${profile.id}`}
+          aria-labelledby={`tab-${profileId}`}
           hidden={index !== 0}
         >
           <div class="profile-panel__intro">
-            <p class="eyebrow">{profile.summary}</p>
-            <h3>{profile.title}</h3>
-            <p>{profile.profile}</p>
+            {entry.data.summary && <p class="eyebrow">{entry.data.summary}</p>}
+            <h3>{entry.data.title}</h3>
           </div>
 
-          <section class="profile-section">
-            <div class="section-heading section-heading--stack">
-              <div>
-                <p class="eyebrow">Experiencia</p>
-                <h4>Trayectoria relevante</h4>
-              </div>
-            </div>
+          <div class="prose profile-panel__content">
+            <Content />
+          </div>
 
-            <div class="profile-timeline">
-              {
-                profile.experience.map((item) => (
-                  <article class="timeline-item">
-                    <div class="timeline-item__meta">
-                      <h5>{item.role}</h5>
-                      <p>{item.organization}</p>
-                      <span>{item.period}</span>
-                    </div>
-
-                    <ul>
-                      {item.bullets.map((bullet) => <li>{bullet}</li>)}
-                    </ul>
-                  </article>
-                ))
-              }
-            </div>
-          </section>
-
-          <section class="profile-section">
-            <div class="section-heading section-heading--stack">
-              <div>
-                <p class="eyebrow">Herramientas</p>
-                <h4>Software y equipamiento técnico</h4>
-              </div>
-            </div>
-
-            <div class="tool-grid">
-              {
-                profile.tools.map((group) => (
-                  <article class="tool-card">
-                    <h5>{group.label}</h5>
-                    <ul>
-                      {group.items.map((item) => <li>{item}</li>)}
-                    </ul>
-                  </article>
-                ))
-              }
-            </div>
-          </section>
+          {entry.data.attachments.length > 0 && <DownloadList files={entry.data.attachments} />}
         </article>
       ))
     }

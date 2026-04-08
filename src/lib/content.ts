@@ -92,3 +92,8 @@ export async function getVisibleProjects() {
 export async function getVisibleTools() {
   return getCollection("tools", ({ data }) => !data.draft);
 }
+
+export async function getVisibleCvProfiles() {
+  const profiles = await getCollection("cvProfiles");
+  return profiles.sort((a, b) => a.data.order - b.data.order);
+}

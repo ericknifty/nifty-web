@@ -103,10 +103,23 @@ const settings = defineCollection({
   })
 });
 
+const cvProfiles = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/cv-profiles" }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string().optional(),
+    tabLabel: z.string(),
+    summary: z.string().optional(),
+    order: z.coerce.number().default(0),
+    attachments: stringListField
+  })
+});
+
 export const collections = {
   posts,
   projects,
   tools,
   pages,
-  settings
+  settings,
+  cvProfiles
 };
