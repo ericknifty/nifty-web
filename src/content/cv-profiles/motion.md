@@ -1,12 +1,11 @@
 ---
-title: "CV A: Motion Graphics B2B y E-learning"
+title: Motion Graphics B2B y E-learning
 slug: motion
 tabLabel: Motion Designer
-summary: "Perfil enfocado en motion graphics, aprendizaje corporativo y comunicación audiovisual técnica."
+summary: Perfil enfocado en motion graphics, aprendizaje corporativo y
+  comunicación audiovisual técnica.
 order: 1
-attachments: []
 ---
-
 ## Perfil profesional
 
 Desarrollador Multimedia y Motion Designer B2B especializado en la traducción de información técnica, corporativa y educativa en piezas animadas de alto impacto. Experto en Motion Graphics 2D, diseño instruccional visual y desarrollo de contenidos E-learning. Destaco por mi capacidad para interpretar guiones complejos y diseñar soluciones visuales que resuelven problemas de capacitación corporativa, inducción y ventas B2B.
@@ -60,3 +59,4 @@ Desarrollador Multimedia y Motion Designer B2B especializado en la traducción d
 
 - Adobe Illustrator
 - Adobe Photoshop
+
