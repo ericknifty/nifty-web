@@ -19,13 +19,13 @@ const { Content } = await render(page);
 
 <BaseLayout title={`${settings.siteName} | CV`} description={page.data.intro ?? settings.siteDescription}>
   <PageHero
-    eyebrow="Experiencia"
+    eyebrow={page.data.eyebrow ?? "Experiencia"}
     title={page.data.title}
     intro={page.data.intro}
     lead={page.data.lead}
-    panelEyebrow="Lectura rápida"
-    panelTitle="Dos perfiles profesionales según el tipo de proyecto."
-    panelBody="La navegación por pestañas separa el perfil audiovisual del perfil técnico-industrial para que cada cliente, reclutador o estudio encuentre rápidamente el enfoque que necesita."
+    panelEyebrow={page.data.panelEyebrow}
+    panelTitle={page.data.panelTitle}
+    panelBody={page.data.panelBody}
   />
 
   <section class="section">

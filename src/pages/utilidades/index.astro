@@ -2,18 +2,29 @@
 import ContentCard from "../../components/ContentCard.astro";
 import PageHero from "../../components/PageHero.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getSiteSettings, getStatusLabel, getVisibleTools, routeSlug } from "../../lib/content";
+import {
+  getPageContent,
+  getSiteSettings,
+  getStatusLabel,
+  getVisibleTools,
+  routeSlug
+} from "../../lib/content";
 
 const settings = await getSiteSettings();
+const page = await getPageContent("utilidades");
 const tools = await getVisibleTools();
+
+if (!page) {
+  throw new Error("Falta src/content/pages/utilidades.md");
+}
 ---
 
-<BaseLayout title={`${settings.siteName} | Utilidades`} description="Demos y herramientas web ligadas al trabajo de diseño y producción.">
+<BaseLayout title={`${settings.siteName} | Utilidades`} description={page.data.intro ?? settings.siteDescription}>
   <PageHero
-    eyebrow="Utilidades"
-    title="Demos y herramientas"
-    intro="Espacio para publicar soluciones digitales pequeñas, pruebas funcionales y laboratorios técnicos."
-    lead="Cada demo nace como una pieza práctica: mostrar una solución, probar una idea o abrir una conversación con clientes y equipos."
+    eyebrow={page.data.eyebrow ?? "Utilidades"}
+    title={page.data.title}
+    intro={page.data.intro}
+    lead={page.data.lead}
   />
 
   <section class="section">

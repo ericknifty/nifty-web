@@ -2,18 +2,30 @@
 import ContentCard from "../../components/ContentCard.astro";
 import PageHero from "../../components/PageHero.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { formatDate, getCategoryLabel, getSiteSettings, getVisiblePosts, routeSlug } from "../../lib/content";
+import {
+  formatDate,
+  getCategoryLabel,
+  getPageContent,
+  getSiteSettings,
+  getVisiblePosts,
+  routeSlug
+} from "../../lib/content";
 
 const settings = await getSiteSettings();
+const page = await getPageContent("blog");
 const posts = await getVisiblePosts();
+
+if (!page) {
+  throw new Error("Falta src/content/pages/blog.md");
+}
 ---
 
-<BaseLayout title={`${settings.siteName} | Blog`} description="Entradas de proceso, reflexión y documentación del trabajo.">
+<BaseLayout title={`${settings.siteName} | Blog`} description={page.data.intro ?? settings.siteDescription}>
   <PageHero
-    eyebrow="Blog"
-    title="Posts y bitácora"
-    intro="Acá vive el contenido editorial del sitio: procesos, reflexiones, pruebas y aprendizajes."
-    lead="Aquí conviven artículos de oficio, observaciones sobre proyectos reales y notas que ayudan a entender mejor cada área de trabajo."
+    eyebrow={page.data.eyebrow ?? "Blog"}
+    title={page.data.title}
+    intro={page.data.intro}
+    lead={page.data.lead}
   />
 
   <section class="section">
@@ -36,9 +48,9 @@ const posts = await getVisiblePosts();
         </div>
       ) : (
         <div class="shell empty-state">
-          <p class="eyebrow">Blog</p>
-          <h2>Aún no hay posts publicados</h2>
-          <p>Cuando publiques una entrada sin marcarla como borrador, aparecerá aquí automáticamente.</p>
+          <p class="eyebrow">{page.data.eyebrow ?? "Blog"}</p>
+          <h2>Aun no hay posts publicados</h2>
+          <p>Cuando publiques una entrada sin marcarla como borrador, aparecera aqui automaticamente.</p>
         </div>
       )
     }

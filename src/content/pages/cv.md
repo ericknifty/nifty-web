@@ -1,8 +1,12 @@
 ---
 title: CV
 slug: cv
+eyebrow: Experiencia
 intro: "Dos currículums orientados a necesidades distintas: uno audiovisual y otro técnico-industrial."
 lead: "La idea es que cada visitante pueda entrar directo al perfil que mejor conversa con su proyecto, servicio o búsqueda laboral."
+panelEyebrow: "Lectura rápida"
+panelTitle: "Dos perfiles profesionales según el tipo de proyecto."
+panelBody: "La navegación por pestañas separa el perfil audiovisual del perfil técnico-industrial para que cada cliente, reclutador o estudio encuentre rápidamente el enfoque que necesita."
 draft: false
 attachments: []
 ---

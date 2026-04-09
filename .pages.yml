@@ -1,6 +1,6 @@
 media:
   - name: content_images
-    label: Imágenes
+    label: Imagenes
     input: public/media/images
     output: /media/images
     extensions: [jpg, jpeg, png, webp, avif, svg]
@@ -36,13 +36,13 @@ content:
         label: Tagline principal
         type: text
       - name: siteDescription
-        label: Descripción general del sitio
+        label: Descripcion general del sitio
         type: text
       - name: email
         label: Email
         type: string
       - name: location
-        label: Ubicación
+        label: Ubicacion
         type: string
       - name: primaryCtaLabel
         label: Texto CTA principal
@@ -70,15 +70,18 @@ content:
         type: string
 
   - name: home_page
-    label: Página Inicio
+    label: Pagina Inicio
     type: file
     path: src/content/pages/inicio.md
     fields:
       - name: title
-        label: Título interno de la página
+        label: Titulo interno de la pagina
         type: string
       - name: slug
         label: Slug
+        type: string
+      - name: eyebrow
+        label: Eyebrow hero
         type: string
       - name: intro
         label: Texto principal
@@ -86,8 +89,35 @@ content:
       - name: lead
         label: Texto secundario
         type: text
+      - name: panelEyebrow
+        label: Eyebrow panel azul
+        type: string
+      - name: panelTitle
+        label: Titulo panel azul
+        type: text
+      - name: panelBody
+        label: Texto panel azul
+        type: text
+      - name: panelItems
+        label: Lista panel azul (una por linea)
+        type: text
+      - name: serviceTitle
+        label: Titulo tarjeta servicios
+        type: text
+      - name: serviceItems
+        label: Items servicios (uno por linea)
+        type: text
+      - name: areaMotionCopy
+        label: Texto area motion
+        type: text
+      - name: areaPrintCopy
+        label: Texto area print
+        type: text
+      - name: areaWebCopy
+        label: Texto area web
+        type: text
       - name: body
-        label: Contenido de la página
+        label: Contenido de la pagina
         type: rich-text
         options:
           format: markdown
@@ -97,12 +127,12 @@ content:
           switcher: true
 
   - name: about_page
-    label: Página Sobre mí
+    label: Pagina Sobre mi
     type: file
     path: src/content/pages/sobre-mi.md
     fields:
       - name: title
-        label: Título de la página
+        label: Titulo de la pagina
         type: string
       - name: slug
         label: Slug
@@ -123,7 +153,7 @@ content:
         label: Texto alternativo foto
         type: string
       - name: body
-        label: Contenido de la página
+        label: Contenido de la pagina
         type: rich-text
         options:
           format: markdown
@@ -133,21 +163,33 @@ content:
           switcher: true
 
   - name: cv_page
-    label: Página CV
+    label: Pagina CV
     type: file
     path: src/content/pages/cv.md
     fields:
       - name: title
-        label: Título de la página
+        label: Titulo de la pagina
         type: string
       - name: slug
         label: Slug
+        type: string
+      - name: eyebrow
+        label: Eyebrow hero
         type: string
       - name: intro
         label: Texto principal
         type: text
       - name: lead
         label: Texto secundario
+        type: text
+      - name: panelEyebrow
+        label: Eyebrow panel azul
+        type: string
+      - name: panelTitle
+        label: Titulo panel azul
+        type: text
+      - name: panelBody
+        label: Texto panel azul
         type: text
       - name: attachments
         label: Archivos descargables
@@ -157,7 +199,7 @@ content:
           path: public/media/downloads/pages
           multiple: true
       - name: body
-        label: Contenido de la página
+        label: Contenido de la pagina
         type: rich-text
         options:
           format: markdown
@@ -165,6 +207,69 @@ content:
           path: public/media/images/pages
           rename: safe
           switcher: true
+
+  - name: portfolio_page
+    label: Pagina Portafolio
+    type: file
+    path: src/content/pages/portafolio.md
+    fields:
+      - name: title
+        label: Titulo de la pagina
+        type: string
+      - name: slug
+        label: Slug
+        type: string
+      - name: eyebrow
+        label: Eyebrow hero
+        type: string
+      - name: intro
+        label: Texto principal
+        type: text
+      - name: lead
+        label: Texto secundario
+        type: text
+
+  - name: blog_page
+    label: Pagina Blog
+    type: file
+    path: src/content/pages/blog.md
+    fields:
+      - name: title
+        label: Titulo de la pagina
+        type: string
+      - name: slug
+        label: Slug
+        type: string
+      - name: eyebrow
+        label: Eyebrow hero
+        type: string
+      - name: intro
+        label: Texto principal
+        type: text
+      - name: lead
+        label: Texto secundario
+        type: text
+
+  - name: tools_page
+    label: Pagina Utilidades
+    type: file
+    path: src/content/pages/utilidades.md
+    fields:
+      - name: title
+        label: Titulo de la pagina
+        type: string
+      - name: slug
+        label: Slug
+        type: string
+      - name: eyebrow
+        label: Eyebrow hero
+        type: string
+      - name: intro
+        label: Texto principal
+        type: text
+      - name: lead
+        label: Texto secundario
+        type: text
 
   - name: cv_profiles
     label: CV / Perfiles
@@ -177,19 +282,19 @@ content:
       search: [title, summary, tabLabel]
     fields:
       - name: title
-        label: Título del perfil
+        label: Titulo del perfil
         type: string
       - name: slug
         label: Slug interno
         type: string
       - name: tabLabel
-        label: Nombre de la pestaña
+        label: Nombre de la pestana
         type: string
       - name: summary
         label: Resumen breve
         type: text
       - name: order
-        label: Orden de aparición
+        label: Orden de aparicion
         type: number
       - name: attachments
         label: Archivos descargables
@@ -219,16 +324,16 @@ content:
       search: [title, excerpt, tags]
     fields:
       - name: title
-        label: Título del post
+        label: Titulo del post
         type: string
       - name: slug
         label: Slug / URL
         type: string
       - name: date
-        label: Fecha de publicación
+        label: Fecha de publicacion
         type: date
       - name: category
-        label: Categoría principal
+        label: Categoria principal
         type: select
         options:
           values: [motion, print, web, reflexiones, vida, hacks]
@@ -242,7 +347,7 @@ content:
           media: content_images
           path: public/media/images/posts
       - name: tags
-        label: Etiquetas del post (una por línea o separadas por coma)
+        label: Etiquetas del post (una por linea o separadas por coma)
         type: text
       - name: downloads
         label: Archivos descargables
@@ -290,13 +395,13 @@ content:
       search: [title, summary, tags]
     fields:
       - name: title
-        label: Título del proyecto
+        label: Titulo del proyecto
         type: string
       - name: slug
         label: Slug / URL
         type: string
       - name: area
-        label: Área del portafolio
+        label: Area del portafolio
         type: select
         options:
           values: [motion, print, web]
@@ -313,14 +418,14 @@ content:
           media: content_images
           path: public/media/images/projects
       - name: gallery
-        label: Galería de imágenes
+        label: Galeria de imagenes
         type: image
         options:
           media: content_images
           path: public/media/images/projects
           multiple: true
       - name: tags
-        label: Etiquetas del proyecto (una por línea o separadas por coma)
+        label: Etiquetas del proyecto (una por linea o separadas por coma)
         type: text
       - name: downloads
         label: Archivos descargables
@@ -339,7 +444,7 @@ content:
           media: content_video
           path: public/media/video/projects
       - name: lottieFile
-        label: Animación Lottie
+        label: Animacion Lottie
         type: file
         options:
           media: lottie_files
@@ -374,7 +479,7 @@ content:
       search: [title, summary]
     fields:
       - name: title
-        label: Título de la utilidad
+        label: Titulo de la utilidad
         type: string
       - name: slug
         label: Slug / URL
@@ -407,7 +512,7 @@ content:
           path: public/media/downloads/tools
           multiple: true
       - name: lottieFile
-        label: Animación Lottie
+        label: Animacion Lottie
         type: file
         options:
           media: lottie_files
