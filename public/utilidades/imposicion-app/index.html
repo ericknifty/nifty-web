@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WEB Imposición MVP</title>
+  <meta name="description" content="MVP para crear imposiciones y montajes de tarjetas y piezas gráficas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/styles.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script defer src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script defer src="./src/app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <div class="hero-main">
+        <p class="eyebrow">WEB Imposición</p>
+        <h1>MVP para montaje de tarjetas y documentos gráficos</h1>
+        <p class="hero-copy">
+          Carga un PDF o imagen, detecta su tamaño, ajusta la pieza, arma la grilla y exporta una imposición básica
+          con corte simple o corte doble.
+        </p>
+      </div>
+      <div class="hero-side">
+        <section class="hero-panel source-panel">
+          <div class="section-heading">
+            <h2>Archivo fuente</h2>
+            <span id="sourceTypeBadge" class="badge">Sin archivo</span>
+          </div>
+          <label class="field">
+            <span>Seleccionar archivo</span>
+            <input id="fileInput" type="file" accept=".pdf,image/*">
+          </label>
+          <div class="inline-grid">
+            <label class="field">
+              <span>Tipo detectado</span>
+              <input id="fileType" type="text" value="-" readonly>
+            </label>
+            <label class="field">
+              <span>Páginas</span>
+              <input id="pageCount" type="text" value="-" readonly>
+            </label>
+          </div>
+          <label id="pageSelectField" class="field hidden">
+            <span>Página del PDF</span>
+            <select id="pageSelect"></select>
+          </label>
+          <label class="field field-compact">
+            <span>Nombre</span>
+            <input id="fileName" type="text" value="-" readonly>
+          </label>
+        </section>
+      </div>
+    </header>
+
+    <section class="panel tabs-panel">
+      <div class="tabs-panel-main">
+        <label class="checkbox checkbox-compact tabs-checkbox">
+          <input id="applyLayoutToAll" type="checkbox" disabled>
+          <span>Montaje igual para todos</span>
+        </label>
+        <div id="pageTabs" class="page-tabs" aria-label="Páginas de montaje"></div>
+      </div>
+      <div class="tabs-panel-side">
+        <button id="addPage" type="button" class="ghost-button tab-add-button" aria-label="Agregar página">+</button>
+        <button id="removePage" type="button" class="ghost-button tab-add-button hidden" aria-label="Eliminar página actual">-</button>
+      </div>
+      <p id="pageTabsHint" class="tabs-hint">Trabaja por pestañas para crear un montaje multipágina.</p>
+    </section>
+
+    <main class="workspace">
+      <aside class="panel controls-panel">
+        <section class="section">
+          <div class="section-heading">
+            <h2>Archivo</h2>
+            <button id="resetDetectedSize" type="button" class="ghost-button">Usar tamaño detectado</button>
+          </div>
+          <div class="inline-grid">
+            <label class="field">
+              <span>Ancho final (mm)</span>
+              <input id="pieceWidth" type="number" min="0" step="0.1" value="90">
+            </label>
+            <label class="field">
+              <span>Alto final (mm)</span>
+              <input id="pieceHeight" type="number" min="0" step="0.1" value="55">
+            </label>
+          </div>
+          <label class="checkbox">
+            <input id="keepRatio" type="checkbox" checked>
+            <span>Mantener proporción al editar</span>
+          </label>
+          <div class="inline-grid">
+            <label class="field">
+              <span>Resolución imagen (DPI)</span>
+              <input id="imageDpi" type="number" min="30" step="1" value="300">
+            </label>
+            <label class="field">
+              <span>Sangrado/Excedente (mm)</span>
+              <input id="bleedMm" type="number" min="0" step="0.1" value="3">
+            </label>
+          </div>
+          <p id="pieceHint" class="muted">
+            Para imágenes, el tamaño físico se estima usando DPI. Para PDF, se toma el tamaño de página detectado.
+          </p>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <h2>Hoja de salida</h2>
+            <button id="fillPage" type="button" class="accent-button">Llenar página</button>
+          </div>
+          <label class="field">
+            <span>Preset hoja</span>
+            <select id="sheetPreset">
+              <option value="330x480">330 x 480 mm</option>
+              <option value="sra3">SRA3</option>
+              <option value="a3">A3</option>
+              <option value="a4">A4</option>
+              <option value="carta">Carta</option>
+              <option value="oficio">Oficio</option>
+              <option value="tabloid">Tabloid</option>
+              <option value="custom">Personalizada</option>
+            </select>
+          </label>
+          <div class="inline-grid">
+            <label class="field">
+              <span>Ancho hoja (mm)</span>
+              <input id="sheetWidth" type="number" min="0" step="0.1" value="330">
+            </label>
+            <label class="field">
+              <span>Alto hoja (mm)</span>
+              <input id="sheetHeight" type="number" min="0" step="0.1" value="480">
+            </label>
+          </div>
+          <label class="checkbox">
+            <input id="unlockSpacing" type="checkbox">
+            <span>Desbloquear márgenes y separación interna</span>
+          </label>
+          <div class="inline-grid">
+            <label class="field">
+              <span>Margen hoja (mm)</span>
+              <input id="sheetMargin" type="number" min="0" step="0.1" value="8">
+            </label>
+            <label class="field">
+              <span>Separación interna (mm)</span>
+              <input id="sheetGap" type="number" min="0" step="0.1" value="0">
+            </label>
+          </div>
+        </section>
+
+        <section class="section section-tight">
+          <h2>Estado</h2>
+          <p id="statusMessage" class="status neutral">
+            Sube un PDF o una imagen para comenzar. El MVP asume que las medidas editables son el tamaño final de corte.
+          </p>
+        </section>
+      </aside>
+
+      <section class="panel preview-panel">
+        <div class="preview-toolbar">
+          <div>
+            <p class="eyebrow">Vista previa</p>
+            <h2>Montaje en hoja</h2>
+          </div>
+          <div class="preview-toolbar-side">
+            <div class="zoom-controls" aria-label="Control de zoom">
+              <span class="zoom-label">Zoom</span>
+              <button id="zoomOut" type="button" class="ghost-button zoom-button" aria-label="Alejar vista">-</button>
+              <strong id="zoomValue" class="zoom-value">100%</strong>
+              <button id="zoomIn" type="button" class="ghost-button zoom-button" aria-label="Acercar vista">+</button>
+            </div>
+            <div class="legend">
+              <span><i class="swatch trim"></i>Corte final</span>
+              <span><i class="swatch bleed"></i>Bleed</span>
+              <span><i class="swatch marks"></i>Marcas</span>
+            </div>
+          </div>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="previewCanvas"></canvas>
+        </div>
+        <section class="section section-tight full-width-section">
+          <div class="section-heading section-heading-tight">
+            <h2>Imposición</h2>
+            <div class="export-actions">
+              <button id="exportPdf" type="button" class="accent-button">Exportar</button>
+            </div>
+          </div>
+          <p class="export-note export-note-tight">Raster conserva apariencia. Vectorial reduce peso y reutiliza mejor los PDFs fuente.</p>
+          <div class="imposition-grid">
+            <div class="inline-grid">
+              <label class="field">
+                <span>Columnas</span>
+                <input id="cols" type="number" min="1" step="1" value="3">
+              </label>
+              <label class="field">
+                <span>Filas</span>
+                <input id="rows" type="number" min="1" step="1" value="7">
+              </label>
+            </div>
+            <div class="toggle-group">
+              <label class="toggle">
+                <input type="radio" name="cutType" value="simple" checked>
+                <span>Corte simple</span>
+              </label>
+              <label class="toggle">
+                <input type="radio" name="cutType" value="double">
+                <span>Corte doble</span>
+              </label>
+            </div>
+            <div class="marks-panel">
+              <label class="checkbox checkbox-inline">
+                <input id="editCutMarks" type="checkbox">
+                <span>Editar Marcas de Corte</span>
+              </label>
+              <div id="cutMarksFields" class="inline-grid hidden">
+                <label class="field field-compact">
+                  <span>Separación marcas (mm)</span>
+                  <input id="markOffset" type="number" min="0" step="0.1" value="3">
+                </label>
+                <label class="field field-compact">
+                  <span>Largo de marcas (mm)</span>
+                  <input id="markLength" type="number" min="0.5" step="0.1" value="4">
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="summary-grid summary-grid-compact">
+          <article class="summary-card">
+            <div class="summary-dual">
+              <div class="summary-item">
+                <span>Tamaño detectado</span>
+                <strong id="detectedSizeValue">90 x 55 mm</strong>
+              </div>
+              <div class="summary-item">
+                <span>Huella por pieza</span>
+                <strong id="footprintValue">90 x 55 mm</strong>
+              </div>
+            </div>
+          </article>
+          <article class="summary-card">
+            <div class="summary-dual">
+              <div class="summary-item">
+                <span>Área útil hoja</span>
+                <strong id="usableAreaValue">-</strong>
+              </div>
+              <div class="summary-item">
+                <span>Encaje</span>
+                <strong id="fitValue">Ajustado</strong>
+              </div>
+            </div>
+          </article>
+          <article class="summary-card">
+            <div class="summary-dual">
+              <div class="summary-item">
+                <span>Grilla activa</span>
+                <strong id="gridValue">3 x 7</strong>
+              </div>
+              <div class="summary-item">
+                <span>Piezas totales</span>
+                <strong id="totalPiecesValue">21</strong>
+              </div>
+            </div>
+          </article>
+          <article class="summary-card">
+            <span>Ocupación</span>
+            <strong id="coverageValue">-</strong>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modalBackdrop" class="modal-backdrop hidden" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <p class="eyebrow modal-eyebrow">Confirmación</p>
+      <h2 id="modalTitle">Aviso</h2>
+      <p id="modalBody" class="modal-copy"></p>
+      <div class="modal-actions">
+        <button id="modalSecondary" type="button" class="ghost-button">Cancelar</button>
+        <button id="modalPrimary" type="button" class="accent-button">Continuar</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

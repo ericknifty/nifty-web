@@ -370,7 +370,7 @@ content:
     filename: "{fields.slug}.md"
     view:
       primary: title
-      fields: [title, status, draft]
+      fields: [title, status, featured, draft]
       search: [title, summary]
     fields:
       - name: title
@@ -413,6 +413,10 @@ content:
           media: lottie_files
           path: public/lottie/tools
           extensions: [json]
+      - name: featured
+        label: Destacado
+        type: boolean
+        default: false
       - name: draft
         label: Guardar como borrador
         type: boolean

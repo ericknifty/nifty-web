@@ -24,7 +24,40 @@ if (!home) {
 }
 
 const { Content } = await render(home);
-const projects = (await getVisibleProjects()).filter((entry) => entry.data.featured).slice(0, 3);
+const featuredProjects = (await getVisibleProjects())
+  .filter((entry) => entry.data.featured)
+  .map((project) => ({
+    href: `/portafolio/${routeSlug(project)}`,
+    title: project.data.title,
+    eyebrow: "Portafolio",
+    summary: project.data.summary,
+    image: project.data.cover,
+    meta: formatDate(project.data.date),
+    tags: project.data.tags
+  }));
+const featuredPosts = (await getVisiblePosts())
+  .filter((entry) => entry.data.featured)
+  .map((post) => ({
+    href: `/blog/${routeSlug(post)}`,
+    title: post.data.title,
+    eyebrow: "Blog",
+    summary: post.data.excerpt,
+    image: post.data.cover,
+    meta: formatDate(post.data.date),
+    tags: post.data.tags
+  }));
+const featuredTools = (await getVisibleTools())
+  .filter((entry) => entry.data.featured)
+  .map((tool) => ({
+    href: `/utilidades/${routeSlug(tool)}`,
+    title: tool.data.title,
+    eyebrow: "Utilidad",
+    summary: tool.data.summary,
+    image: tool.data.cover,
+    meta: getStatusLabel(tool.data.status),
+    tags: []
+  }));
+const featuredItems = [...featuredProjects, ...featuredPosts, ...featuredTools].slice(0, 6);
 const posts = await getVisiblePosts(3);
 const tools = (await getVisibleTools()).slice(0, 2);
 
@@ -86,6 +119,31 @@ if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
   <section class="section">
     <div class="shell section-heading">
       <div>
+        <p class="eyebrow">Selecciones del editor</p>
+        <h2>Destacados</h2>
+      </div>
+    </div>
+
+    <div class="shell card-grid">
+      {
+        featuredItems.map((item) => (
+          <ContentCard
+            href={item.href}
+            title={item.title}
+            eyebrow={item.eyebrow}
+            summary={item.summary}
+            image={item.image}
+            meta={item.meta}
+            tags={item.tags}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell section-heading">
+      <div>
         <p class="eyebrow">Portafolio</p>
         <h2>Áreas principales</h2>
       </div>
@@ -100,32 +158,6 @@ if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
           <p>{area.copy}</p>
         </article>
       ))}
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="shell section-heading">
-      <div>
-        <p class="eyebrow">Destacados</p>
-        <h2>Proyectos seleccionados</h2>
-      </div>
-      <a href="/portafolio">Ir al portafolio</a>
-    </div>
-
-    <div class="shell card-grid">
-      {
-        projects.map((project) => (
-          <ContentCard
-            href={`/portafolio/${routeSlug(project)}`}
-            title={project.data.title}
-            eyebrow={getAreaLabel(project.data.area)}
-            summary={project.data.summary}
-            image={project.data.cover}
-            meta={formatDate(project.data.date)}
-            tags={project.data.tags}
-          />
-        ))
-      }
     </div>
   </section>
 

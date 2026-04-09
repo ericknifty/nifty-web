@@ -68,6 +68,7 @@ const tools = defineCollection({
     externalUrl: z.union([z.string().url(), z.literal("")]).optional(),
     downloads: stringListField,
     lottieFile: z.union([z.string(), z.literal("")]).optional(),
+    featured: z.boolean().default(false),
     draft: z.boolean().default(false)
   })
 });
