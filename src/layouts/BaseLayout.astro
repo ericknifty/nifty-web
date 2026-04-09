@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import faviconPng from "../assets/brand/favicon.png?url";
+import faviconSvg from "../assets/brand/favicon.svg?url";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { getSiteSettings } from "../lib/content";
@@ -28,10 +30,18 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString(
       href="https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400..700;1,400..700&family=Space+Grotesk:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={faviconSvg} />
+    <link rel="icon" type="image/png" href={faviconPng} />
     {canonical && <link rel="canonical" href={canonical} />}
   </head>
   <body>
+    <div class="site-atmosphere" aria-hidden="true">
+      <div class="site-atmosphere__wash"></div>
+      <div class="site-atmosphere__grid site-atmosphere__grid--left"></div>
+      <div class="site-atmosphere__grid site-atmosphere__grid--right"></div>
+      <div class="site-atmosphere__glow site-atmosphere__glow--top"></div>
+      <div class="site-atmosphere__glow site-atmosphere__glow--bottom"></div>
+    </div>
     <div class="site-shell">
       <Header currentPath={Astro.url.pathname} />
       <main>

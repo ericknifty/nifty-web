@@ -1,4 +1,4 @@
-# Web Nifty
+# Taller Nifty
 
 Sitio personal construido con `Astro + GitHub + Pages CMS + hosting compartido`, pensado para ser rápido, editable y fácil de entender.
 

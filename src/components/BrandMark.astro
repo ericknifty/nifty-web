@@ -1,0 +1,103 @@
+---
+import faviconRaw from "../assets/brand/favicon.svg?raw";
+import isologoRaw from "../assets/brand/isologo.svg?raw";
+import isotipoRaw from "../assets/brand/isotipo.svg?raw";
+import logotipoRaw from "../assets/brand/logotipo.svg?raw";
+import monogramRaw from "../assets/brand/monogram.svg?raw";
+
+interface Props {
+  variant?: "isologo" | "isotipo" | "logotipo" | "monogram" | "favicon";
+  label?: string;
+  width?: number;
+  height?: number;
+  class?: string;
+}
+
+const {
+  variant = "isologo",
+  label = "Taller Nifty",
+  width = 208,
+  height = 86,
+  class: className
+} = Astro.props;
+
+const assetMap = {
+  favicon: faviconRaw,
+  isologo: isologoRaw,
+  isotipo: isotipoRaw,
+  logotipo: logotipoRaw,
+  monogram: monogramRaw
+} as const;
+
+const gradientId = `brand-gradient-${variant}-${Math.random().toString(36).slice(2, 8)}`;
+
+function buildMarkup(raw: string) {
+  const defs = `
+    <defs>
+      <linearGradient id="${gradientId}" x1="0%" y1="50%" x2="100%" y2="50%">
+        <animateTransform
+          attributeName="gradientTransform"
+          type="translate"
+          values="-0.35 0;0.25 0;-0.35 0"
+          dur="5s"
+          repeatCount="indefinite"
+        />
+        <stop offset="0%" stop-color="#f2dc8e">
+          <animate attributeName="offset" values="0;0.08;0" dur="5s" repeatCount="indefinite" />
+        </stop>
+        <stop offset="42%" stop-color="#fccb00">
+          <animate attributeName="offset" values="0.42;0.52;0.42" dur="5s" repeatCount="indefinite" />
+        </stop>
+        <stop offset="72%" stop-color="#d0a23c">
+          <animate attributeName="offset" values="0.72;0.82;0.72" dur="5s" repeatCount="indefinite" />
+        </stop>
+        <stop offset="100%" stop-color="#f2dc8e">
+          <animate attributeName="offset" values="1;1.08;1" dur="5s" repeatCount="indefinite" />
+        </stop>
+      </linearGradient>
+      <style>
+        .brand-mark__svg #logotipo path:not([class]),
+        .brand-mark__svg #logotipo polygon:not([class]),
+        .brand-mark__svg #logotipo rect:not([class]),
+        .brand-mark__svg #logotipo circle:not([class]),
+        .brand-mark__svg #logotipo ellipse:not([class]) {
+          fill: currentColor;
+        }
+
+        .brand-mark__svg #logotipo .cls-2,
+        .brand-mark__svg #logotipo .cls-3,
+        .brand-mark__svg #logotipo .cls-4,
+        .brand-mark__svg #logotipo .cls-5 {
+          stroke: currentColor;
+        }
+
+        .brand-mark__svg .cls-1,
+        .brand-mark__svg .cls-2,
+        .brand-mark__svg .cls-3 {
+          fill: url(#${gradientId});
+        }
+      </style>
+    </defs>
+  `;
+
+  const cleaned = raw
+    .replace(/<\?xml[\s\S]*?\?>\s*/i, "")
+    .replace(/<svg\b([^>]*)>/i, `<svg$1 class="brand-mark__svg" aria-hidden="true" focusable="false">`);
+
+  if (/<defs>[\s\S]*?<\/defs>/i.test(cleaned)) {
+    return cleaned.replace(/<defs>[\s\S]*?<\/defs>/i, defs);
+  }
+
+  return cleaned.replace(/(<svg\b[^>]*>)/i, `$1${defs}`);
+}
+
+const markup = buildMarkup(assetMap[variant]);
+---
+
+<span
+  class:list={["brand-mark", `brand-mark--${variant}`, className]}
+  style={`--brand-width: ${width}px; --brand-height: ${height}px;`}
+  role="img"
+  aria-label={label}
+  set:html={markup}
+></span>

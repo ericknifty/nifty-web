@@ -1,4 +1,6 @@
 ---
+import BrandMark from "./BrandMark.astro";
+
 interface Props {
   settings: {
     siteName: string;
@@ -25,7 +27,8 @@ const links = [
 <footer class="site-footer">
   <div class="shell site-footer__inner">
     <div>
-      <p class="site-footer__eyebrow">Web Nifty</p>
+      <BrandMark class="site-footer__brand" variant="isologo" width={182} height={75} />
+      <p class="site-footer__eyebrow">Taller Nifty</p>
       <h2>{settings.siteTagline}</h2>
       <p>{settings.location}</p>
     </div>

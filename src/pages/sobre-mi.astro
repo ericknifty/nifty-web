@@ -1,10 +1,12 @@
 ---
 import { render } from "astro:content";
+import BrandMark from "../components/BrandMark.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getPageContent, getSiteSettings } from "../lib/content";
 
 const settings = await getSiteSettings();
 const page = await getPageContent("sobre-mi");
+const hasHeroImage = Boolean(page?.data.heroImage);
 
 if (!page) {
   throw new Error("Falta src/content/pages/sobre-mi.md");
@@ -23,15 +25,16 @@ const { Content } = await render(page);
         {page.data.lead && <p class="page-hero__lead">{page.data.lead}</p>}
       </div>
 
-      <aside class="about-hero__media">
-        <div class="about-hero__frame">
+      <aside class:list={["about-hero__media", !hasHeroImage && "about-hero__media--placeholder"]}>
+        <div class:list={["about-hero__frame", !hasHeroImage && "about-hero__frame--placeholder"]}>
           {
-            page.data.heroImage ? (
+            hasHeroImage ? (
               <img src={page.data.heroImage} alt={page.data.heroImageAlt || ""} />
             ) : (
               <div class="about-hero__placeholder">
-                <span>Fotografía</span>
-                <p>Espacio reservado para un retrato o imagen editorial editable desde Pages CMS.</p>
+                <div class="about-hero__placeholder-mark">
+                  <BrandMark variant="isotipo" width={425} height={432} label="Isotipo Taller Nifty" />
+                </div>
               </div>
             )
           }

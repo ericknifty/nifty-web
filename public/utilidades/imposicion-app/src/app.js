@@ -49,7 +49,7 @@
   });
 
   function applyAppChrome() {
-    document.title = "Utilidad: Imposiciones de Tarjetas | Web Nifty";
+    document.title = "Utilidad: Imposiciones de Tarjetas | Taller Nifty";
 
     var description = document.querySelector('meta[name="description"]');
     if (description) {
@@ -72,7 +72,7 @@
 
     var eyebrow = document.querySelector(".hero-main .eyebrow");
     if (eyebrow) {
-      eyebrow.textContent = "Web Nifty · Utilidades";
+      eyebrow.textContent = "Taller Nifty · Utilidades";
     }
 
     var heading = document.querySelector(".hero-main h1");
