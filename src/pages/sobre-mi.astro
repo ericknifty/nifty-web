@@ -31,8 +31,8 @@ const { Content } = await render(page);
             hasHeroImage ? (
               <img src={page.data.heroImage} alt={page.data.heroImageAlt || ""} />
             ) : (
-              <div class="about-hero__placeholder">
-                <div class="about-hero__placeholder-mark">
+              <div class="about-hero__placeholder" data-eye-follow>
+                <div class="about-hero__placeholder-mark" data-eye-follow-mark>
                   <BrandMark variant="isotipo" width={425} height={432} label="Isotipo Taller Nifty" />
                 </div>
               </div>
@@ -49,3 +49,86 @@ const { Content } = await render(page);
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (prefersReducedMotion.matches) {
+      return;
+    }
+
+    const placeholder = document.querySelector("[data-eye-follow]");
+    const svg = placeholder?.querySelector(".brand-mark__svg");
+    const pupilGroup = svg?.querySelector("#ojo_pupila");
+
+    if (!(svg instanceof SVGSVGElement) || !(pupilGroup instanceof SVGGElement)) {
+      return;
+    }
+
+    let pointerActive = false;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let frameId = 0;
+    const maxTravel = 2.8;
+
+    const render = () => {
+      currentX += (targetX - currentX) * 0.16;
+      currentY += (targetY - currentY) * 0.16;
+
+      if (Math.abs(targetX - currentX) < 0.01 && Math.abs(targetY - currentY) < 0.01) {
+        currentX = targetX;
+        currentY = targetY;
+      }
+
+      pupilGroup.setAttribute("transform", `translate(${currentX.toFixed(2)} ${currentY.toFixed(2)})`);
+
+      if (pointerActive || Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
+        frameId = window.requestAnimationFrame(render);
+      } else {
+        frameId = 0;
+      }
+    };
+
+    const startLoop = () => {
+      if (!frameId) {
+        frameId = window.requestAnimationFrame(render);
+      }
+    };
+
+    const updateTarget = (event) => {
+      const rect = svg.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const deltaX = (event.clientX - centerX) / (rect.width / 2);
+      const deltaY = (event.clientY - centerY) / (rect.height / 2);
+      const distance = Math.hypot(deltaX, deltaY) || 1;
+      const clamped = Math.min(1, distance);
+
+      pointerActive = true;
+      targetX = (deltaX / distance) * maxTravel * clamped;
+      targetY = (deltaY / distance) * maxTravel * clamped;
+      startLoop();
+    };
+
+    const reset = () => {
+      pointerActive = false;
+      targetX = 0;
+      targetY = 0;
+      startLoop();
+    };
+
+    window.addEventListener("pointermove", updateTarget, { passive: true });
+    window.addEventListener("pointerdown", updateTarget, { passive: true });
+    window.addEventListener("pointercancel", reset);
+    window.addEventListener("pointerleave", reset);
+    window.addEventListener("blur", reset);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        reset();
+      }
+    });
+  })();
+</script>
