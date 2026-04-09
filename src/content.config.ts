@@ -79,6 +79,8 @@ const pages = defineCollection({
     slug: z.string().optional(),
     intro: z.string().optional(),
     lead: z.string().optional(),
+    heroImage: z.union([z.string(), z.literal("")]).optional(),
+    heroImageAlt: z.string().optional(),
     draft: z.boolean().default(false),
     attachments: stringListField
   })

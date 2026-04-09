@@ -1,6 +1,5 @@
 ---
 import { render } from "astro:content";
-import PageHero from "../components/PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getPageContent, getSiteSettings } from "../lib/content";
 
@@ -15,7 +14,31 @@ const { Content } = await render(page);
 ---
 
 <BaseLayout title={`${settings.siteName} | Sobre mí`} description={page.data.intro ?? settings.siteDescription}>
-  <PageHero eyebrow="Perfil" title={page.data.title} intro={page.data.intro} lead={page.data.lead} />
+  <section class="page-hero">
+    <div class="shell about-hero">
+      <div class="page-hero__copy about-hero__copy">
+        <p class="eyebrow">Perfil</p>
+        <h1>{page.data.title}</h1>
+        {page.data.intro && <p class="page-hero__intro">{page.data.intro}</p>}
+        {page.data.lead && <p class="page-hero__lead">{page.data.lead}</p>}
+      </div>
+
+      <aside class="about-hero__media">
+        <div class="about-hero__frame">
+          {
+            page.data.heroImage ? (
+              <img src={page.data.heroImage} alt={page.data.heroImageAlt || ""} />
+            ) : (
+              <div class="about-hero__placeholder">
+                <span>Fotografía</span>
+                <p>Espacio reservado para un retrato o imagen editorial editable desde Pages CMS.</p>
+              </div>
+            )
+          }
+        </div>
+      </aside>
+    </div>
+  </section>
 
   <section class="section">
     <div class="shell prose prose--wide">

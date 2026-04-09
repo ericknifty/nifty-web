@@ -1,8 +1,10 @@
 ---
-title: Sobre mí
+title: "Sobre mí"
 slug: sobre-mi
 intro: "Diseñador de profesión, curioso por la web y enfocado en construir una presencia digital más flexible y propia."
 lead: "Este sitio nace desde la práctica real: combinar criterio visual, documentación honesta del proceso y herramientas concretas que aporten valor."
+heroImage: ""
+heroImageAlt: "Fotografia de perfil"
 draft: false
 attachments: []
 ---

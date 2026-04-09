@@ -129,6 +129,13 @@ main {
   grid-template-columns: minmax(0, 1fr);
 }
 
+.about-hero {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.68fr);
+  align-items: stretch;
+}
+
 .page-hero__copy,
 .page-hero__panel,
 .content-card,
@@ -143,6 +150,63 @@ main {
 
 .page-hero__copy {
   padding: 38px;
+}
+
+.about-hero__copy .page-hero__intro {
+  max-width: 42ch;
+}
+
+.about-hero__copy .page-hero__lead {
+  max-width: 48ch;
+}
+
+.about-hero__media {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.about-hero__frame {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: calc(var(--radius-xl) - 8px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at top left, rgba(249, 115, 22, 0.18), transparent 40%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(248, 245, 239, 0.72));
+}
+
+.about-hero__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-hero__placeholder {
+  display: grid;
+  align-content: end;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 28px;
+}
+
+.about-hero__placeholder span {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.about-hero__placeholder p {
+  margin: 0;
+  max-width: 22ch;
+  color: var(--muted);
 }
 
 .page-hero__panel {
@@ -646,6 +710,7 @@ main {
 }
 
 @media (max-width: 960px) {
+  .about-hero,
   .page-hero__inner,
   .detail-layout,
   .two-column,
