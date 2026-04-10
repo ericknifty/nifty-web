@@ -32,6 +32,8 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString(
     />
     <link rel="icon" type="image/svg+xml" href={faviconSvg} />
     <link rel="icon" type="image/png" href={faviconPng} />
+    <link rel="shortcut icon" href={faviconPng} />
+    <link rel="apple-touch-icon" href={faviconPng} />
     {canonical && <link rel="canonical" href={canonical} />}
   </head>
   <body>
