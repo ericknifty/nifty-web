@@ -25,7 +25,7 @@ const { Content } = await render(entry);
     eyebrow={getAreaLabel(entry.data.area)}
     title={entry.data.title}
     intro={entry.data.summary}
-    lead={`Actualizado el ${formatDate(entry.data.date)}`}
+    lead={entry.data.detailLead ?? `${settings.projectDatePrefix ?? "Actualizado el"} ${formatDate(entry.data.date)}`}
   />
 
   <section class="section">
@@ -39,8 +39,8 @@ const { Content } = await render(entry);
             <section class="detail-block">
               <div class="section-heading">
                 <div>
-                  <p class="eyebrow">Galería</p>
-                  <h2>Imágenes del proyecto</h2>
+                  <p class="eyebrow">{settings.projectGalleryEyebrow ?? "Galería"}</p>
+                  <h2>{settings.projectGalleryTitle ?? "Imágenes del proyecto"}</h2>
                 </div>
               </div>
               <div class="gallery-grid">

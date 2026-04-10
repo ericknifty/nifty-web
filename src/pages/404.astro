@@ -1,14 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getSiteSettings } from "../lib/content";
+
+const settings = await getSiteSettings();
 ---
 
-<BaseLayout title="404 | Taller Nifty" description="La página que buscas no existe o cambió de dirección.">
+<BaseLayout
+  title={`404 | ${settings.siteName}`}
+  description={settings.notFoundBody ?? "La página que buscas no existe o cambió de dirección."}
+>
   <section class="section">
     <div class="shell empty-state">
-      <p class="eyebrow">404</p>
-      <h1>Página no encontrada</h1>
-      <p>La ruta que abriste no existe todavía o fue movida a otra sección.</p>
-      <a class="button" href="/">Volver al inicio</a>
+      <p class="eyebrow">{settings.notFoundEyebrow ?? "404"}</p>
+      <h1>{settings.notFoundTitle ?? "Página no encontrada"}</h1>
+      <p>{settings.notFoundBody ?? "La ruta que abriste no existe todavía o fue movida a otra sección."}</p>
+      <a class="button" href="/">{settings.notFoundCtaLabel ?? "Volver al inicio"}</a>
     </div>
   </section>
 </BaseLayout>

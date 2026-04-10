@@ -3,21 +3,28 @@ import BrandMark from "./BrandMark.astro";
 
 interface Props {
   currentPath: string;
+  settings: {
+    navHomeLabel?: string;
+    navAboutLabel?: string;
+    navCvLabel?: string;
+    navPortfolioLabel?: string;
+    navBlogLabel?: string;
+    navToolsLabel?: string;
+  };
 }
 
-const { currentPath } = Astro.props;
+const { currentPath, settings } = Astro.props;
 
 const navItems = [
-  { href: "/", label: "Inicio" },
-  { href: "/sobre-mi", label: "Sobre mí" },
-  { href: "/cv", label: "CV" },
-  { href: "/portafolio", label: "Portafolio" },
-  { href: "/blog", label: "Blog" },
-  { href: "/utilidades", label: "Utilidades" }
+  { href: "/", label: settings.navHomeLabel ?? "Inicio" },
+  { href: "/sobre-mi", label: settings.navAboutLabel ?? "Sobre mí" },
+  { href: "/cv", label: settings.navCvLabel ?? "CV" },
+  { href: "/portafolio", label: settings.navPortfolioLabel ?? "Portafolio" },
+  { href: "/blog", label: settings.navBlogLabel ?? "Blog" },
+  { href: "/utilidades", label: settings.navToolsLabel ?? "Utilidades" }
 ];
 
-const isActive = (href: string) =>
-  href === "/" ? currentPath === href : currentPath.startsWith(href);
+const isActive = (href: string) => (href === "/" ? currentPath === href : currentPath.startsWith(href));
 ---
 
 <header class="site-header">

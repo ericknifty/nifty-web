@@ -49,8 +49,8 @@ if (!page) {
       ) : (
         <div class="shell empty-state">
           <p class="eyebrow">{page.data.eyebrow ?? "Blog"}</p>
-          <h2>Aun no hay posts publicados</h2>
-          <p>Cuando publiques una entrada sin marcarla como borrador, aparecera aqui automaticamente.</p>
+          <h2>{page.data.emptyTitle ?? "Aun no hay posts publicados"}</h2>
+          <p>{page.data.emptyBody ?? "Cuando publiques una entrada sin marcarla como borrador, aparecera aqui automaticamente."}</p>
         </div>
       )
     }

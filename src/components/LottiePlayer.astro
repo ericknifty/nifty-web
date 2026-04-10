@@ -1,4 +1,6 @@
 ---
+import { getSiteSettings } from "../lib/content";
+
 interface Props {
   src?: string;
   title?: string;
@@ -7,6 +9,7 @@ interface Props {
 }
 
 const { src, title = "Animación Lottie", loop = true, autoplay = true } = Astro.props;
+const settings = await getSiteSettings();
 ---
 
 {
@@ -14,8 +17,8 @@ const { src, title = "Animación Lottie", loop = true, autoplay = true } = Astro
     <section class="detail-block">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Animación</p>
-          <h2>Lottie</h2>
+          <p class="eyebrow">{settings.lottieEyebrow ?? "Animación"}</p>
+          <h2>{settings.lottieTitle ?? "Lottie"}</h2>
         </div>
       </div>
 

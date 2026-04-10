@@ -19,7 +19,7 @@ const { Content } = await render(page);
   <section class="page-hero">
     <div class="shell about-hero">
       <div class="page-hero__copy about-hero__copy">
-        <p class="eyebrow">Perfil</p>
+        <p class="eyebrow">{page.data.eyebrow ?? "Perfil"}</p>
         <h1>{page.data.title}</h1>
         {page.data.intro && <p class="page-hero__intro">{page.data.intro}</p>}
         {page.data.lead && <p class="page-hero__lead">{page.data.lead}</p>}
@@ -67,6 +67,7 @@ const { Content } = await render(page);
     }
 
     let pointerActive = false;
+    let touchPointerId = null;
     let targetX = 0;
     let targetY = 0;
     let currentX = 0;
@@ -115,13 +116,44 @@ const { Content } = await render(page);
 
     const reset = () => {
       pointerActive = false;
+      touchPointerId = null;
       targetX = 0;
       targetY = 0;
       startLoop();
     };
 
-    window.addEventListener("pointermove", updateTarget, { passive: true });
-    window.addEventListener("pointerdown", updateTarget, { passive: true });
+    const onPointerMove = (event) => {
+      if (event.pointerType === "mouse") {
+        updateTarget(event);
+        return;
+      }
+
+      if (touchPointerId === event.pointerId) {
+        updateTarget(event);
+      }
+    };
+
+    const onPointerDown = (event) => {
+      if (event.pointerType !== "mouse") {
+        touchPointerId = event.pointerId;
+      }
+
+      updateTarget(event);
+    };
+
+    const onPointerUp = (event) => {
+      if (event.pointerType === "mouse") {
+        return;
+      }
+
+      if (touchPointerId === event.pointerId) {
+        reset();
+      }
+    };
+
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("pointerdown", onPointerDown, { passive: true });
+    window.addEventListener("pointerup", onPointerUp, { passive: true });
     window.addEventListener("pointercancel", reset);
     window.addEventListener("pointerleave", reset);
     window.addEventListener("blur", reset);

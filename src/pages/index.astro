@@ -103,7 +103,7 @@ if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
 <BaseLayout title={`${settings.siteName} | Inicio`} description={settings.siteDescription}>
   <PageHero
     eyebrow={home.data.eyebrow ?? "Portafolio + Blog + Demos"}
-    title={settings.siteTagline}
+    title={home.data.heroTitle ?? settings.siteTagline}
     intro={home.data.intro}
     lead={home.data.lead}
     actions={heroActions}
@@ -120,7 +120,7 @@ if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
       </div>
 
       <aside class="stack-card">
-        <p class="eyebrow">Servicios</p>
+        <p class="eyebrow">{home.data.servicesEyebrow ?? "Servicios"}</p>
         <h2>{home.data.serviceTitle ?? "Que puedes encontrar y solicitar aqui"}</h2>
         <ul class="stack-list">
           {serviceItems.map((item) => <li>{item}</li>)}
@@ -132,8 +132,8 @@ if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
   <section class="section">
     <div class="shell section-heading">
       <div>
-        <p class="eyebrow">Selecciones del editor</p>
-        <h2>Destacados</h2>
+        <p class="eyebrow">{home.data.featuredEyebrow ?? "Selecciones del editor"}</p>
+        <h2>{home.data.featuredTitle ?? "Destacados"}</h2>
       </div>
     </div>
 
@@ -157,10 +157,10 @@ if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
   <section class="section">
     <div class="shell section-heading">
       <div>
-        <p class="eyebrow">Portafolio</p>
-        <h2>Areas principales</h2>
+        <p class="eyebrow">{home.data.portfolioSectionEyebrow ?? "Portafolio"}</p>
+        <h2>{home.data.portfolioSectionTitle ?? "Areas principales"}</h2>
       </div>
-      <a href="/portafolio">Ver todo el portafolio</a>
+      <a href="/portafolio">{home.data.portfolioSectionCtaLabel ?? "Ver todo el portafolio"}</a>
     </div>
 
     <div class="shell area-grid">
@@ -177,10 +177,10 @@ if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
   <section class="section">
     <div class="shell section-heading">
       <div>
-        <p class="eyebrow">Bitacora</p>
-        <h2>Ultimos posts</h2>
+        <p class="eyebrow">{home.data.postsSectionEyebrow ?? "Bitacora"}</p>
+        <h2>{home.data.postsSectionTitle ?? "Ultimos posts"}</h2>
       </div>
-      <a href="/blog">Ir al blog</a>
+      <a href="/blog">{home.data.postsSectionCtaLabel ?? "Ir al blog"}</a>
     </div>
 
     <div class="shell card-grid">
@@ -203,10 +203,10 @@ if (settings.secondaryCtaLabel && settings.secondaryCtaUrl) {
   <section class="section">
     <div class="shell section-heading">
       <div>
-        <p class="eyebrow">Laboratorio</p>
-        <h2>Utilidades y demos</h2>
+        <p class="eyebrow">{home.data.toolsSectionEyebrow ?? "Laboratorio"}</p>
+        <h2>{home.data.toolsSectionTitle ?? "Utilidades y demos"}</h2>
       </div>
-      <a href="/utilidades">Ver utilidades</a>
+      <a href="/utilidades">{home.data.toolsSectionCtaLabel ?? "Ver utilidades"}</a>
     </div>
 
     <div class="shell card-grid card-grid--compact">

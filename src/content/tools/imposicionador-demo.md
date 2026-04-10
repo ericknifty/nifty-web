@@ -2,6 +2,7 @@
 title: "Utilidad: Imposiciones de Tarjetas"
 slug: imposicionador-demo
 summary: "Utilidad web para preparar imposiciones y montajes base de tarjetas o piezas gráficas dentro del mismo sitio."
+detailLead: "Demo técnica para resolver imposiciones rápidas, preparar montajes base y testear configuraciones de pre-prensa desde el navegador."
 status: beta
 cover: /media/images/tool-print.svg
 demoPath: /utilidades/imposicion

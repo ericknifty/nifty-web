@@ -24,7 +24,7 @@ const { Content } = await render(entry);
     eyebrow={getCategoryLabel(entry.data.category)}
     title={entry.data.title}
     intro={entry.data.excerpt}
-    lead={`Publicado el ${formatDate(entry.data.date)}`}
+    lead={entry.data.detailLead ?? `${settings.postDatePrefix ?? "Publicado el"} ${formatDate(entry.data.date)}`}
   />
 
   <section class="section">

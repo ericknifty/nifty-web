@@ -4,9 +4,11 @@ import DownloadList from "./DownloadList.astro";
 
 interface Props {
   profiles: CollectionEntry<"cvProfiles">[];
+  eyebrow?: string;
+  title?: string;
 }
 
-const { profiles } = Astro.props;
+const { profiles, eyebrow = "CV", title = "Perfiles profesionales" } = Astro.props;
 
 const renderedProfiles = await Promise.all(
   profiles.map(async (profile) => {
@@ -23,11 +25,11 @@ const renderedProfiles = await Promise.all(
 <section class="profile-tabs" data-profile-tabs>
   <div class="profile-tabs__header">
     <div>
-      <p class="eyebrow">CV</p>
-      <h2>Perfiles profesionales</h2>
+      <p class="eyebrow">{eyebrow}</p>
+      <h2>{title}</h2>
     </div>
 
-    <div class="profile-tabs__controls" role="tablist" aria-label="Perfiles profesionales">
+    <div class="profile-tabs__controls" role="tablist" aria-label={title}>
       {
         renderedProfiles.map(({ entry, profileId }, index) => (
           <button

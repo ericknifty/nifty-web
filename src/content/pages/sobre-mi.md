@@ -1,16 +1,17 @@
 ---
 title: "Sobre mí"
 slug: sobre-mi
-intro: "Diseñador de profesión, curioso por la web y enfocado en construir una presencia digital más flexible y propia."
-lead: "Este sitio nace desde la práctica real: combinar criterio visual, documentación honesta del proceso y herramientas concretas que aporten valor."
+eyebrow: Perfil
+intro: "Diseño enfocado en la ejecución técnica y la claridad comunicacional."
+lead: "Diseñador de profesión y consultor técnico. Este sitio nace de la necesidad de documentar la práctica real: combinar criterio visual con herramientas concretas que resuelvan problemas operativos."
 heroImage: ""
-heroImageAlt: "Fotografia de perfil"
+heroImageAlt: "Fotografía de perfil"
 draft: false
 attachments: []
 ---
 
-Me interesa trabajar en la intersección entre **diseño**, **comunicación visual** y **soluciones web livianas**.
+Durante más de 7 años he operado en la intersección del desarrollo audiovisual corporativo y la producción gráfica industrial. Mi objetivo no es lo estético por sí solo, sino la funcionalidad B2B.
 
-Durante años el flujo estuvo muy apoyado en herramientas como WordPress y Elementor. Ahora la búsqueda es otra: tiempos de carga más rápidos, menos dependencias externas y una estructura que pueda entender, mantener y mejorar con más autonomía.
+En el área audiovisual, facilito la retención de información compleja mediante animación técnica. En el taller, aseguro la viabilidad de impresión, automatizo tirajes y gestiono pre-prensa para evitar errores de producción que cuestan tiempo y material.
 
-También me interesa que el sitio no sea solo un escaparate. Quiero que funcione como un archivo vivo de aprendizajes, procesos, referencias y pequeñas utilidades construidas desde necesidades reales.
+Este sitio funciona como un archivo vivo de esos aprendizajes, procesos técnicos y soluciones reales.

@@ -33,10 +33,10 @@ content:
         label: Nombre del sitio
         type: string
       - name: siteTagline
-        label: Tagline principal
+        label: Tagline general
         type: text
       - name: siteDescription
-        label: Descripcion general del sitio
+        label: Descripcion SEO general
         type: text
       - name: email
         label: Email
@@ -45,13 +45,13 @@ content:
         label: Ubicacion
         type: string
       - name: primaryCtaLabel
-        label: Texto CTA principal
+        label: CTA principal
         type: string
       - name: primaryCtaUrl
         label: URL CTA principal
         type: string
       - name: secondaryCtaLabel
-        label: Texto CTA secundaria
+        label: CTA secundaria
         type: string
       - name: secondaryCtaUrl
         label: URL CTA secundaria
@@ -68,6 +68,78 @@ content:
       - name: socialInstagram
         label: Instagram
         type: string
+      - name: navHomeLabel
+        label: Menu Inicio
+        type: string
+      - name: navAboutLabel
+        label: Menu Sobre mi
+        type: string
+      - name: navCvLabel
+        label: Menu CV
+        type: string
+      - name: navPortfolioLabel
+        label: Menu Portafolio
+        type: string
+      - name: navBlogLabel
+        label: Menu Blog
+        type: string
+      - name: navToolsLabel
+        label: Menu Utilidades
+        type: string
+      - name: postDatePrefix
+        label: Prefijo fecha post
+        type: string
+      - name: projectDatePrefix
+        label: Prefijo fecha proyecto
+        type: string
+      - name: projectGalleryEyebrow
+        label: Eyebrow galeria proyecto
+        type: string
+      - name: projectGalleryTitle
+        label: Titulo galeria proyecto
+        type: string
+      - name: downloadsEyebrow
+        label: Eyebrow descargas
+        type: string
+      - name: downloadsTitle
+        label: Titulo descargas
+        type: string
+      - name: videoEyebrow
+        label: Eyebrow video
+        type: string
+      - name: videoTitle
+        label: Titulo video
+        type: string
+      - name: videoExternalLabel
+        label: Link video externo
+        type: string
+      - name: videoUnsupportedLabel
+        label: Texto video no soportado
+        type: text
+      - name: lottieEyebrow
+        label: Eyebrow lottie
+        type: string
+      - name: lottieTitle
+        label: Titulo lottie
+        type: string
+      - name: toolExternalCtaLabel
+        label: Boton demo externa
+        type: string
+      - name: toolInternalCtaLabel
+        label: Boton demo interna
+        type: string
+      - name: notFoundEyebrow
+        label: Eyebrow 404
+        type: string
+      - name: notFoundTitle
+        label: Titulo 404
+        type: string
+      - name: notFoundBody
+        label: Texto 404
+        type: text
+      - name: notFoundCtaLabel
+        label: Boton 404
+        type: string
 
   - name: home_page
     label: Pagina Inicio
@@ -75,19 +147,22 @@ content:
     path: src/content/pages/inicio.md
     fields:
       - name: title
-        label: Titulo interno de la pagina
+        label: Titulo interno
         type: string
       - name: slug
         label: Slug
         type: string
+      - name: heroTitle
+        label: Titulo principal hero
+        type: text
       - name: eyebrow
         label: Eyebrow hero
         type: string
       - name: intro
-        label: Texto principal
+        label: Parrafo principal hero
         type: text
       - name: lead
-        label: Texto secundario
+        label: Texto secundario hero
         type: text
       - name: panelEyebrow
         label: Eyebrow panel azul
@@ -99,14 +174,32 @@ content:
         label: Texto panel azul
         type: text
       - name: panelItems
-        label: Lista panel azul (una por linea)
+        label: Bullets panel azul (uno por linea)
         type: text
+      - name: servicesEyebrow
+        label: Eyebrow tarjeta servicios
+        type: string
       - name: serviceTitle
         label: Titulo tarjeta servicios
         type: text
       - name: serviceItems
-        label: Items servicios (uno por linea)
+        label: Items tarjeta servicios (uno por linea)
         type: text
+      - name: featuredEyebrow
+        label: Eyebrow destacados
+        type: string
+      - name: featuredTitle
+        label: Titulo destacados
+        type: string
+      - name: portfolioSectionEyebrow
+        label: Eyebrow areas
+        type: string
+      - name: portfolioSectionTitle
+        label: Titulo areas
+        type: string
+      - name: portfolioSectionCtaLabel
+        label: CTA areas
+        type: string
       - name: areaMotionCopy
         label: Texto area motion
         type: text
@@ -116,8 +209,26 @@ content:
       - name: areaWebCopy
         label: Texto area web
         type: text
+      - name: postsSectionEyebrow
+        label: Eyebrow posts
+        type: string
+      - name: postsSectionTitle
+        label: Titulo posts
+        type: string
+      - name: postsSectionCtaLabel
+        label: CTA posts
+        type: string
+      - name: toolsSectionEyebrow
+        label: Eyebrow utilidades
+        type: string
+      - name: toolsSectionTitle
+        label: Titulo utilidades
+        type: string
+      - name: toolsSectionCtaLabel
+        label: CTA utilidades
+        type: string
       - name: body
-        label: Contenido de la pagina
+        label: Contenido editorial
         type: rich-text
         options:
           format: markdown
@@ -137,11 +248,14 @@ content:
       - name: slug
         label: Slug
         type: string
+      - name: eyebrow
+        label: Eyebrow hero
+        type: string
       - name: intro
-        label: Texto principal
+        label: Parrafo principal hero
         type: text
       - name: lead
-        label: Texto secundario
+        label: Texto secundario hero
         type: text
       - name: heroImage
         label: Foto principal
@@ -177,10 +291,10 @@ content:
         label: Eyebrow hero
         type: string
       - name: intro
-        label: Texto principal
+        label: Parrafo principal hero
         type: text
       - name: lead
-        label: Texto secundario
+        label: Texto secundario hero
         type: text
       - name: panelEyebrow
         label: Eyebrow panel azul
@@ -191,6 +305,12 @@ content:
       - name: panelBody
         label: Texto panel azul
         type: text
+      - name: tabsEyebrow
+        label: Eyebrow pestañas
+        type: string
+      - name: tabsTitle
+        label: Titulo pestañas
+        type: string
       - name: attachments
         label: Archivos descargables
         type: file
@@ -223,10 +343,10 @@ content:
         label: Eyebrow hero
         type: string
       - name: intro
-        label: Texto principal
+        label: Parrafo principal hero
         type: text
       - name: lead
-        label: Texto secundario
+        label: Texto secundario hero
         type: text
 
   - name: blog_page
@@ -244,10 +364,16 @@ content:
         label: Eyebrow hero
         type: string
       - name: intro
-        label: Texto principal
+        label: Parrafo principal hero
         type: text
       - name: lead
-        label: Texto secundario
+        label: Texto secundario hero
+        type: text
+      - name: emptyTitle
+        label: Titulo estado vacio
+        type: string
+      - name: emptyBody
+        label: Texto estado vacio
         type: text
 
   - name: tools_page
@@ -265,10 +391,10 @@ content:
         label: Eyebrow hero
         type: string
       - name: intro
-        label: Texto principal
+        label: Parrafo principal hero
         type: text
       - name: lead
-        label: Texto secundario
+        label: Texto secundario hero
         type: text
 
   - name: cv_profiles
@@ -288,7 +414,7 @@ content:
         label: Slug interno
         type: string
       - name: tabLabel
-        label: Nombre de la pestana
+        label: Nombre de la pestaña
         type: string
       - name: summary
         label: Resumen breve
@@ -339,6 +465,9 @@ content:
           values: [motion, print, web, reflexiones, vida, hacks]
       - name: excerpt
         label: Extracto breve
+        type: text
+      - name: detailLead
+        label: Bajada detalle post
         type: text
       - name: cover
         label: Imagen de portada
@@ -410,6 +539,9 @@ content:
         type: date
       - name: summary
         label: Resumen corto
+        type: text
+      - name: detailLead
+        label: Bajada detalle proyecto
         type: text
       - name: cover
         label: Imagen de portada
@@ -486,6 +618,9 @@ content:
         type: string
       - name: summary
         label: Resumen corto
+        type: text
+      - name: detailLead
+        label: Bajada detalle utilidad
         type: text
       - name: status
         label: Estado de la utilidad

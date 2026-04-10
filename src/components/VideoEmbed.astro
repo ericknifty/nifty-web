@@ -1,4 +1,5 @@
 ---
+import { getSiteSettings } from "../lib/content";
 import { getVideoEmbed } from "../lib/media";
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 
 const { title, videoUrl, videoFile } = Astro.props;
 const embed = getVideoEmbed(videoUrl);
+const settings = await getSiteSettings();
 ---
 
 {
@@ -16,15 +18,15 @@ const embed = getVideoEmbed(videoUrl);
     <section class="detail-block">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Multimedia</p>
-          <h2>Video</h2>
+          <p class="eyebrow">{settings.videoEyebrow ?? "Multimedia"}</p>
+          <h2>{settings.videoTitle ?? "Video"}</h2>
         </div>
       </div>
 
       {videoFile ? (
         <video class="video-frame" controls preload="metadata">
           <source src={videoFile} />
-          Tu navegador no soporta la reproducción de video.
+          {settings.videoUnsupportedLabel ?? "Tu navegador no soporta la reproducción de video."}
         </video>
       ) : embed?.type === "iframe" ? (
         <div class="video-frame video-frame--embed">
@@ -39,7 +41,7 @@ const embed = getVideoEmbed(videoUrl);
       ) : embed ? (
         <p>
           <a href={embed.src} target="_blank" rel="noreferrer">
-            Ver video externo
+            {settings.videoExternalLabel ?? "Ver video externo"}
           </a>
         </p>
       ) : null}

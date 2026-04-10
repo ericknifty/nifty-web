@@ -23,7 +23,9 @@ const actions = demoHref
   ? [
       {
         href: demoHref,
-        label: isExternalUrl(demoHref) ? "Abrir demo externa" : "Abrir demo interna"
+        label: isExternalUrl(demoHref)
+          ? settings.toolExternalCtaLabel ?? "Abrir demo externa"
+          : settings.toolInternalCtaLabel ?? "Abrir demo interna"
       }
     ]
   : [];
@@ -34,7 +36,7 @@ const actions = demoHref
     eyebrow={getStatusLabel(entry.data.status)}
     title={entry.data.title}
     intro={entry.data.summary}
-    lead="Espacio para presentar una demo funcional, una herramienta propia o una prueba aplicada."
+    lead={entry.data.detailLead ?? "Espacio para presentar una demo funcional, una herramienta propia o una prueba aplicada."}
     actions={actions}
   />
 

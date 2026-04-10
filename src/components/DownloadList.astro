@@ -1,11 +1,12 @@
 ---
-import { fileLabel } from "../lib/content";
+import { fileLabel, getSiteSettings } from "../lib/content";
 
 interface Props {
   files: string[];
 }
 
 const { files } = Astro.props;
+const settings = await getSiteSettings();
 ---
 
 {
@@ -13,8 +14,8 @@ const { files } = Astro.props;
     <section class="detail-block">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Recursos</p>
-          <h2>Descargas</h2>
+          <p class="eyebrow">{settings.downloadsEyebrow ?? "Recursos"}</p>
+          <h2>{settings.downloadsTitle ?? "Descargas"}</h2>
         </div>
       </div>
 
