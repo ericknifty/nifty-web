@@ -6,10 +6,14 @@ on:
       - main
   workflow_dispatch:
 
+concurrency:
+  group: deploy-to-hosting
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository
@@ -44,54 +48,67 @@ jobs:
 
           PROTOCOL="${DEPLOY_PROTOCOL:-sftp}"
           REMOTE_DIR="${DEPLOY_REMOTE_DIR:-public_html}"
-          MIRROR_ARGS="--verbose=1 --parallel=1 --only-newer --delete-first --scan-all-first --no-perms --no-umask --exclude-glob .gitkeep"
+          MIRROR_ARGS="--verbose=1 --parallel=1 --continue --only-newer --delete-first --scan-all-first --no-perms --no-umask --exclude-glob .gitkeep"
           LFTP_COMMANDS=$(cat <<EOF
           set cmd:fail-exit yes
-          set net:timeout 20
-          set net:max-retries 2
-          set net:reconnect-interval-base 5
-          set net:reconnect-interval-max 20
+          set net:timeout 30
+          set net:max-retries 5
+          set net:persist-retries 3
+          set net:reconnect-interval-base 10
+          set net:reconnect-interval-max 45
           set xfer:clobber yes
           set xfer:use-temp-file yes
           set mirror:parallel-transfer-count 1
           set mirror:use-pget-n 0
           set ftp:passive-mode true
+          set ftp:prefer-epsv false
           set ftp:sync-mode false
           set ftp:list-options -a
           EOF
           )
 
+          publish_with_retries() {
+            local open_command="$1"
+            local attempt=1
+            local max_attempts=3
+
+            while [ "$attempt" -le "$max_attempts" ]; do
+              echo "Deploy attempt $attempt/$max_attempts"
+
+              if timeout --signal=TERM 8m lftp -c "$LFTP_COMMANDS
+              $open_command
+              set cmd:fail-exit false
+              mkdir -p \"$REMOTE_DIR\"
+              set cmd:fail-exit true
+              cd \"$REMOTE_DIR\"
+              mirror -R dist . $MIRROR_ARGS
+              bye"; then
+                echo "Deploy completed on attempt $attempt."
+                return 0
+              fi
+
+              if [ "$attempt" -lt "$max_attempts" ]; then
+                echo "Deploy attempt $attempt failed. Waiting before retry..."
+                sleep $((attempt * 15))
+              fi
+
+              attempt=$((attempt + 1))
+            done
+
+            echo "Deploy failed after $max_attempts attempts."
+            return 1
+          }
+
           if [ "$PROTOCOL" = "sftp" ]; then
             PORT="${DEPLOY_PORT:-22}"
-            timeout --signal=TERM 6m lftp -c "$LFTP_COMMANDS
-            set sftp:auto-confirm yes
-            open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT sftp://$DEPLOY_HOST
-            set cmd:fail-exit false
-            mkdir -p \"$REMOTE_DIR\"
-            set cmd:fail-exit true
-            cd \"$REMOTE_DIR\"
-            mirror -R dist . $MIRROR_ARGS
-            bye"
+            publish_with_retries "set sftp:auto-confirm yes
+            open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT sftp://$DEPLOY_HOST"
           elif [ "$PROTOCOL" = "ftps" ]; then
             PORT="${DEPLOY_PORT:-21}"
-            timeout --signal=TERM 6m lftp -c "$LFTP_COMMANDS
-            set ssl:verify-certificate no
-            open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT ftps://$DEPLOY_HOST
-            set cmd:fail-exit false
-            mkdir -p \"$REMOTE_DIR\"
-            set cmd:fail-exit true
-            cd \"$REMOTE_DIR\"
-            mirror -R dist . $MIRROR_ARGS
-            bye"
+            publish_with_retries "set ssl:verify-certificate no
+            open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT ftps://$DEPLOY_HOST"
           else
             PORT="${DEPLOY_PORT:-21}"
-            timeout --signal=TERM 6m lftp -c "$LFTP_COMMANDS
-            set ssl:verify-certificate no
-            open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT ftp://$DEPLOY_HOST
-            set cmd:fail-exit false
-            mkdir -p \"$REMOTE_DIR\"
-            set cmd:fail-exit true
-            cd \"$REMOTE_DIR\"
-            mirror -R dist . $MIRROR_ARGS
-            bye"
+            publish_with_retries "set ssl:verify-certificate no
+            open -u \"$DEPLOY_USERNAME\",\"$DEPLOY_PASSWORD\" -p $PORT ftp://$DEPLOY_HOST"
           fi
