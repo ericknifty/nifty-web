@@ -50,6 +50,7 @@ tags: |-
   animacion
 featured: true
 draft: false
+videoUrl: https://vimeo.com/462007583
 ---
 Video animado desarrollado para **Tiaxa** que presenta su solución *Water Data Management*. El proyecto explica la integración de tecnología IoT, analítica de datos y aplicaciones móviles para optimizar el uso del agua en faenas mineras de difícil acceso.
 
