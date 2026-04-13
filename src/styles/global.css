@@ -442,10 +442,18 @@ main {
   margin: 22px 0 0;
 }
 
+.page-hero__intro--wide {
+  max-width: 72ch;
+}
+
 .page-hero__lead {
   max-width: 58ch;
   color: var(--muted);
   margin: 18px 0 0;
+}
+
+.page-hero__lead--wide {
+  max-width: 76ch;
 }
 
 .page-hero__actions {
@@ -700,6 +708,11 @@ main {
   width: 100%;
   border-radius: var(--radius-lg);
   margin-bottom: 24px;
+}
+
+.cover-image--hero {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 .gallery-grid {

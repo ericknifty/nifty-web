@@ -21,25 +21,25 @@ const { Content } = await render(entry);
 ---
 
 <BaseLayout title={`${entry.data.title} | ${settings.siteName}`} description={entry.data.summary}>
-  <PageHero
-    eyebrow={getAreaLabel(entry.data.area)}
-    title={entry.data.title}
-    intro={entry.data.summary}
-    lead={entry.data.detailLead ?? `${settings.projectDatePrefix ?? "Actualizado el"} ${formatDate(entry.data.date)}`}
-  />
+  <section class="page-hero">
+    <div class="shell">
+      <div class="page-hero__copy">
+        {entry.data.cover && <img class="cover-image cover-image--hero" src={entry.data.cover} alt="" />}
+        <p class="eyebrow">{getAreaLabel(entry.data.area)}</p>
+        <h1>{entry.data.title}</h1>
+        {entry.data.summary && <p class="page-hero__intro page-hero__intro--wide">{entry.data.summary}</p>}
+        <p class="page-hero__lead page-hero__lead--wide">
+          {entry.data.detailLead ?? `${settings.projectDatePrefix ?? "Actualizado el"} ${formatDate(entry.data.date)}`}
+        </p>
+      </div>
+    </div>
+  </section>
 
   <section class="section">
     <div class="shell detail-stack">
-      <VideoEmbed
-        title={entry.data.title}
-        videoUrl={entry.data.videoUrl}
-        videoFile={entry.data.videoFile}
-        tone="dark"
-      />
-      <LottiePlayer src={entry.data.lottieFile} title={entry.data.title} tone="dark" />
-
       <article class="prose prose--wide detail-article">
-        {entry.data.cover && <img class="cover-image" src={entry.data.cover} alt="" />}
+        <VideoEmbed title={entry.data.title} videoUrl={entry.data.videoUrl} videoFile={entry.data.videoFile} />
+        <LottiePlayer src={entry.data.lottieFile} title={entry.data.title} />
         <Content />
 
         {
@@ -57,9 +57,8 @@ const { Content } = await render(entry);
             </section>
           )
         }
+        <DownloadList files={entry.data.downloads} />
       </article>
-
-      <DownloadList files={entry.data.downloads} tone="dark" />
     </div>
   </section>
 </BaseLayout>
