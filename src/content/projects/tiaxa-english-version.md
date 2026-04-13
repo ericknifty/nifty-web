@@ -24,7 +24,6 @@ videoUrl: https://vimeo.com/462007583
 ---
 ![image.png](/media/images/projects/image.png)
 
-  
 Este video técnico-explicativo aborda la problemática del control hídrico en la minería, destacando soluciones que reducen hasta en un **85% los tiempos de respuesta** ante desviaciones de caudales y eliminan el error humano en lecturas manuales.
 
 *(Nota: Esta es la versión del video con textos en inglés).*
@@ -42,7 +41,7 @@ Este proyecto fue realizado a través de **MT Audiovisual (Mario Toro)**, trabaj
 
 *Motion graphics developed for **Tiaxa**, focusing on their "Water Data Management" solution. The video illustrates how the integration of IoT technology, data analytics, and mobile applications optimizes water resource management in remote mining operations. It highlights key benefits such as reduced response times and the elimination of human error in data collection.*
 
-*### Credits & Collaboration* *This project was produced through **MT Audiovisual (Mario Toro)**, in collaboration with a specialized team:*
+*Credits & Collaboration* *This project was produced through **MT Audiovisual (Mario Toro)**, in collaboration with a specialized team:*
 
 - ***Animation & Motion Graphics:** Erick Guerrero / Taller Nifty*
 - ***Graphic Design & Art Direction:** Katherine Sánchez*
