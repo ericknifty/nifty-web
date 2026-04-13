@@ -3,11 +3,8 @@ title: "Tiaxa: Water Data Management"
 slug: tiaxa-english-version
 area: motion
 date: 2019-09-29
-summary: Motion graphics desarrollado para Tiaxa, enfocado en su solución Water
-  Data Management. El video explica cómo la integración de tecnología IoT,
-  analítica de datos y aplicaciones móviles permite optimizar el uso del recurso
-  hídrico en faenas mineras de difícil acceso, reduciendo tiempos de respuesta y
-  errores humanos en la toma de decisiones.
+summary: Motion Graphics para la optimización del recurso hídrico en la
+  industria minera mediante tecnología IoT.
 detailLead: >-
   (Nota: Esta es la versión del video con locución en inglés).
 
@@ -54,3 +51,15 @@ tags: |-
 featured: true
 draft: false
 ---
+Video animado desarrollado para **Tiaxa** que presenta su solución *Water Data Management*. El proyecto explica la integración de tecnología IoT, analítica de datos y aplicaciones móviles para optimizar el uso del agua en faenas mineras de difícil acceso.
+
+*(Nota: Esta es la versión del video con locución en inglés).*
+
+Este proyecto fue realizado a través de **MT Audiovisual (Mario Toro)**, en colaboración con:
+
+- **Animación y Motion Graphics:** Erick Guerrero, Nifty.cl
+- **Diseño y Dirección de Arte:** Katherine Sánchez
+
+---
+
+*## **Tiaxa: Water Data Management (English Version)** Motion graphics developed for **Tiaxa**, focusing on how IoT technology, data analytics, and mobile applications optimize water resource management in remote mining operations.*
