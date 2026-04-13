@@ -32,8 +32,8 @@ Este video técnico-explicativo aborda la problemática del control hídrico en 
 
 Este proyecto fue realizado a través de **MT Audiovisual (Mario Toro)**, trabajando en conjunto con un equipo especializado:
 
-- **Animación y Motion Graphics:** Erick Guerrero / Taller Nifty
-- **Diseño y Dirección de Arte:** Katherine Sánchez, [kathonejo@gmail.com, https://portrait.so/kathonejo.](https://portrait.so/kathonejo)
+- **Animación y Motion Graphics:** Erick Guerrero / [Nifty.cl](http://Nifty.cl)
+- **Diseño y Dirección de Arte:** [Katherine Sánchez](https://portrait.so/kathonejo) / [kathonejo@gmail.com](mailto:kathonejo@gmail.com)
 
 ---
 
@@ -43,6 +43,6 @@ Este proyecto fue realizado a través de **MT Audiovisual (Mario Toro)**, trabaj
 
 *Credits & Collaboration* *This project was produced through **MT Audiovisual (Mario Toro)**, in collaboration with a specialized team:*
 
-- ***Animation & Motion Graphics:** Erick Guerrero / Nifty.cl*
-- ***Graphic Design & Art Direction:** Katherine Sánchez- , [kathonejo@gmail.com](mailto:kathonejo@gmail.com), [https://portrait.so/kathonejo.](https://portrait.so/kathonejo.](https://portrait.so/kathonejo))*
+- ***Animation & Motion Graphics:** Erick Guerrero / [Nifty.cl](http://Nifty.cl)*
+- ***Graphic Design & Art Direction:** [Katherine Sánchez](https://portrait.so/kathonejo) / [kathonejo@gmail.com](mailto:kathonejo@gmail.com)*
 
