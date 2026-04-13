@@ -22,6 +22,9 @@ featured: true
 draft: false
 videoUrl: https://vimeo.com/462007583
 ---
+![image.png](/media/images/projects/image.png)
+
+  
 Este video técnico-explicativo aborda la problemática del control hídrico en la minería, destacando soluciones que reducen hasta en un **85% los tiempos de respuesta** ante desviaciones de caudales y eliminan el error humano en lecturas manuales.
 
 *(Nota: Esta es la versión del video con textos en inglés).*
