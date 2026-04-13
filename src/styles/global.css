@@ -749,9 +749,9 @@ main {
 .lottie-frame {
   width: 100%;
   overflow: hidden;
-  border: 1px solid rgba(127, 91, 0, 0.14);
-  border-radius: var(--radius-lg);
-  background: var(--panel-muted);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .video-frame--embed {

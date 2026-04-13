@@ -17,13 +17,6 @@ const settings = await getSiteSettings();
 {
   (videoFile || embed) && (
     <section class:list={["detail-block", tone === "dark" && "detail-block--dark"]}>
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">{settings.videoEyebrow ?? "Multimedia"}</p>
-          <h2>{settings.videoTitle ?? "Video"}</h2>
-        </div>
-      </div>
-
       {videoFile ? (
         <video class="video-frame" controls preload="metadata">
           <source src={videoFile} />
