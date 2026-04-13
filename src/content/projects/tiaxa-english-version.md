@@ -44,5 +44,5 @@ Este proyecto fue realizado a través de **MT Audiovisual (Mario Toro)**, trabaj
 *Credits & Collaboration* *This project was produced through **MT Audiovisual (Mario Toro)**, in collaboration with a specialized team:*
 
 - ***Animation & Motion Graphics:** Erick Guerrero / Nifty.cl*
-- ***Graphic Design & Art Direction:** Katherine Sánchez- , [kathonejo@gmail.com](mailto:kathonejo@gmail.com), [https://portrait.so/kathonejo.](https://portrait.so/kathonejo)](https://portrait.so/kathonejo.](https://portrait.so/kathonejo))*
+- ***Graphic Design & Art Direction:** Katherine Sánchez- , [kathonejo@gmail.com](mailto:kathonejo@gmail.com), [https://portrait.so/kathonejo.](https://portrait.so/kathonejo.](https://portrait.so/kathonejo))*
 
