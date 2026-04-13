@@ -6,18 +6,19 @@ interface Props {
   title?: string;
   loop?: boolean;
   autoplay?: boolean;
+  tone?: "light" | "dark";
 }
 
-const { src, title = "Animación Lottie", loop = true, autoplay = true } = Astro.props;
+const { src, title = "Animacion Lottie", loop = true, autoplay = true, tone = "light" } = Astro.props;
 const settings = await getSiteSettings();
 ---
 
 {
   src && (
-    <section class="detail-block">
+    <section class:list={["detail-block", tone === "dark" && "detail-block--dark"]}>
       <div class="section-heading">
         <div>
-          <p class="eyebrow">{settings.lottieEyebrow ?? "Animación"}</p>
+          <p class="eyebrow">{settings.lottieEyebrow ?? "Animacion"}</p>
           <h2>{settings.lottieTitle ?? "Lottie"}</h2>
         </div>
       </div>

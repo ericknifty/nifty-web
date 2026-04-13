@@ -29,8 +29,16 @@ const { Content } = await render(entry);
   />
 
   <section class="section">
-    <div class="shell detail-layout">
-      <article class="prose prose--wide">
+    <div class="shell detail-stack">
+      <VideoEmbed
+        title={entry.data.title}
+        videoUrl={entry.data.videoUrl}
+        videoFile={entry.data.videoFile}
+        tone="dark"
+      />
+      <LottiePlayer src={entry.data.lottieFile} title={entry.data.title} tone="dark" />
+
+      <article class="prose prose--wide detail-article">
         {entry.data.cover && <img class="cover-image" src={entry.data.cover} alt="" />}
         <Content />
 
@@ -39,8 +47,8 @@ const { Content } = await render(entry);
             <section class="detail-block">
               <div class="section-heading">
                 <div>
-                  <p class="eyebrow">{settings.projectGalleryEyebrow ?? "Galería"}</p>
-                  <h2>{settings.projectGalleryTitle ?? "Imágenes del proyecto"}</h2>
+                  <p class="eyebrow">{settings.projectGalleryEyebrow ?? "Galeria"}</p>
+                  <h2>{settings.projectGalleryTitle ?? "Imagenes del proyecto"}</h2>
                 </div>
               </div>
               <div class="gallery-grid">
@@ -51,11 +59,7 @@ const { Content } = await render(entry);
         }
       </article>
 
-      <aside class="detail-aside">
-        <VideoEmbed title={entry.data.title} videoUrl={entry.data.videoUrl} videoFile={entry.data.videoFile} />
-        <LottiePlayer src={entry.data.lottieFile} title={entry.data.title} />
-        <DownloadList files={entry.data.downloads} />
-      </aside>
+      <DownloadList files={entry.data.downloads} tone="dark" />
     </div>
   </section>
 </BaseLayout>

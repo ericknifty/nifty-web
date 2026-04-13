@@ -3,15 +3,16 @@ import { fileLabel, getSiteSettings } from "../lib/content";
 
 interface Props {
   files: string[];
+  tone?: "light" | "dark";
 }
 
-const { files } = Astro.props;
+const { files, tone = "light" } = Astro.props;
 const settings = await getSiteSettings();
 ---
 
 {
   files.length > 0 && (
-    <section class="detail-block">
+    <section class:list={["detail-block", tone === "dark" && "detail-block--dark"]}>
       <div class="section-heading">
         <div>
           <p class="eyebrow">{settings.downloadsEyebrow ?? "Recursos"}</p>

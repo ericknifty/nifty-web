@@ -431,8 +431,9 @@ main {
 }
 
 .page-hero h1 {
-  font-size: clamp(3rem, 5vw, 5.8rem);
-  max-width: 11ch;
+  font-size: clamp(2.25rem, 3.8vw, 4.35rem);
+  max-width: 100%;
+  text-wrap: balance;
 }
 
 .page-hero__intro {
@@ -547,6 +548,11 @@ main {
 .two-column,
 .detail-layout {
   grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+}
+
+.detail-stack {
+  display: grid;
+  gap: 28px;
 }
 
 .stack-card,
@@ -677,6 +683,19 @@ main {
   color: var(--brand);
 }
 
+.detail-block--dark .section-heading h2,
+.detail-block--dark .section-heading a {
+  color: var(--text-soft);
+}
+
+.detail-block--dark .section-heading .eyebrow {
+  color: rgba(242, 234, 220, 0.68);
+}
+
+.detail-article {
+  width: 100%;
+}
+
 .cover-image {
   width: 100%;
   border-radius: var(--radius-lg);
@@ -740,6 +759,15 @@ main {
   background:
     radial-gradient(circle at center, rgba(252, 203, 0, 0.14), transparent 54%),
     var(--panel-muted);
+}
+
+.detail-stack .video-frame--embed {
+  aspect-ratio: 16 / 9;
+}
+
+.detail-stack .video-frame iframe,
+.detail-stack .video-frame video {
+  min-height: clamp(360px, 46vw, 640px);
 }
 
 .profile-tabs {
@@ -1049,7 +1077,7 @@ main {
   }
 
   .page-hero h1 {
-    font-size: clamp(2.5rem, 13vw, 4.1rem);
+    font-size: clamp(2rem, 9vw, 3.1rem);
   }
 
   .gallery-grid,
