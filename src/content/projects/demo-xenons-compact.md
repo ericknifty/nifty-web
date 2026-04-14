@@ -27,7 +27,7 @@ A partir del material de registro y el guion proporcionado por el cliente, se re
 
 ---
 
-- ***Xenons Compact 130 & Impact 160 (English Version)***   
+- ***Xenons Compact 130 & Impact 160 (English Version)***  
 *Motion graphics and video editing for **G&R Limitada**, featuring the Xenons Compact 130 and Impact 160 eco-solvent printers. Based on raw footage and a technical script, I managed the full post-production process to showcase the equipment's printing capabilities.*
 - ***My Roles***
 - *Video Editing & Final Assembly*
