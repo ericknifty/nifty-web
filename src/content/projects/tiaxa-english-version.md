@@ -20,7 +20,7 @@ tags: |-
   Sustentabilidad
 featured: true
 draft: false
-videoUrl: https://vimeo.com/462007583
+videoUrl: https://youtu.be/2_YFZvnaoZk
 ---
 Este video técnico-explicativo aborda la problemática del control hídrico en la minería, destacando soluciones que reducen hasta en un **85% los tiempos de respuesta** ante desviaciones de caudales y eliminan el error humano en lecturas manuales.
 
