@@ -12,6 +12,8 @@ interface Props {
 const { title, videoUrl, videoFile, tone = "light" } = Astro.props;
 const embed = getVideoEmbed(videoUrl);
 const settings = await getSiteSettings();
+const isVimeo = embed?.type === "iframe" && embed.provider === "vimeo";
+const isYouTube = embed?.type === "iframe" && embed.provider === "youtube";
 ---
 
 {
@@ -20,11 +22,12 @@ const settings = await getSiteSettings();
       {videoFile ? (
         <video class="video-frame" controls preload="metadata">
           <source src={videoFile} />
-          {settings.videoUnsupportedLabel ?? "Tu navegador no soporta la reproducción de video."}
+          {settings.videoUnsupportedLabel ?? "Tu navegador no soporta la reproduccion de video."}
         </video>
       ) : embed?.type === "iframe" ? (
-        <div class="video-frame video-frame--embed">
+        <div class:list={["video-frame", "video-frame--embed", isVimeo && "video-frame--vimeo", isYouTube && "video-frame--youtube"]}>
           <iframe
+            class:list={["video-frame__embed", isVimeo && "video-frame__embed--vimeo", isYouTube && "video-frame__embed--youtube"]}
             src={embed.src}
             title={title}
             loading="lazy"

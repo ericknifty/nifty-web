@@ -755,7 +755,9 @@ main {
 }
 
 .video-frame--embed {
+  position: relative;
   aspect-ratio: 16 / 9;
+  background: #000;
 }
 
 .video-frame iframe,
@@ -765,6 +767,51 @@ main {
   min-height: 280px;
   border: 0;
   display: block;
+}
+
+.video-frame__embed {
+  position: absolute;
+  inset: 0;
+}
+
+.video-frame__embed--vimeo {
+  top: -9px;
+  left: -2px;
+  right: auto;
+  bottom: auto;
+  width: calc(100% + 22px);
+  height: calc(100% + 28px);
+  z-index: 1;
+}
+
+.video-frame__embed--youtube {
+  top: -3px;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 3px);
+}
+
+.video-frame--vimeo::before,
+.video-frame--vimeo::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  background: var(--surface);
+  z-index: 2;
+}
+
+.video-frame--vimeo::before {
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 100%;
+}
+
+.video-frame--vimeo::after {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
 }
 
 .lottie-frame {

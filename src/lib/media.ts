@@ -16,6 +16,7 @@ export function getVideoEmbed(url?: string) {
       if (!videoId) return null;
       return {
         type: "iframe",
+        provider: "youtube",
         src: `https://www.youtube.com/embed/${videoId}`
       };
     }
@@ -25,6 +26,7 @@ export function getVideoEmbed(url?: string) {
       if (!videoId) return null;
       return {
         type: "iframe",
+        provider: "youtube",
         src: `https://www.youtube.com/embed/${videoId}`
       };
     }
@@ -34,6 +36,7 @@ export function getVideoEmbed(url?: string) {
       if (!videoId) return null;
       return {
         type: "iframe",
+        provider: "vimeo",
         src: `https://player.vimeo.com/video/${videoId}`
       };
     }
@@ -43,6 +46,7 @@ export function getVideoEmbed(url?: string) {
 
   return {
     type: "link",
+    provider: "external",
     src: url
   };
 }
