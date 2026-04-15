@@ -13,16 +13,17 @@ interface Props {
 const { title, videoUrl, hostedVideoUrl, videoFile, tone = "light" } = Astro.props;
 const embed = getVideoEmbed(videoUrl);
 const settings = await getSiteSettings();
+const directVideoUrl = embed?.type === "file" ? embed.src : undefined;
 const isVimeo = embed?.type === "iframe" && embed.provider === "vimeo";
 const isYouTube = embed?.type === "iframe" && embed.provider === "youtube";
 ---
 
 {
-  (videoFile || hostedVideoUrl || embed) && (
+  (videoFile || hostedVideoUrl || directVideoUrl || embed) && (
     <section class:list={["detail-block", tone === "dark" && "detail-block--dark"]}>
-      {videoFile || hostedVideoUrl ? (
+      {videoFile || hostedVideoUrl || directVideoUrl ? (
         <video class="video-frame" controls preload="metadata">
-          <source src={hostedVideoUrl ?? videoFile} />
+          <source src={hostedVideoUrl ?? directVideoUrl ?? videoFile} />
           {settings.videoUnsupportedLabel ?? "Tu navegador no soporta la reproduccion de video."}
         </video>
       ) : embed?.type === "iframe" ? (

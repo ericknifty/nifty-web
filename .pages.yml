@@ -489,7 +489,7 @@ content:
         label: URL de video externo
         type: string
       - name: hostedVideoUrl
-        label: URL de video propio en hosting (ejemplo: https://tudominio.cl/media/video/posts/mi-video.mp4)
+        label: URL de video propio en hosting (subir por FTP a /media/video/hosting/posts/ y pegar aqui la URL completa)
         type: string
       - name: videoFile
         label: Archivo de video local
@@ -573,7 +573,7 @@ content:
         label: URL de video externo
         type: string
       - name: hostedVideoUrl
-        label: URL de video propio en hosting (ejemplo: https://tudominio.cl/media/video/projects/mi-video.mp4)
+        label: URL de video propio en hosting (subir por FTP a /media/video/hosting/projects/ y pegar aqui la URL completa)
         type: string
       - name: videoFile
         label: Archivo de video local
