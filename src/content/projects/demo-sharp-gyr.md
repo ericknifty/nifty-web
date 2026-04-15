@@ -12,7 +12,7 @@ detailLead: Video demostrativo desarrollado para la empresa G&R Limitada,
 cover: /media/images/projects/vlcsnap-2026-04-13-20h42m42s558.png
 tags: Post-producción,Edición de Video,Sharp,G&R,Motion Graphics,Demostración
   Técnica,Impresión Láser
-videoUrl: https://nifty.cl/media/video/projects/demo_sharp_g&r_v1%20(1080p).mp4
+videoUrl: https://nifty.cl/media/video/hosting/projects/demo_sharp.mp4
 featured: false
 draft: false
 ---
