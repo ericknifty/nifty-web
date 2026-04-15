@@ -12,7 +12,7 @@ detailLead: Video desarrollado para G&R Limitada enfocado en la presentación de
 cover: /media/images/projects/vlcsnap-2026-04-13-20h53m32s245.png
 tags: Xenons, G&R, Plotter, Impresión Ecosolvente, Edición de Video,
   Post-producción, Gráfica Industrial, Animación 2D
-videoUrl: https://nifty.cl/media/video/projects/xenons_compact_130_&_impact_160_v1%20(1080p).mp4
+videoUrl: https://nifty.cl/media/video/hosting/projects/compact_130.mp4
 featured: false
 draft: false
 ---
