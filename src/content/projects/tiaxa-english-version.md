@@ -20,7 +20,7 @@ tags: |-
   Sustentabilidad
 featured: true
 draft: false
-videoUrl: https://nifty.cl/media/video/projects/tiaxa_v1%20(1080p).mp4
+videoUrl: https://nifty.cl/media/video/hosting/projects/tiaxa.mp4
 ---
 Este video técnico-explicativo aborda la problemática del control hídrico en la minería, destacando soluciones que reducen hasta en un **85% los tiempos de respuesta** ante desviaciones de caudales y eliminan el error humano en lecturas manuales.
 
