@@ -3,18 +3,14 @@ title: Cómo estoy armando mi sitio personal sin usar base de datos
 slug: proceso-web-personal
 date: 2026-04-08
 category: web
-excerpt: Una bitácora inicial sobre la transición desde flujos pesados a una web más rápida, simple y entendible.
+excerpt: Una bitácora inicial sobre la transición desde flujos pesados a una web
+  más rápida, simple y entendible.
 cover: /media/images/post-editorial.svg
-tags:
-  - astro
-  - pages cms
-  - portfolio
-downloads: []
+tags: astro, pages cms, portfolio
 videoUrl: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-featured: true
-draft: false
+featured: false
+draft: true
 ---
-
 Esta primera entrada deja documentado el objetivo principal del proyecto: tener una web propia que sea rápida, escalable y suficientemente simple como para mantenerla sin depender de una base de datos ni de un constructor pesado.
 
 ## Qué quiero resolver
