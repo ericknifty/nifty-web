@@ -1224,6 +1224,32 @@ main {
   }
 }
 
+@media (max-width: 430px) {
+  .about-hero__placeholder {
+    min-height: 620px;
+    padding: 28px;
+  }
+
+  .about-hero__placeholder-mark {
+    width: min(100%, 440px);
+  }
+
+  .about-hero__placeholder.is-mantra-active .about-hero__placeholder-mark {
+    transform: translate(-50%, calc(-50% - 88px)) rotate(-45deg) scale(0.84);
+  }
+
+  .about-hero__mantra {
+    bottom: 8%;
+    width: min(84%, 16ch);
+    font-size: clamp(1.08rem, 5vw, 1.38rem);
+    line-height: 1.08;
+  }
+
+  .about-hero__mantra-line + .about-hero__mantra-line {
+    margin-top: 0.12em;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
