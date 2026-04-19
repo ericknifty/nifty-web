@@ -1231,18 +1231,18 @@ main {
   }
 
   .about-hero__placeholder-mark {
-    width: min(100%, 300px);
+    width: min(100%, 252px);
   }
 
   .about-hero__placeholder.is-mantra-active .about-hero__placeholder-mark {
-    transform: translate(-50%, calc(-50% - 30px)) rotate(-45deg) scale(0.7);
+    transform: translate(-50%, calc(-50% - 24px)) rotate(-45deg);
   }
 
   .about-hero__mantra {
-    bottom: 13%;
-    width: min(82%, 16ch);
-    font-size: clamp(0.68rem, 3.2vw, 0.9rem);
-    line-height: 1.14;
+    bottom: 11%;
+    width: min(80%, 15ch);
+    font-size: clamp(0.58rem, 2.85vw, 0.82rem);
+    line-height: 1.16;
   }
 
   .about-hero__mantra-line + .about-hero__mantra-line {
