@@ -1231,11 +1231,11 @@ main {
   }
 
   .about-hero__placeholder-mark {
-    width: min(100%, 252px);
+    width: min(100%, 208px);
   }
 
   .about-hero__placeholder.is-mantra-active .about-hero__placeholder-mark {
-    transform: translate(-50%, calc(-50% - 24px)) rotate(-45deg);
+    transform: translate(-50%, calc(-50% - 18px)) rotate(-45deg);
   }
 
   .about-hero__mantra {
