@@ -1226,23 +1226,24 @@ main {
 
 @media (max-width: 430px) {
   .about-hero__placeholder {
-    min-height: 520px;
+    min-height: 500px;
     padding: 24px;
   }
 
   .about-hero__placeholder-mark {
-    width: min(100%, 208px);
+    width: min(100%, 300px);
+    transform: translate(-50%, -50%) rotate(-45deg) scale(0.62);
   }
 
   .about-hero__placeholder.is-mantra-active .about-hero__placeholder-mark {
-    transform: translate(-50%, calc(-50% - 18px)) rotate(-45deg);
+    transform: translate(-50%, calc(-50% - 18px)) rotate(-45deg) scale(0.62);
   }
 
   .about-hero__mantra {
-    bottom: 11%;
-    width: min(80%, 15ch);
-    font-size: clamp(0.58rem, 2.85vw, 0.82rem);
-    line-height: 1.16;
+    bottom: 10%;
+    width: min(78%, 14ch);
+    font-size: clamp(0.56rem, 2.7vw, 0.76rem);
+    line-height: 1.15;
   }
 
   .about-hero__mantra-line + .about-hero__mantra-line {
