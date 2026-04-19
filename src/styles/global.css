@@ -1232,18 +1232,18 @@ main {
 
   .about-hero__placeholder-mark {
     width: min(100%, 300px);
-    transform: translate(-50%, -46%) rotate(-45deg) scale(0.62);
+    transform: translate(-50%, -60%) rotate(-45deg) scale(0.62);
   }
 
   .about-hero__placeholder.is-mantra-active .about-hero__placeholder-mark {
-    transform: translate(-50%, calc(-50% - 110px)) rotate(-45deg) scale(0.62);
+    transform: translate(-50%, calc(-50% - 96px)) rotate(-45deg) scale(0.62);
   }
 
   .about-hero__mantra {
-    bottom: 8%;
-    width: min(80%, 15ch);
-    font-size: clamp(0.62rem, 2.95vw, 0.84rem);
-    line-height: 1.18;
+    bottom: 29%;
+    width: min(94%, 26ch);
+    font-size: clamp(0.8rem, 3.7vw, 1rem);
+    line-height: 1.06;
   }
 
   .about-hero__mantra-line + .about-hero__mantra-line {
