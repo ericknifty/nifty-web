@@ -33,10 +33,18 @@ const { Content } = await render(page);
             hasHeroImage ? (
               <img src={page.data.heroImage} alt={page.data.heroImageAlt || ""} />
             ) : (
-              <div class="about-hero__placeholder" data-eye-follow>
-                <div class="about-hero__placeholder-mark" data-eye-follow-mark>
+              <div class="about-hero__placeholder" data-eye-follow data-mantra-root>
+                <button
+                  type="button"
+                  class="about-hero__placeholder-mark"
+                  data-eye-follow-mark
+                  data-mantra-toggle
+                  aria-expanded="false"
+                  aria-controls="about-mantra"
+                >
                   <BrandMark variant="isotipo" width={425} height={432} label="Isotipo Taller Nifty" />
-                </div>
+                </button>
+                <p id="about-mantra" class="about-hero__mantra" data-mantra-text hidden></p>
               </div>
             )
           }
@@ -189,6 +197,131 @@ const { Content } = await render(page);
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         reset();
+      }
+    });
+  })();
+
+  (() => {
+    const placeholder = document.querySelector("[data-mantra-root]");
+    const toggle = placeholder?.querySelector("[data-mantra-toggle]");
+    const mantra = placeholder?.querySelector("[data-mantra-text]");
+
+    if (!(placeholder instanceof HTMLElement) || !(toggle instanceof HTMLButtonElement) || !(mantra instanceof HTMLElement)) {
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mantraCopyParts = [
+      "\"La estética es el arma del diseño",
+      "para que la funcionalidad",
+      "cumpla sus objetivos\""
+    ];
+    const fadeDuration = 320;
+    const phraseDelay = 520;
+    const mantraRevealDelay = 1200;
+    let typingTimer = 0;
+    let closingTimer = 0;
+    let isOpen = false;
+
+    const clearTimers = () => {
+      if (typingTimer) {
+        window.clearTimeout(typingTimer);
+        typingTimer = 0;
+      }
+
+      if (closingTimer) {
+        window.clearTimeout(closingTimer);
+        closingTimer = 0;
+      }
+    };
+
+    const setExpanded = (value) => {
+      toggle.setAttribute("aria-expanded", value ? "true" : "false");
+    };
+
+    const revealMantra = () => {
+      mantra.hidden = false;
+      placeholder.classList.add("is-mantra-active");
+    };
+
+    const buildMantraLines = () => {
+      mantra.innerHTML = "";
+
+      mantraCopyParts.forEach((part) => {
+        const line = document.createElement("span");
+        line.className = "about-hero__mantra-line";
+        line.textContent = part;
+        mantra.appendChild(line);
+      });
+    };
+
+    const openMantra = () => {
+      clearTimers();
+      isOpen = true;
+      setExpanded(true);
+      buildMantraLines();
+      revealMantra();
+
+      if (prefersReducedMotion.matches) {
+        placeholder.classList.add("is-mantra-visible");
+        mantra.querySelectorAll(".about-hero__mantra-line").forEach((line) => {
+          line.classList.add("is-visible");
+        });
+        return;
+      }
+
+      const lines = Array.from(mantra.querySelectorAll(".about-hero__mantra-line"));
+      let index = 0;
+
+      const revealNext = () => {
+        const line = lines[index];
+        if (!(line instanceof HTMLElement)) {
+          typingTimer = 0;
+          return;
+        }
+
+        line.classList.add("is-visible");
+        index += 1;
+
+        if (index < lines.length) {
+          typingTimer = window.setTimeout(revealNext, phraseDelay);
+        } else {
+          typingTimer = 0;
+        }
+      };
+
+      typingTimer = window.setTimeout(() => {
+        placeholder.classList.add("is-mantra-visible");
+        revealNext();
+      }, mantraRevealDelay);
+    };
+
+    const closeMantra = () => {
+      clearTimers();
+      isOpen = false;
+      setExpanded(false);
+
+      if (prefersReducedMotion.matches) {
+        placeholder.classList.remove("is-mantra-visible", "is-mantra-active");
+        mantra.textContent = "";
+        mantra.hidden = true;
+        return;
+      }
+
+      placeholder.classList.remove("is-mantra-visible");
+      closingTimer = window.setTimeout(() => {
+        mantra.textContent = "";
+        mantra.hidden = true;
+        placeholder.classList.remove("is-mantra-active");
+        closingTimer = 0;
+      }, fadeDuration);
+    };
+
+    toggle.addEventListener("click", () => {
+      if (isOpen) {
+        closeMantra();
+      } else {
+        openMantra();
       }
     });
   })();

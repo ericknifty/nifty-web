@@ -381,12 +381,63 @@ main {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%) rotate(-45deg);
+  padding: 0;
+  border: 0;
+  background: transparent;
   filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.26));
   z-index: 1;
+  cursor: pointer;
+  transition:
+    transform 1320ms ease,
+    filter 220ms ease;
 }
 
 .about-hero__placeholder-mark .brand-mark {
   color: #f2eadc;
+}
+
+.about-hero__placeholder.is-mantra-active .about-hero__placeholder-mark {
+  transform: translate(-50%, calc(-50% - 58px)) rotate(-45deg);
+}
+
+.about-hero__mantra {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(28px, 5vw, 44px);
+  width: min(84%, 24ch);
+  margin: 0;
+  transform: translateX(-50%);
+  text-align: center;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1rem, 2vw, 1.45rem);
+  line-height: 1.18;
+  color: #f2eadc;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms ease;
+  text-wrap: balance;
+  z-index: 1;
+}
+
+.about-hero__mantra-line {
+  display: block;
+  opacity: 0;
+  transition: opacity 620ms ease;
+}
+
+.about-hero__mantra-line + .about-hero__mantra-line {
+  margin-top: 0.12em;
+}
+
+.about-hero__mantra-line.is-visible {
+  opacity: 1;
+}
+
+.about-hero__placeholder.is-mantra-visible .about-hero__mantra {
+  opacity: 1;
 }
 
 .page-hero__panel {
@@ -1159,6 +1210,17 @@ main {
   .brand-mark--isologo {
     --brand-width: 167px;
     --brand-height: 68px;
+  }
+
+  .about-hero__mantra {
+    bottom: 11%;
+    width: min(84%, 19ch);
+    font-size: clamp(1.28rem, 4.9vw, 1.75rem);
+    line-height: 1.14;
+  }
+
+  .about-hero__mantra-line + .about-hero__mantra-line {
+    margin-top: 0.18em;
   }
 }
 
