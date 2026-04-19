@@ -5,25 +5,23 @@ import { getVideoEmbed } from "../lib/media";
 interface Props {
   title: string;
   videoUrl?: string;
-  hostedVideoUrl?: string;
   videoFile?: string;
   tone?: "light" | "dark";
 }
 
-const { title, videoUrl, hostedVideoUrl, videoFile, tone = "light" } = Astro.props;
+const { title, videoUrl, videoFile, tone = "light" } = Astro.props;
 const embed = getVideoEmbed(videoUrl);
 const settings = await getSiteSettings();
-const directVideoUrl = embed?.type === "file" ? embed.src : undefined;
 const isVimeo = embed?.type === "iframe" && embed.provider === "vimeo";
 const isYouTube = embed?.type === "iframe" && embed.provider === "youtube";
 ---
 
 {
-  (videoFile || hostedVideoUrl || directVideoUrl || embed) && (
+  (videoFile || embed) && (
     <section class:list={["detail-block", tone === "dark" && "detail-block--dark"]}>
-      {videoFile || hostedVideoUrl || directVideoUrl ? (
+      {videoFile ? (
         <video class="video-frame" controls preload="metadata">
-          <source src={hostedVideoUrl ?? directVideoUrl ?? videoFile} />
+          <source src={videoFile} />
           {settings.videoUnsupportedLabel ?? "Tu navegador no soporta la reproduccion de video."}
         </video>
       ) : embed?.type === "iframe" ? (

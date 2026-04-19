@@ -6,9 +6,21 @@ interface Props {
   profiles: CollectionEntry<"cvProfiles">[];
   eyebrow?: string;
   title?: string;
+  hideHeader?: boolean;
+  startCollapsed?: boolean;
+  buttonLabels?: Record<string, string>;
+  hideControls?: boolean;
 }
 
-const { profiles, eyebrow = "CV", title = "Perfiles profesionales" } = Astro.props;
+const {
+  profiles,
+  eyebrow = "CV",
+  title = "Perfiles profesionales",
+  hideHeader = false,
+  startCollapsed = false,
+  buttonLabels = {},
+  hideControls = false
+} = Astro.props;
 
 const renderedProfiles = await Promise.all(
   profiles.map(async (profile) => {
@@ -22,42 +34,59 @@ const renderedProfiles = await Promise.all(
 );
 ---
 
-<section class="profile-tabs" data-profile-tabs>
-  <div class="profile-tabs__header">
-    <div>
-      <p class="eyebrow">{eyebrow}</p>
-      <h2>{title}</h2>
-    </div>
+<section
+  class="profile-tabs"
+  data-profile-tabs
+  data-start-collapsed={startCollapsed ? "true" : "false"}
+>
+  {
+    (!hideHeader || !hideControls) && (
+      <div class="profile-tabs__header">
+        {
+          !hideHeader && (
+            <div>
+              <p class="eyebrow">{eyebrow}</p>
+              <h2>{title}</h2>
+            </div>
+          )
+        }
 
-    <div class="profile-tabs__controls" role="tablist" aria-label={title}>
-      {
-        renderedProfiles.map(({ entry, profileId }, index) => (
-          <button
-            type="button"
-            class:list={["profile-tabs__button", index === 0 && "is-active"]}
-            role="tab"
-            id={`tab-${profileId}`}
-            data-profile-tab={profileId}
-            aria-selected={index === 0 ? "true" : "false"}
-            aria-controls={`panel-${profileId}`}
-          >
-            {entry.data.tabLabel}
-          </button>
-        ))
-      }
-    </div>
-  </div>
+        {
+          !hideControls && (
+            <div class="profile-tabs__controls" role="tablist" aria-label={title}>
+              {
+                renderedProfiles.map(({ entry, profileId }, index) => (
+                  <button
+                    type="button"
+                    class:list={["profile-tabs__button", !startCollapsed && index === 0 && "is-active"]}
+                    role="tab"
+                    id={`tab-${profileId}`}
+                    data-profile-tab={profileId}
+                    aria-selected={!startCollapsed && index === 0 ? "true" : "false"}
+                    aria-controls={`panel-${profileId}`}
+                  >
+                    {buttonLabels[profileId] ?? entry.data.tabLabel}
+                  </button>
+                ))
+              }
+            </div>
+          )
+        }
+      </div>
+    )
+  }
 
   <div class="profile-tabs__panels">
     {
       renderedProfiles.map(({ entry, Content, profileId }, index) => (
         <article
-          class:list={["profile-panel", index === 0 && "is-active"]}
+          class:list={["profile-panel", !startCollapsed && index === 0 && "is-active"]}
           id={`panel-${profileId}`}
           data-profile-panel={profileId}
-          role="tabpanel"
-          aria-labelledby={`tab-${profileId}`}
-          hidden={index !== 0}
+          role={hideControls ? "region" : "tabpanel"}
+          aria-labelledby={hideControls ? undefined : `tab-${profileId}`}
+          aria-label={hideControls ? entry.data.title : undefined}
+          hidden={startCollapsed || index !== 0}
         >
           <div class="profile-panel__intro">
             {entry.data.summary && <p class="eyebrow">{entry.data.summary}</p>}
@@ -83,6 +112,7 @@ const renderedProfiles = await Promise.all(
 
       const tabs = Array.from(root.querySelectorAll("[data-profile-tab]"));
       const panels = Array.from(root.querySelectorAll("[data-profile-panel]"));
+      const startCollapsed = root.dataset.startCollapsed === "true";
 
       const activate = (target) => {
         tabs.forEach((tab) => {
@@ -100,13 +130,20 @@ const renderedProfiles = await Promise.all(
         });
       };
 
+      root.addEventListener("profile-tabs:activate", (event) => {
+        const target = event instanceof CustomEvent ? event.detail?.target : undefined;
+        if (typeof target === "string") {
+          activate(target);
+        }
+      });
+
       tabs.forEach((tab) => {
         if (!(tab instanceof HTMLButtonElement)) return;
         tab.addEventListener("click", () => activate(tab.dataset.profileTab));
       });
 
       const firstTab = tabs[0];
-      if (firstTab instanceof HTMLButtonElement && firstTab.dataset.profileTab) {
+      if (!startCollapsed && firstTab instanceof HTMLButtonElement && firstTab.dataset.profileTab) {
         activate(firstTab.dataset.profileTab);
       }
 

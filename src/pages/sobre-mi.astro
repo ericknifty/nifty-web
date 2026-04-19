@@ -2,10 +2,12 @@
 import { render } from "astro:content";
 import BrandMark from "../components/BrandMark.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getPageContent, getSiteSettings } from "../lib/content";
+import ProfileTabs from "../components/ProfileTabs.astro";
+import { getPageContent, getSiteSettings, getVisibleCvProfiles } from "../lib/content";
 
 const settings = await getSiteSettings();
 const page = await getPageContent("sobre-mi");
+const profiles = await getVisibleCvProfiles();
 const hasHeroImage = Boolean(page?.data.heroImage);
 
 if (!page) {
@@ -15,7 +17,7 @@ if (!page) {
 const { Content } = await render(page);
 ---
 
-<BaseLayout title={`${settings.siteName} | Sobre mí`} description={page.data.intro ?? settings.siteDescription}>
+<BaseLayout title={`${settings.siteName} | Bio`} description={page.data.intro ?? settings.siteDescription}>
   <section class="page-hero">
     <div class="shell about-hero">
       <div class="page-hero__copy about-hero__copy">
@@ -46,6 +48,33 @@ const { Content } = await render(page);
   <section class="section">
     <div class="shell prose prose--wide">
       <Content />
+
+      {
+        (page.data.contactPrimaryUrl || page.data.contactSecondaryUrl) && (
+          <div class="about-contact-actions">
+            {
+              page.data.contactPrimaryUrl && (
+                <a class="button" href={page.data.contactPrimaryUrl}>
+                  {page.data.contactPrimaryLabel ?? page.data.contactPrimaryUrl.replace("mailto:", "")}
+                </a>
+              )
+            }
+            {
+              page.data.contactSecondaryUrl && (
+                <a class="button button--secondary" href={page.data.contactSecondaryUrl}>
+                  {page.data.contactSecondaryLabel ?? page.data.contactSecondaryUrl.replace("mailto:", "")}
+                </a>
+              )
+            }
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section section--tight" id="experiencia">
+    <div class="shell">
+      <ProfileTabs profiles={profiles} hideHeader={true} hideControls={true} startCollapsed={true} />
     </div>
   </section>
 </BaseLayout>
@@ -162,5 +191,54 @@ const { Content } = await render(page);
         reset();
       }
     });
+  })();
+
+  (() => {
+    const profileTabs = document.querySelector("[data-profile-tabs]");
+    const experienceSection = document.querySelector("#experiencia");
+
+    if (!(profileTabs instanceof HTMLElement)) {
+      return;
+    }
+
+    const profileHashMap = {
+      "#perfil-motion": "motion",
+      "#perfil-print": "print"
+    };
+
+    const activateFromHash = (hash, smooth = false) => {
+      const target = profileHashMap[hash];
+
+      if (!target) {
+        return;
+      }
+
+      profileTabs.dispatchEvent(
+        new CustomEvent("profile-tabs:activate", {
+          detail: { target }
+        })
+      );
+
+      if (experienceSection instanceof HTMLElement) {
+        experienceSection.scrollIntoView({
+          behavior: smooth ? "smooth" : "auto",
+          block: "start"
+        });
+      }
+    };
+
+    document.querySelectorAll('a[href="#perfil-motion"], a[href="#perfil-print"]').forEach((link) => {
+      if (!(link instanceof HTMLAnchorElement)) return;
+
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const hash = link.getAttribute("href") ?? "";
+        history.replaceState(null, "", hash);
+        activateFromHash(hash, true);
+      });
+    });
+
+    window.addEventListener("hashchange", () => activateFromHash(window.location.hash));
+    activateFromHash(window.location.hash);
   })();
 </script>

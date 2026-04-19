@@ -257,6 +257,18 @@ content:
       - name: lead
         label: Texto secundario hero
         type: text
+      - name: contactPrimaryLabel
+        label: Boton correo principal
+        type: string
+      - name: contactPrimaryUrl
+        label: Link correo principal
+        type: string
+      - name: contactSecondaryLabel
+        label: Boton correo secundario
+        type: string
+      - name: contactSecondaryUrl
+        label: Link correo secundario
+        type: string
       - name: heroImage
         label: Foto principal
         type: image
@@ -277,7 +289,7 @@ content:
           switcher: true
 
   - name: cv_page
-    label: Pagina CV
+    label: CV (legacy, no usar)
     type: file
     path: src/content/pages/cv.md
     fields:
@@ -488,9 +500,6 @@ content:
       - name: videoUrl
         label: URL de video externo
         type: string
-      - name: hostedVideoUrl
-        label: URL de video propio en hosting (subir por FTP a /media/video/hosting/posts/ y pegar aqui la URL completa)
-        type: string
       - name: videoFile
         label: Archivo de video local
         type: file
@@ -571,9 +580,6 @@ content:
           multiple: true
       - name: videoUrl
         label: URL de video externo
-        type: string
-      - name: hostedVideoUrl
-        label: URL de video propio en hosting (subir por FTP a /media/video/hosting/projects/ y pegar aqui la URL completa)
         type: string
       - name: videoFile
         label: Archivo de video local

@@ -1,52 +1,21 @@
 ---
-import { render } from "astro:content";
-import DownloadList from "../components/DownloadList.astro";
-import PageHero from "../components/PageHero.astro";
-import ProfileTabs from "../components/ProfileTabs.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getPageContent, getSiteSettings, getVisibleCvProfiles } from "../lib/content";
+import { getSiteSettings } from "../lib/content";
 
 const settings = await getSiteSettings();
-const page = await getPageContent("cv");
-const profiles = await getVisibleCvProfiles();
-
-if (!page) {
-  throw new Error("Falta src/content/pages/cv.md");
-}
-
-const { Content } = await render(page);
 ---
 
-<BaseLayout title={`${settings.siteName} | CV`} description={page.data.intro ?? settings.siteDescription}>
-  <PageHero
-    eyebrow={page.data.eyebrow ?? "Experiencia"}
-    title={page.data.title}
-    intro={page.data.intro}
-    lead={page.data.lead}
-    panelEyebrow={page.data.panelEyebrow}
-    panelTitle={page.data.panelTitle}
-    panelBody={page.data.panelBody}
-  />
-
+<BaseLayout title={`${settings.siteName} | Bio`} description={settings.siteDescription}>
   <section class="section">
-    <div class="shell prose prose--wide">
-      <Content />
+    <div class="shell empty-state">
+      <p class="eyebrow">Bio</p>
+      <h1>La experiencia completa ahora vive dentro de Bio.</h1>
+      <p>Desde ahí puedes abrir el perfil Motion Graphics o Producción Gráfica según lo que quieras revisar.</p>
+      <a class="button" href="/sobre-mi#experiencia">Ir a Bio</a>
     </div>
   </section>
 
-  <section class="section section--tight">
-    <div class="shell">
-      <ProfileTabs
-        profiles={profiles}
-        eyebrow={page.data.tabsEyebrow ?? "CV"}
-        title={page.data.tabsTitle ?? "Perfiles profesionales"}
-      />
-    </div>
-  </section>
-
-  <section class="section section--tight">
-    <div class="shell">
-      <DownloadList files={page.data.attachments} />
-    </div>
-  </section>
+  <script is:inline>
+    window.location.replace("/sobre-mi#experiencia");
+  </script>
 </BaseLayout>

@@ -48,7 +48,7 @@ jobs:
 
           PROTOCOL="${DEPLOY_PROTOCOL:-sftp}"
           REMOTE_DIR="${DEPLOY_REMOTE_DIR:-public_html}"
-          MIRROR_ARGS="--verbose=1 --parallel=1 --continue --only-newer --delete-first --scan-all-first --no-perms --no-umask --exclude-glob .gitkeep --exclude-glob media/video/hosting --exclude-glob media/video/hosting/**"
+          MIRROR_ARGS="--verbose=1 --parallel=1 --continue --only-newer --delete-first --scan-all-first --no-perms --no-umask --exclude-glob .gitkeep"
           LFTP_COMMANDS=$(cat <<EOF
           set cmd:fail-exit yes
           set net:timeout 30

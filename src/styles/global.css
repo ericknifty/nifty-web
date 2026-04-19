@@ -654,6 +654,13 @@ main {
   max-width: 100%;
 }
 
+.about-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
 .prose h2,
 .prose h3 {
   font-family: var(--font-display);
