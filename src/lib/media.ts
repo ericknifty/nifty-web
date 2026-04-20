@@ -2,6 +2,10 @@ export function isExternalUrl(value?: string) {
   return Boolean(value && /^https?:\/\//i.test(value));
 }
 
+function isDirectVideoFile(pathname: string) {
+  return /\.(mp4|m4v|webm|mov)$/i.test(pathname);
+}
+
 export function getVideoEmbed(url?: string) {
   if (!url) {
     return null;
@@ -10,6 +14,14 @@ export function getVideoEmbed(url?: string) {
   try {
     const parsed = new URL(url);
     const host = parsed.hostname.replace(/^www\./, "");
+
+    if (isDirectVideoFile(parsed.pathname)) {
+      return {
+        type: "file",
+        provider: "direct",
+        src: url
+      };
+    }
 
     if (host === "youtube.com" || host === "m.youtube.com") {
       const videoId = parsed.searchParams.get("v");

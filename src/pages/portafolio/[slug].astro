@@ -38,7 +38,12 @@ const { Content } = await render(entry);
   <section class="section">
     <div class="shell detail-stack">
       <article class="prose prose--wide detail-article">
-        <VideoEmbed title={entry.data.title} videoUrl={entry.data.videoUrl} videoFile={entry.data.videoFile} />
+        <VideoEmbed
+          title={entry.data.title}
+          videoUrl={entry.data.videoUrl}
+          hostedVideoUrl={entry.data.hostedVideoUrl}
+          videoFile={entry.data.videoFile}
+        />
         <LottiePlayer src={entry.data.lottieFile} title={entry.data.title} />
         <Content />
 

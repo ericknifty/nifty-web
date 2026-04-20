@@ -500,6 +500,9 @@ content:
       - name: videoUrl
         label: URL de video externo
         type: string
+      - name: hostedVideoUrl
+        label: URL de video propio en hosting (ejemplo: https://nifty.cl/media/video/hosting/posts/mi-video.mp4)
+        type: string
       - name: videoFile
         label: Archivo de video local
         type: file
@@ -580,6 +583,9 @@ content:
           multiple: true
       - name: videoUrl
         label: URL de video externo
+        type: string
+      - name: hostedVideoUrl
+        label: URL de video propio en hosting (ejemplo: https://nifty.cl/media/video/hosting/projects/mi-video.mp4)
         type: string
       - name: videoFile
         label: Archivo de video local
