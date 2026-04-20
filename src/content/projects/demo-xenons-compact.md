@@ -18,6 +18,8 @@ draft: false
 ---
 A partir del material de registro y el guion proporcionado por el cliente, se realizó una post-producción integral para comunicar de manera efectiva las características técnicas de cada plotter. Se priorizó la claridad visual en las tomas de detalle y la integración de elementos gráficos para reforzar la información técnica.
 
+<video controls preload="metadata" style="width:100%; display:block;"> <source src="https://nifty.cl/media/video/hosting/projects/colision.mp4" type="video/mp4" /> </video>
+
 ### Mis Funciones
 
 - **Edición de Video y Montaje Final:** Estructura narrativa de la demostración.
