@@ -1,5 +1,5 @@
 ---
-title: "Demo: Xenons Compact 130 & Impact 160"
+title: "G&R: Xenons Compact 130 & Impact 160"
 slug: demo-xenons-compact
 area: motion
 date: 2023-04-10
