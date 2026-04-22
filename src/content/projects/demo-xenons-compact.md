@@ -1,5 +1,5 @@
 ---
-title: Xenons Compact 130 & Impact 160
+title: "Demo: Xenons Compact 130 & Impact 160"
 slug: demo-xenons-compact
 area: motion
 date: 2023-04-10
@@ -18,7 +18,7 @@ draft: false
 ---
 A partir del material de registro y el guion proporcionado por el cliente, se realizó una post-producción integral para comunicar de manera efectiva las características técnicas de cada plotter. Se priorizó la claridad visual en las tomas de detalle y la integración de elementos gráficos para reforzar la información técnica.
 
-<video controls preload="metadata" style="width:100%; display:block;"> <source src="https://nifty.cl/media/video/hosting/projects/colision.mp4" type="video/mp4" /> </video>
+
 
 ### Mis Funciones
 
