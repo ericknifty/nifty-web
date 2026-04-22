@@ -1,5 +1,5 @@
 ---
-title: "Demo Sharp MX-Series: G&R"
+title: "G&R: Sharp MX-Series"
 slug: demo-sharp-gyr
 area: motion
 date: 2023-04-02
