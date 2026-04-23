@@ -23,28 +23,29 @@ Este video técnico-informativo resume los hitos operativos y sociales de la com
 
 El video detalla áreas críticas de la operación y el compromiso de la empresa:
 
-- **Infraestructura y Operación:** Visualización de la red de distribución de agua potable y sistemas de tratamiento que sirven a casi 2 millones de hogares.
-- **Eficiencia Energética:** Explicación del plan de inversiones y la reducción del uso de combustibles y pérdidas hídricas.
-- **Impacto Social y Premiaciones:** Presentación de logros como el Premio Revolución Wellness, el Programa Mujeres Gasfíter y la emisión del primer bono verde en Chile.
+- **Infraestructura y Operación:** Visualización de la red de distribución de agua potable y sistemas de tratamiento.
+- **Eficiencia Energética:** Explicación del plan de inversiones y la reducción de pérdidas hídricas.
+- **Impacto Social y Premiaciones:** Presentación de logros como el Premio Revolución Wellness y el Programa Mujeres Gasfíter.
 - **Vinculación con la Comunidad:** Resumen de iniciativas como el Fondo Concursable "Contigo en Cada Gota" y el apoyo a Bomberos.
 
-### Detalles Técnicos
+### Créditos y Colaboración
 
-- **Data Viz:** Animación de gráficos y cifras para mantener el dinamismo informativo.
-- **Iconografía Personalizada:** Creación de un lenguaje visual coherente con la identidad corporativa de Esval para representar procesos técnicos.
-- **Post-producción:** Sincronización precisa de locución con la aparición de métricas clave.
+Este proyecto fue realizado a través de **MT Audiovisual (Mario Toro)**, en colaboración con:
 
-### Créditos
-
-- **Animación y Diseño Gráfico:** Erick Guerrero / [Nifty.cl](http://Nifty.cl)
+- **Animación y Motion Graphics:** Erick Guerrero / [Nifty.cl](http://Nifty.cl)
+- **Diseño y Dirección de Arte:** [Katherine Sánchez](https://portrait.so/kathonejo) ([kathonejo@gmail.com](mailto:kathonejo@gmail.com))
 
 ---
 
-**Esval: Sustainability Report (English Version)** Motion graphics developed for **Esval** to summarize their Sustainability Report. The project focuses on visualizing complex data regarding infrastructure, hídric efficiency, and social responsibility programs. The animation translates corporate milestones into an engaging narrative for regional stakeholders.
+**Esval: Sustainability Report (English Version)** Motion graphics developed for **Esval** to summarize their Sustainability Report. The project focuses on visualizing complex data regarding infrastructure, water efficiency, and social responsibility programs.
 
 **My Roles**
 
-- Graphic Design & Iconography
-- Motion Graphics
+- Animation & Motion Graphics
 - Data Visualization
+
+**Credits & Collaboration**
+
+- Animation & Motion Graphics: Erick Guerrero / [Nifty.cl](http://Nifty.cl)
+- Graphic Design & Art Direction: [Katherine Sánchez](https://portrait.so/kathonejo) ([kathonejo@gmail.com](mailto:kathonejo@gmail.com))
 
