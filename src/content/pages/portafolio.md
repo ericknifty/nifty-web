@@ -1,9 +1,10 @@
 ---
-title: "Proyectos y casos de estudio."
+title: Selección de proyectos
 slug: portafolio
 eyebrow: Portafolio
-intro: "Esta sección documenta soluciones reales filtradas por mis áreas de especialidad."
-lead: "La organización por disciplinas permite presentar la complejidad técnica de cada trabajo sin perder la visión global de mi perfil profesional."
+intro: Documentación detallada de procesos en diseño, animación y desarrollo web.
+lead: Una mirada a mi trayectoria profesional a través de proyectos que
+  desafiaron mi capacidad técnica, organizados para mostrar la evolución y
+  versatilidad de mi perfil.
 draft: false
-attachments: []
 ---
