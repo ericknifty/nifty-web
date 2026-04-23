@@ -10,13 +10,12 @@ detailLead: Pieza audiovisual desarrollada para Esval, a través de MT
   "Contigo en Cada Gota". El video combina una invitación a las organizaciones
   sociales con una guía práctica paso a paso sobre el proceso de postulación
   digital.
-gallery:
-  - /media/images/projects/vlcsnap-2026-04-22-21h49m59s771.png
 tags: Esval, Responsabilidad Social, Fondo Concursable, Motion Graphics,
   Tutorial, Animación 2D, Comunidad, Chile
 videoUrl: https://nifty.cl/media/video/hosting/projects/esval_concurso.mp4
 featured: false
 draft: false
+cover: /media/images/projects/vlcsnap-2026-04-22-21h49m59s771-1.png
 ---
 El video destaca el compromiso de Esval con el desarrollo regional y la mejora de la calidad de vida a través del apoyo a proyectos comunitarios. Como pieza de comunicación masiva, debía cumplir una doble función: inspirar la participación y educar sobre el uso de la plataforma web de postulación.
 
