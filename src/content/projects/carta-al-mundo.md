@@ -35,7 +35,7 @@ Desarrollo de una pieza audiovisual de 15 segundos enfocada en generar una atmó
 
 ### Afiche Oficial
 
-![afiche carta al mundo.png](blob:https:/app.pagescms.org/dd7a2d37-d383-4cc2-88a0-8901d83d9761)
+![Afiche Carta al Mundo](/media/images/projects/afiche%20carta%20al%20mundo.png)
 
 ---
 
