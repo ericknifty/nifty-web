@@ -15,6 +15,7 @@ tags: Cabify, Motion Graphics, LATAM Pass, Marketing Digital, Animación 2D, UI
   Animation, Publicidad, Chile
 featured: false
 draft: false
+videoUrl: "https://nifty.cl/media/video/hosting/projects/cabify_1.mp4 "
 ---
 El objetivo del video fue incentivar el uso de la aplicación mediante una campaña de referidos y códigos promocionales. La pieza guía al usuario a través de la interfaz de la app de manera ágil, explicando los pasos para participar y las oportunidades de ganar al ingresar múltiples códigos.
 
